@@ -1,0 +1,123 @@
+import { siteConfig } from "@/config/site"
+
+<DocsHeader>
+
+# Picker
+
+<DocsPageActions />
+
+</DocsHeader>
+
+<DocsAvailability />
+
+Displays a dropdown for selecting one value from a set of options.
+
+<ComponentPreviewCode
+  alt="FLXPicker example"
+  image={{ light: "/images/components/ios/picker/picker-usage.webp", dark: "/images/components/ios/picker/picker-usage-dark.webp" }}
+  filePath="registry/components/picker/picker-usage-example.swift"
+  collapsible
+/>
+
+## Installation
+
+Requires the [design system foundation](/docs/installation#add-the-foundation) (tokens and theme).
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<CodeBlockCommand
+  command={`shadcn@latest add ${siteConfig.url}/r/ios-picker.json`}
+/>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy the component</Step>
+
+<CodeBlockFromFile
+  filePath="registry/components/picker/FLXPicker.swift"
+  title="FLXPicker.swift"
+/>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```swift
+FLXPicker("Fruit", selection: $fruit) {
+    Text("Apple").tag("Apple")
+    Text("Banana").tag("Banana")
+}
+```
+
+## Content
+
+`FLXPicker` wraps the native `Picker` in `.menu` style. Populate it with any view tagged via `.tag(_:)`, typically a `ForEach`.
+
+## Custom label triggers
+
+Use the `content`/`label` initializer for a custom trigger like an avatar. No box decoration is applied:
+
+<ComponentPreviewCode
+  alt="FLXPicker custom label trigger"
+  image={{ light: "/images/components/ios/picker/picker-trigger.webp", dark: "/images/components/ios/picker/picker-trigger-dark.webp" }}
+  code={`FLXPicker(selection: $fruit) {
+    Text("Apple").tag("Apple")
+    Text("Banana").tag("Banana")
+} label: {
+    FLXAvatar(size: .small) {
+        FLXAvatarFallback("A")
+    }
+}
+`}
+/>
+
+## Custom styling
+
+`PickerStyle` doesn't support custom conformances, so there's no `FLXPickerStyle` or override.
+
+## API Reference
+
+### FLXPicker
+
+```swift
+init(
+    selection: Binding<SelectionValue>,
+    @ViewBuilder content: @escaping () -> Content,
+    @ViewBuilder label: @escaping () -> Label
+)
+
+init(
+    _ titleKey: LocalizedStringKey = "",
+    selection: Binding<SelectionValue>,
+    @ViewBuilder content: @escaping () -> Content
+)
+
+init(
+    _ titleResource: LocalizedStringResource,
+    selection: Binding<SelectionValue>,
+    @ViewBuilder content: @escaping () -> Content
+)
+
+init<S: StringProtocol>(
+    _ title: S,
+    selection: Binding<SelectionValue>,
+    @ViewBuilder content: @escaping () -> Content
+)
+```
+
+For more information about FLXPicker props, see the [Apple documentation](https://developer.apple.com/documentation/swiftui/picker).

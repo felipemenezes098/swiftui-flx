@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "mac-sheet",
+  "title": "Sheet",
+  "description": "Presents content in a sheet over the current view, driven by an item binding.",
+  "files": [
+    {
+      "path": "registry/components/sheet/FLXSheet.swift",
+      "content": "import SwiftUI\n\n/// There's no native `SheetStyle` for `.sheet` to conform to — Apple resolves sheet\n/// appearance entirely through presentation view modifiers (`presentationDetents`,\n/// `presentationCornerRadius`, `presentationBackground`, ...) applied to the sheet's\n/// content, not through a style protocol like `ButtonStyle`/`ToggleStyle`. That's why\n/// there's no `FLXSheetStyle.swift`/`.flxSheetStyle(_:)` here — the same limitation\n/// `FLXPicker`/`FLXMenu` already document for their own native primitives.\n///\n/// `.sheet` itself also isn't a control you drop into a view tree — it's a modifier\n/// applied to whatever triggers the presentation. So `FLXSheet` deviates from the usual\n/// \"public View you instantiate\" shape and is exposed as a `View` modifier\n/// (`.flxSheet(item:onDismiss:content:)`), mirroring the native API's own shape.\n///\n/// Always controlled: `item` must come from the presenting screen (the least common\n/// ancestor). There's no uncontrolled/internal-state variant like `FLXCollapsible` has —\n/// nothing about \"which sheet, with what data\" can be decided by the sheet itself.\n///\n/// Only theme identity (corner radius, background) is applied here. Presentation\n/// behavior — `presentationDetents`, `interactiveDismissDisabled`,\n/// `presentationDragIndicator`, `presentationSizing` — is left to the caller, written\n/// inside `content`: a modifier applied here, outside the content, would silently win\n/// over the caller's own.\n///\n/// One platform behavior is baked in here rather than left for every call site to\n/// rediscover on its own: VoiceOver focus doesn't return to the trigger once a sheet\n/// dismisses (a documented Apple platform gap, not a bug in this component) — fixed via\n/// `accessibilityFocused` on the trigger, re-focused from `onDismiss`.\n\nprivate struct FLXSheetModifier<Item: Identifiable, SheetContent: View>: ViewModifier {\n    // Reading @Environment directly here is safe, unlike inside a *Style conformance\n    // (section 3.4): a ViewModifier's `body(content:)` is invoked by SwiftUI's normal\n    // render path, not called as a plain function through a type-erasing wrapper.\n    @Environment(\\.flxTheme) private var theme\n    @AccessibilityFocusState private var isTriggerFocused: Bool\n\n    @Binding var item: Item?\n    let onDismiss: (() -> Void)?\n    let content: (Item) -> SheetContent\n\n    func body(content triggerContent: Content) -> some View {\n        triggerContent\n            .accessibilityFocused($isTriggerFocused)\n            .sheet(item: $item, onDismiss: {\n                isTriggerFocused = true\n                onDismiss?()\n            }) { unwrapped in\n                content(unwrapped)\n                    .presentationCornerRadius(theme.radius.lg)\n                    .presentationBackground(theme.colors.popover)\n            }\n    }\n}\n\nextension View {\n    /// Presents `content` for the item currently held in `item`, styled with FLX's theme\n    /// tokens (corner radius, background) and with VoiceOver focus return handled\n    /// automatically.\n    public func flxSheet<Item: Identifiable, SheetContent: View>(\n        item: Binding<Item?>,\n        onDismiss: (() -> Void)? = nil,\n        @ViewBuilder content: @escaping (Item) -> SheetContent\n    ) -> some View {\n        modifier(\n            FLXSheetModifier(\n                item: item,\n                onDismiss: onDismiss,\n                content: content\n            )\n        )\n    }\n}\n",
+      "type": "registry:file",
+      "target": "~/DesignSystem/Components/FLXSheet/FLXSheet.swift"
+    }
+  ],
+  "meta": {
+    "platforms": {
+      "macOS": "13.3"
+    },
+    "license": "MIT"
+  },
+  "type": "registry:file"
+}

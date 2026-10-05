@@ -1,0 +1,109 @@
+import { siteConfig } from "@/config/site"
+
+<DocsHeader>
+
+# Text Editor
+
+<DocsPageActions />
+
+</DocsHeader>
+
+<DocsAvailability />
+
+Displays a multi-line text input for long-form content.
+
+<ComponentPreviewCode
+  filePath="registry/components/text-editor/text-editor-usage-example.swift"
+  image={{ light: "/images/components/mac/text-editor/text-editor-usage.webp", dark: "/images/components/mac/text-editor/text-editor-usage-dark.webp" }}
+  collapsible
+/>
+
+## Installation
+
+Requires the [design system foundation](/docs/installation#add-the-foundation) (tokens and theme).
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<CodeBlockCommand
+  command={`shadcn@latest add ${siteConfig.url}/r/mac-text-editor.json`}
+/>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy the component</Step>
+
+<CodeBlockFromFile
+  filePath="registry/components/text-editor/FLXTextEditor.swift"
+  title="FLXTextEditor.swift"
+/>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```swift
+FLXTextEditor("Description", text: $description)
+```
+
+The native `TextEditor` has no placeholder parameter, so `FLXTextEditor` renders the placeholder as an overlay.
+
+On macOS, the border takes the theme's ring color while the field has focus, since the Mac doesn't draw its own focus ring around it.
+
+## Sizes
+
+Three sizes, set via `size:`. Defaults to `.medium`.
+
+<ComponentPreviewCode
+  code={`FLXTextEditor("Short note", text: $text, size: .small)
+FLXTextEditor("Description", text: $text, size: .medium)
+FLXTextEditor("Long-form content", text: $text, size: .large)
+`}
+  image={{ light: "/images/components/mac/text-editor/text-editor-sizes.webp", dark: "/images/components/mac/text-editor/text-editor-sizes-dark.webp" }}
+/>
+
+## Custom styling
+
+`TextEditor` has no style protocol, so there's no `FLXTextEditorStyle` or override.
+
+## API Reference
+
+### FLXTextEditor
+
+```swift
+init(
+    _ placeholderKey: LocalizedStringResource = "",
+    text: Binding<String>,
+    size: FLXTextEditorSize = .medium
+)
+
+init<S: StringProtocol>(
+    _ placeholder: S,
+    text: Binding<String>,
+    size: FLXTextEditorSize = .medium
+)
+```
+
+### Sizes
+
+| Case     | Description                        |
+| -------- | ------------------------------------ |
+| `small`  | Shortest fixed height (80pt).        |
+| `medium` | Default fixed height (120pt).        |
+| `large`  | Tallest fixed height (160pt).        |
+
+For more information about FLXTextEditor props, see the [Apple documentation](https://developer.apple.com/documentation/swiftui/texteditor).

@@ -1,0 +1,171 @@
+import { siteConfig } from "@/config/site"
+
+<DocsHeader>
+
+# Swift Packages
+
+<DocsPageActions />
+
+</DocsHeader>
+
+Keep the design system in its own Swift package and use it from your app and your other packages.
+
+## When to use it
+
+Use a package when your app is already split into packages, for example one per feature, and more than one of them needs FLX. Apple recommends this setup as an app grows.
+
+If `DesignSystem` lives inside your app, as [Installation](/docs/installation) sets it up, every file can use it right away and you can skip this page.
+
+## How it looks
+
+```markdown
+MyApp
+├── MyApp.xcodeproj
+├── MyApp                    ← your app
+└── Packages
+    ├── DesignSystem         ← FLX lives here
+    │   ├── Package.swift
+    │   └── Sources
+    │       └── DesignSystem
+    │           ├── Tokens
+    │           ├── Theme
+    │           └── Components
+    └── Profile              ← one of your own packages
+        ├── Package.swift
+        └── Sources
+            └── Profile
+```
+
+A folder with a `Package.swift` is a package. That file names the package and lists what it depends on, like a `package.json`. The folder names are up to you. `Packages` is only a common choice.
+
+## Set it up
+
+<Steps>
+
+<Step>Create the package</Step>
+
+In Xcode, choose **File > New > Package**, pick **Library**, name it `DesignSystem`, and save it in `Packages`. Then replace its manifest with:
+
+<CodeBlockFromFile
+  title="Packages/DesignSystem/Package.swift"
+  code={`// swift-tools-version: 6.0
+import PackageDescription
+
+let package = Package(
+    name: "DesignSystem",
+    platforms: [.iOS("16.4"), .macOS("13.3")],
+    products: [
+        .library(name: "DesignSystem", targets: ["DesignSystem"])
+    ],
+    targets: [
+        .target(name: "DesignSystem")
+    ]
+)`}
+/>
+
+<Step>Link it to your app</Step>
+
+Select your app target. Under **General > Frameworks, Libraries, and Embedded Content**, click **+** and add `DesignSystem`.
+
+<Step>Add FLX</Step>
+
+Turn on **Swift package** in any install command on this site. Every command then includes `--cwd` with your package's path, so the files land in `Sources/DesignSystem`. Your choice is saved in this browser.
+
+Leave the path empty to use `Packages/DesignSystem/Sources`, or type your own, starting from your project folder. Run the commands from that folder, where `MyApp.xcodeproj` is.
+
+<CodeBlockCommand
+  command={`shadcn@latest add ${siteConfig.url}/r/foundation.json`}
+/>
+
+Then add components from their pages the same way.
+
+To copy the files by hand instead, put them in `Sources/DesignSystem`, keeping the `Tokens`, `Theme` and `Components` folders.
+
+</Steps>
+
+## Use it in your app
+
+Add `import DesignSystem` at the top of each file that uses FLX:
+
+<CodeBlockFromFile
+  title="MyApp/ContentView.swift"
+  code={`import SwiftUI
+import DesignSystem
+
+struct ContentView: View {
+    var body: some View {
+        FLXButton("Save") {}
+    }
+}`}
+/>
+
+To use a preset, apply it once in your app. Every package that uses FLX gets it too:
+
+<CodeBlockFromFile
+  title="MyApp/MyApp.swift"
+  code={`import SwiftUI
+import DesignSystem
+
+@main
+struct MyApp: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+                .flxTheme(.sienna)
+        }
+    }
+}`}
+/>
+
+Files inside the `DesignSystem` package don't need the import.
+
+## Use it from your other packages
+
+A package that uses FLX lists `DesignSystem` as a dependency in its own manifest:
+
+<CodeBlockFromFile
+  title="Packages/Profile/Package.swift"
+  code={`// swift-tools-version: 6.0
+import PackageDescription
+
+let package = Package(
+    name: "Profile",
+    platforms: [.iOS("16.4"), .macOS("13.3")],
+    products: [
+        .library(name: "Profile", targets: ["Profile"])
+    ],
+    dependencies: [
+        .package(path: "../DesignSystem")
+    ],
+    targets: [
+        .target(name: "Profile", dependencies: ["DesignSystem"])
+    ]
+)`}
+/>
+
+Its files import `DesignSystem` the same way:
+
+<CodeBlockFromFile
+  title="Packages/Profile/Sources/Profile/ProfileView.swift"
+  code={`import SwiftUI
+import DesignSystem
+
+public struct ProfileView: View {
+    public init() {}
+
+    public var body: some View {
+        FLXButton("Edit profile") {}
+    }
+}`}
+/>
+
+`ProfileView` is `public` because your app shows it, and code in one package is only visible to others when it's `public`. The same rule is why FLX itself is `public`.
+
+## Text in your packages
+
+Like SwiftUI's own `Button`, a title such as `FLXButton("Save")` is translated with your app's String Catalog. To use the catalog of the package the code lives in, pass a `LocalizedStringResource` with its bundle:
+
+<CodeBlockFromFile
+  title="Packages/Profile/Sources/Profile/ProfileView.swift"
+  code={`FLXButton(LocalizedStringResource("Edit profile", bundle: #bundle)) {}`}
+/>

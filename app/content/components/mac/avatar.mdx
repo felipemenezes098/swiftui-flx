@@ -1,0 +1,241 @@
+import { siteConfig } from "@/config/site"
+
+<DocsHeader>
+
+# Avatar
+
+<DocsPageActions />
+
+</DocsHeader>
+
+<DocsAvailability />
+
+Displays a user's profile picture, with initials as a fallback.
+
+<ComponentPreviewCode
+  filePath="registry/components/avatar/avatar-usage-example.swift"
+  image={{ light: "/images/components/mac/avatar/avatar-usage.webp", dark: "/images/components/mac/avatar/avatar-usage-dark.webp" }}
+  collapsible
+/>
+
+## Installation
+
+Requires the [design system foundation](/docs/installation#add-the-foundation) (tokens and theme).
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<CodeBlockCommand
+  command={`shadcn@latest add ${siteConfig.url}/r/mac-avatar.json`}
+/>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy the style</Step>
+
+<CodeBlockFromFile
+  filePath="registry/components/avatar/FLXAvatarStyle.swift"
+  title="FLXAvatarStyle.swift"
+/>
+
+<Step>Copy the component</Step>
+
+<CodeBlockFromFile
+  filePath="registry/components/avatar/FLXAvatar.swift"
+  title="FLXAvatar.swift"
+/>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```swift
+FLXAvatar(size: .medium) {
+    FLXAvatarFallback("FM")
+    FLXAvatarImage(url: URL(string: "https://github.com/shadcn.png"))
+}
+```
+
+## Composition
+
+`FLXAvatar` stacks its content in a `ZStack`. Use the following composition to build an avatar:
+
+```
+FLXAvatar
+├── FLXAvatarFallback
+├── FLXAvatarImage
+└── FLXAvatarBadge
+```
+
+Put `FLXAvatarFallback` first so it sits behind `FLXAvatarImage`, which stays transparent until the image finishes loading. `FLXAvatarFallback` uppercases its text. `FLXAvatarBadge` is optional and always pins itself to the bottom-trailing corner.
+
+## Sizes
+
+Three sizes, set via `size:`.
+
+<ComponentPreviewCode
+  code={`FLXAvatar(size: .small) {
+    FLXAvatarFallback("FM")
+    FLXAvatarImage(url: URL(string: "https://github.com/shadcn.png"))
+}
+FLXAvatar(size: .medium) {
+    FLXAvatarFallback("FM")
+    FLXAvatarImage(url: URL(string: "https://github.com/shadcn.png"))
+}
+FLXAvatar(size: .large) {
+    FLXAvatarFallback("FM")
+    FLXAvatarImage(url: URL(string: "https://github.com/shadcn.png"))
+}
+`}
+  image={{ light: "/images/components/mac/avatar/avatar-sizes.webp", dark: "/images/components/mac/avatar/avatar-sizes-dark.webp" }}
+/>
+
+## Badge
+
+Overlay a status indicator by adding `FLXAvatarBadge` alongside the other content. The badge doesn't inherit the avatar's size, so pass a matching `size:` for `.small` and `.large` avatars:
+
+<ComponentPreviewCode
+  code={`FLXAvatar(size: .medium) {
+    FLXAvatarFallback("FM")
+    FLXAvatarImage(url: URL(string: "https://github.com/shadcn.png"))
+    FLXAvatarBadge()
+}
+`}
+  image={{ light: "/images/components/mac/avatar/avatar-badge.webp", dark: "/images/components/mac/avatar/avatar-badge-dark.webp" }}
+/>
+
+## Groups
+
+Wrap a stack of avatars in `FLXAvatarGroup` to overlap them, and finish the stack with `FLXAvatarGroupCount` for an overflow indicator:
+
+<ComponentPreviewCode
+  code={`FLXAvatarGroup {
+    FLXAvatar(size: .medium) {
+        FLXAvatarFallback("FM")
+        FLXAvatarImage(url: URL(string: "https://github.com/shadcn.png"))
+    }
+    FLXAvatar(size: .medium) {
+        FLXAvatarFallback("FM")
+        FLXAvatarImage(url: URL(string: "https://github.com/felipemenezes098.png"))
+    }
+    FLXAvatar(size: .medium) {
+        FLXAvatarFallback("PD")
+        FLXAvatarImage(url: URL(string: "https://github.com/peduarte.png"))
+    }
+    FLXAvatarGroupCount(count: 5, size: .medium)
+}
+`}
+  image={{ light: "/images/components/mac/avatar/avatar-group.webp", dark: "/images/components/mac/avatar/avatar-group-dark.webp" }}
+/>
+
+## Custom styling
+
+`FLXAvatarStyle` is an FLX protocol. Override it for a subtree via `.flxAvatarStyle(_:)`:
+
+<ComponentPreviewCode
+  code={`struct FLXRingAvatarStyle: FLXAvatarStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        FLXRingAvatarStyleBody(configuration: configuration)
+    }
+}
+
+struct FLXRingAvatarStyleBody: View {
+    @ScaledMetric(relativeTo: .body) private var scale: CGFloat = 1
+
+    let configuration: FLXAvatarStyleConfiguration
+
+    var body: some View {
+        ZStack {
+            configuration.content
+        }
+        .flxFont(configuration.size.typography)
+        .foregroundStyle(.orange)
+        .frame(width: configuration.size.diameter * scale, height: configuration.size.diameter * scale)
+        .padding(FLXSpacing.xs)
+        .overlay(
+            Circle().strokeBorder(
+                AngularGradient(colors: [.yellow, .orange, .pink, .yellow], center: .center),
+                lineWidth: FLXBorderWidth.thick
+            )
+        )
+    }
+}
+
+HStack(spacing: FLXSpacing.xl) {
+    FLXAvatar(size: .large) {
+        FLXAvatarFallback("FM")
+        FLXAvatarImage(url: URL(string: "https://github.com/shadcn.png"))
+    }
+    FLXAvatar(size: .large) {
+        FLXAvatarFallback("FM")
+        FLXAvatarImage(url: URL(string: "https://github.com/shadcn.png"))
+    }
+    .flxAvatarStyle(FLXRingAvatarStyle())
+}
+`}
+  image={{ light: "/images/components/mac/avatar/avatar-custom.webp", dark: "/images/components/mac/avatar/avatar-custom-dark.webp" }}
+  collapsible
+/>
+
+## API Reference
+
+### FLXAvatar
+
+```swift
+init(
+    size: FLXAvatarSize = .medium,
+    @ViewBuilder content: @escaping () -> Content
+)
+```
+
+### FLXAvatarImage
+
+```swift
+init(url: URL?)
+```
+
+### FLXAvatarFallback
+
+```swift
+init(_ text: String)
+```
+
+### FLXAvatarBadge
+
+```swift
+init(size: FLXAvatarSize = .medium)
+```
+
+### FLXAvatarGroup
+
+```swift
+init(@ViewBuilder content: @escaping () -> Content)
+```
+
+### FLXAvatarGroupCount
+
+```swift
+init(count: Int, size: FLXAvatarSize = .medium)
+```
+
+### Sizes
+
+| Case     | Description                          |
+| -------- | ------------------------------------- |
+| `small`  | Compact diameter, for dense lists.    |
+| `medium` | Default diameter.                     |
+| `large`  | Largest diameter, for profile headers. |

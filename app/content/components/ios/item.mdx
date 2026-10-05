@@ -1,0 +1,340 @@
+import { siteConfig } from "@/config/site"
+
+<DocsHeader>
+
+# Item
+
+<DocsPageActions />
+
+</DocsHeader>
+
+<DocsAvailability />
+
+Displays a row of content, such as a list entry, notification, or settings row.
+
+<ComponentPreviewCode
+  alt="FLXItem example"
+  image={{ light: "/images/components/ios/item/item-usage.webp", dark: "/images/components/ios/item/item-usage-dark.webp" }}
+  filePath="registry/components/item/item-usage-example.swift"
+  collapsible
+/>
+
+## Installation
+
+Requires the [design system foundation](/docs/installation#add-the-foundation) (tokens and theme).
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<CodeBlockCommand
+  command={`shadcn@latest add ${siteConfig.url}/r/ios-item.json`}
+/>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy the style</Step>
+
+<CodeBlockFromFile
+  filePath="registry/components/item/FLXItemStyle.swift"
+  title="FLXItemStyle.swift"
+/>
+
+<Step>Copy the component</Step>
+
+<CodeBlockFromFile
+  filePath="registry/components/item/FLXItem.swift"
+  title="FLXItem.swift"
+/>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```swift
+FLXItem(variant: .outline) {
+    FLXItemMedia(variant: .icon) {
+        Image(systemName: "bell.fill")
+    }
+    FLXItemContent {
+        FLXItemTitle("Push notifications")
+        FLXItemDescription("Get notified when someone mentions you.")
+    }
+    FLXItemActions {
+        FLXBadge("New", variant: .secondary)
+    }
+}
+```
+
+## Composition
+
+`FLXItem` lays its children out in an `HStack`; padding, background, and border come from `FLXItemStyle`. Use the following composition to build an item:
+
+```
+FLXItem
+├── FLXItemMedia
+├── FLXItemContent
+│   ├── FLXItemTitle
+│   └── FLXItemDescription
+└── FLXItemActions
+```
+
+All sections are optional. `FLXItemContent` is a plain `VStack`.
+
+For lists of items:
+
+- `FLXItemGroup` stacks multiple `FLXItem`s with a tight gap.
+- `FLXItemSeparator` draws a hairline divider between items inside a group.
+- `FLXItemHeader` and `FLXItemFooter` are full-width `HStack`s for content above or below an item's main row.
+
+## Variants
+
+Three variants, set via `variant:`.
+
+<ComponentPreviewCode
+  alt="FLXItem variants"
+  image={{ light: "/images/components/ios/item/item-variants.webp", dark: "/images/components/ios/item/item-variants-dark.webp" }}
+  code={`FLXItem(variant: .regular) {
+    FLXItemMedia(variant: .icon) {
+        Image(systemName: "star.fill")
+    }
+    FLXItemContent {
+        FLXItemTitle("Regular")
+        FLXItemDescription("Transparent, no border.")
+    }
+}
+FLXItem(variant: .outline) {
+    FLXItemMedia(variant: .icon) {
+        Image(systemName: "star.fill")
+    }
+    FLXItemContent {
+        FLXItemTitle("Outline")
+        FLXItemDescription("Transparent, bordered.")
+    }
+}
+FLXItem(variant: .muted) {
+    FLXItemMedia(variant: .icon) {
+        Image(systemName: "star.fill")
+    }
+    FLXItemContent {
+        FLXItemTitle("Muted")
+        FLXItemDescription("Filled with theme.colors.muted.")
+    }
+}
+`}
+/>
+
+## Sizes
+
+Three sizes, set via `size:`.
+
+<ComponentPreviewCode
+  alt="FLXItem sizes"
+  image={{ light: "/images/components/ios/item/item-sizes.webp", dark: "/images/components/ios/item/item-sizes-dark.webp" }}
+  code={`FLXItem(variant: .outline, size: .regular) {
+    FLXItemMedia(variant: .icon) {
+        Image(systemName: "star.fill")
+    }
+    FLXItemContent {
+        FLXItemTitle("Regular size")
+        FLXItemDescription("Default padding.")
+    }
+}
+FLXItem(variant: .outline, size: .small) {
+    FLXItemMedia(variant: .icon) {
+        Image(systemName: "star.fill")
+    }
+    FLXItemContent {
+        FLXItemTitle("Small size")
+        FLXItemDescription("Tighter padding.")
+    }
+}
+FLXItem(variant: .outline, size: .extraSmall) {
+    FLXItemMedia(variant: .icon) {
+        Image(systemName: "star.fill")
+    }
+    FLXItemContent {
+        FLXItemTitle("Extra small size")
+        FLXItemDescription("Most compact padding.")
+    }
+}
+`}
+/>
+
+## Media
+
+`FLXItemMedia` has three variants, set via `variant:`.
+
+<ComponentPreviewCode
+  alt="FLXItemMedia variants"
+  image={{ light: "/images/components/ios/item/item-media.webp", dark: "/images/components/ios/item/item-media-dark.webp" }}
+  code={`FLXItemMedia(variant: .regular) {
+    Image(systemName: "bell.fill")
+}
+FLXItemMedia(variant: .icon) {
+    Image(systemName: "bell.fill")
+}
+FLXItemMedia(variant: .image) {
+    FLXAvatarImage(url: URL(string: "https://github.com/shadcn.png"))
+}
+`}
+/>
+
+`.regular` renders the content as-is, `.icon` wraps it in a rounded muted square, and `.image` clips it to the same size.
+
+## Custom styling
+
+Each piece has its own FLX protocol: `FLXItemStyle`, `FLXItemMediaStyle`, `FLXItemTitleStyle`, `FLXItemDescriptionStyle`, and `FLXItemSeparatorStyle`. Override any of them for a subtree via the matching modifier, e.g. `.flxItemTitleStyle(_:)`:
+
+<ComponentPreviewCode
+  alt="FLXItem custom styling"
+  image={{ light: "/images/components/ios/item/item-custom.webp", dark: "/images/components/ios/item/item-custom-dark.webp" }}
+  code={`struct FLXVerifiedItemTitleStyle: FLXItemTitleStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        HStack(spacing: FLXSpacing.xs) {
+            configuration.title
+                .flxFont(.headline)
+            Image(systemName: "checkmark.seal.fill")
+                .foregroundStyle(.blue)
+        }
+    }
+}
+
+VStack(spacing: FLXSpacing.md) {
+    FLXItem(variant: .outline) {
+        FLXItemMedia(variant: .icon) {
+            Image(systemName: "sparkles")
+        }
+        FLXItemContent {
+            FLXItemTitle("Featured")
+            FLXItemDescription("Default title style.")
+        }
+    }
+    FLXItem(variant: .outline) {
+        FLXItemMedia(variant: .icon) {
+            Image(systemName: "sparkles")
+        }
+        FLXItemContent {
+            FLXItemTitle("Featured")
+            FLXItemDescription("Custom title style.")
+        }
+    }
+    .flxItemTitleStyle(FLXVerifiedItemTitleStyle())
+}
+`}
+  collapsible
+/>
+
+## API Reference
+
+### FLXItem
+
+```swift
+init(
+    variant: FLXItemVariant = .regular,
+    size: FLXItemSize = .regular,
+    @ViewBuilder content: @escaping () -> Content
+)
+```
+
+### FLXItemMedia
+
+```swift
+init(
+    variant: FLXItemMediaVariant = .regular,
+    @ViewBuilder content: @escaping () -> Content
+)
+```
+
+### FLXItemContent
+
+```swift
+init(@ViewBuilder content: @escaping () -> Content)
+```
+
+### FLXItemTitle
+
+```swift
+init(_ titleKey: LocalizedStringKey)
+
+init(_ titleResource: LocalizedStringResource)
+
+init<S: StringProtocol>(_ title: S)
+```
+
+### FLXItemDescription
+
+```swift
+init(_ textKey: LocalizedStringKey)
+
+init(_ textResource: LocalizedStringResource)
+
+init<S: StringProtocol>(_ text: S)
+```
+
+### FLXItemActions
+
+```swift
+init(@ViewBuilder content: @escaping () -> Content)
+```
+
+### FLXItemHeader
+
+```swift
+init(@ViewBuilder content: @escaping () -> Content)
+```
+
+### FLXItemFooter
+
+```swift
+init(@ViewBuilder content: @escaping () -> Content)
+```
+
+### FLXItemGroup
+
+```swift
+init(@ViewBuilder content: @escaping () -> Content)
+```
+
+### FLXItemSeparator
+
+```swift
+init()
+```
+
+### Variants
+
+| Case      | Description                           |
+| --------- | -------------------------------------- |
+| `regular` | Transparent, no border.                |
+| `outline` | Transparent, bordered.                 |
+| `muted`   | Filled with `theme.colors.muted`.      |
+
+### Sizes
+
+| Case         | Description                    |
+| ------------ | ------------------------------- |
+| `regular`    | Default padding.               |
+| `small`      | Tighter padding.               |
+| `extraSmall` | Most compact padding.          |
+
+### Media variants
+
+| Case      | Description                                                  |
+| --------- | -------------------------------------------------------------- |
+| `regular` | Renders the content as-is, with no extra styling.             |
+| `icon`    | Rounded, muted square sized like an avatar, for an SF Symbol. |
+| `image`   | Clipped to the same size, for pictures.                       |

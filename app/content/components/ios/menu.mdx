@@ -1,0 +1,264 @@
+import { siteConfig } from "@/config/site"
+
+<DocsHeader>
+
+# Menu
+
+<DocsPageActions />
+
+</DocsHeader>
+
+<DocsAvailability />
+
+Displays a list of actions or options revealed from a button or custom trigger.
+
+<ComponentPreviewCode
+  alt="FLXMenu variants"
+  image={{ light: "/images/components/ios/menu/menu-usage.webp", dark: "/images/components/ios/menu/menu-usage-dark.webp" }}
+  filePath="registry/components/menu/menu-usage-example.swift"
+  collapsible
+/>
+
+## Installation
+
+Requires the [design system foundation](/docs/installation#add-the-foundation) (tokens and theme), plus [`FLXButton`](/docs/components/ios/button).
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<CodeBlockCommand
+  command={`shadcn@latest add ${siteConfig.url}/r/ios-menu.json`}
+/>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy the component</Step>
+
+<CodeBlockFromFile
+  filePath="registry/components/menu/FLXMenu.swift"
+  title="FLXMenu.swift"
+/>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```swift
+FLXMenu("Actions", systemImage: "ellipsis.circle") {
+    Button("Rename", systemImage: "pencil") {}
+    Button("Delete", systemImage: "trash", role: .destructive) {}
+}
+```
+
+## Content
+
+`FLXMenu` wraps the native `Menu`, so the system renders its content. Build it from `Button`, `Divider`, `Section`, a nested `Menu` for a submenu, or `Toggle` for options that shouldn't dismiss the menu.
+
+```swift
+FLXMenu("File", systemImage: "doc") {
+    Section("Actions") {
+        Button("Rename", systemImage: "pencil") {}
+        Button("Duplicate", systemImage: "doc.on.doc") {}
+    }
+
+    Menu("Share") {
+        Button("Messages", systemImage: "message") {}
+        Button("Mail", systemImage: "envelope") {}
+    }
+
+    Divider()
+
+    Button("Delete", systemImage: "trash", role: .destructive) {}
+}
+
+FLXMenu("Filter", systemImage: "line.3.horizontal.decrease.circle", variant: .outline) {
+    Toggle("Sort ascending", isOn: $sortAscending)
+    Toggle("Show archived", isOn: $showArchived)
+}
+.menuActionDismissBehavior(.disabled)
+```
+
+## Custom label triggers
+
+Use the `content`/`label` initializer for an icon-only trigger or a custom trigger like an avatar. No `FLXButtonStyle` is applied, so style the label yourself:
+
+<ComponentPreviewCode
+  alt="FLXMenu custom label triggers"
+  image={{ light: "/images/components/ios/menu/menu-triggers.webp", dark: "/images/components/ios/menu/menu-triggers-dark.webp" }}
+  code={`FLXMenu {
+    Button("Rename", systemImage: "pencil") {}
+    Button("Delete", systemImage: "trash", role: .destructive) {}
+} label: {
+    Image(systemName: "ellipsis")
+}
+.buttonStyle(FLXButtonStyle(variant: .ghost))
+.controlSize(.small)
+.accessibilityLabel("More options")
+
+FLXMenu {
+    Button("View profile") {}
+    Button("Sign out", role: .destructive) {}
+} label: {
+    FLXAvatar(size: .small) {
+        FLXAvatarFallback("FM")
+    }
+}
+`}
+/>
+
+## Variants
+
+Five variants, set via `variant:`. Defaults to `.secondary` and styles the trigger like [`FLXButton`](/docs/components/ios/button#variants).
+
+<ComponentPreviewCode
+  alt="FLXMenu variants"
+  image={{ light: "/images/components/ios/menu/menu-variants.webp", dark: "/images/components/ios/menu/menu-variants-dark.webp" }}
+  code={`FLXMenu("Actions", systemImage: "ellipsis.circle", variant: .primary) {
+    Button("Item") {}
+}
+FLXMenu("Actions", systemImage: "ellipsis.circle", variant: .outline) {
+    Button("Item") {}
+}
+FLXMenu("Actions", systemImage: "ellipsis.circle", variant: .secondary) {
+    Button("Item") {}
+}
+FLXMenu("Actions", systemImage: "ellipsis.circle", variant: .ghost) {
+    Button("Item") {}
+}
+FLXMenu("Actions", systemImage: "ellipsis.circle", variant: .link) {
+    Button("Item") {}
+}
+`}
+/>
+
+## Sizes
+
+Set via `.controlSize(_:)`, like native controls.
+
+<ComponentPreviewCode
+  alt="FLXMenu sizes"
+  image={{ light: "/images/components/ios/menu/menu-sizes.webp", dark: "/images/components/ios/menu/menu-sizes-dark.webp" }}
+  code={`FLXMenu("Actions", systemImage: "ellipsis.circle") {
+    Button("Item") {}
+}
+.controlSize(.small)
+FLXMenu("Actions", systemImage: "ellipsis.circle") {
+    Button("Item") {}
+}
+FLXMenu("Actions", systemImage: "ellipsis.circle") {
+    Button("Item") {}
+}
+.controlSize(.large)
+`}
+/>
+
+For an icon-only trigger, use [custom label triggers](#custom-label-triggers).
+
+## Custom styling
+
+There's no `FLXMenuStyle`: `MenuStyle` doesn't expose the menu's `content`. The trigger uses `FLXButtonStyle` and accepts the same `.flxButtonStyle(_:)` override as `FLXButton`:
+
+<ComponentPreviewCode
+  alt="FLXMenu custom styling"
+  image={{ light: "/images/components/ios/menu/menu-custom.webp", dark: "/images/components/ios/menu/menu-custom-dark.webp" }}
+  code={`struct FLXPillButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .flxFont(.body, weight: .medium)
+            .padding(.horizontal, FLXSpacing.xl)
+            .padding(.vertical, FLXSpacing.md)
+            .foregroundStyle(.white)
+            .background(.blue.gradient)
+            .clipShape(Capsule())
+            .opacity(configuration.isPressed ? FLXOpacity.pressed : 1)
+    }
+}
+
+HStack(spacing: FLXSpacing.md) {
+    FLXMenu("Actions", systemImage: "ellipsis.circle") {
+        Button("Item") {}
+    }
+    FLXMenu("Actions", systemImage: "ellipsis.circle") {
+        Button("Item") {}
+    }
+    .flxButtonStyle(FLXPillButtonStyle())
+}
+`}
+  collapsible
+/>
+
+## API Reference
+
+### FLXMenu
+
+```swift
+init(
+    @ViewBuilder content: @escaping () -> Content,
+    @ViewBuilder label: @escaping () -> Label
+)
+
+init(
+    _ titleKey: LocalizedStringKey,
+    variant: FLXButtonVariant = .secondary,
+    @ViewBuilder content: @escaping () -> Content
+)
+
+init(
+    _ titleResource: LocalizedStringResource,
+    variant: FLXButtonVariant = .secondary,
+    @ViewBuilder content: @escaping () -> Content
+)
+
+init<S: StringProtocol>(
+    _ title: S,
+    variant: FLXButtonVariant = .secondary,
+    @ViewBuilder content: @escaping () -> Content
+)
+
+init(
+    _ titleKey: LocalizedStringKey,
+    systemImage: String,
+    variant: FLXButtonVariant = .secondary,
+    @ViewBuilder content: @escaping () -> Content
+)
+
+init(
+    _ titleResource: LocalizedStringResource,
+    systemImage: String,
+    variant: FLXButtonVariant = .secondary,
+    @ViewBuilder content: @escaping () -> Content
+)
+
+init<S: StringProtocol>(
+    _ title: S,
+    systemImage: String,
+    variant: FLXButtonVariant = .secondary,
+    @ViewBuilder content: @escaping () -> Content
+)
+```
+
+### Variants
+
+| Case        | Description                           |
+| ----------- | ------------------------------------- |
+| `primary`   | Filled with `theme.colors.primary`.   |
+| `outline`   | Transparent, bordered.                |
+| `secondary` | Filled with `theme.colors.secondary`. |
+| `ghost`     | Transparent, no border.               |
+| `link`      | Text-only, styled like a hyperlink.   |
+
+For more information about FLXMenu props, see the [Apple documentation](https://developer.apple.com/documentation/swiftui/menu).

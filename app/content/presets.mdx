@@ -1,0 +1,102 @@
+import { siteConfig } from "@/config/site"
+
+<DocsHeader>
+
+# Presets
+
+<DocsPageActions />
+
+</DocsHeader>
+
+A preset sets the colors and radius of every component.
+
+## How it works
+
+Components use `FLXTheme.default` automatically. That default lives in `DesignSystem/Theme/FLXThemeEnvironment.swift`, so there's nothing to configure.
+
+To use another preset in your whole app, change the default there:
+
+```swift
+private struct FLXThemeKey: EnvironmentKey {
+    static let defaultValue: FLXTheme = .sienna
+}
+```
+
+To use it in only part of your app, apply it to a view. Everything inside that view uses it:
+
+```swift
+SettingsView()
+    .flxTheme(.sienna)
+```
+
+Presets handle light and dark mode on their own.
+
+## Default
+
+Near-neutral surfaces and a warm charcoal primary. `FLXTheme.default` comes with the [foundation](/docs/installation#add-the-foundation) and is active from the start.
+
+<PresetPreview
+  alt="FLXTheme.default preset"
+  ios={{ light: "/images/components/ios/presets/presets-default.webp", dark: "/images/components/ios/presets/presets-default-dark.webp" }}
+  mac={{ light: "/images/components/mac/presets/presets-default.webp", dark: "/images/components/mac/presets/presets-default-dark.webp" }}
+/>
+
+## Sienna
+
+Cream paper, burnt-earth ink, and a larger base radius.
+
+<PresetPreview
+  alt="FLXTheme.sienna preset"
+  ios={{ light: "/images/components/ios/presets/presets-sienna.webp", dark: "/images/components/ios/presets/presets-sienna-dark.webp" }}
+  mac={{ light: "/images/components/mac/presets/presets-sienna.webp", dark: "/images/components/mac/presets/presets-sienna-dark.webp" }}
+/>
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<CodeBlockCommand
+  command={`shadcn@latest add ${siteConfig.url}/r/preset-sienna.json`}
+/>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<CodeBlockFromFile
+  filePath="registry/design-system/Theme/Presets/FLXTheme+Sienna.swift"
+  title="DesignSystem/Theme/Presets/FLXTheme+Sienna.swift"
+/>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Create your own
+
+A preset is a `FLXTheme` value. To change only a few tokens, start from an existing preset:
+
+```swift
+extension FLXTheme {
+    static let brand: FLXTheme = {
+        var theme = FLXTheme.sienna
+        theme.colors.primary = Color(flxLight: .indigo, dark: .mint)
+        theme.radius.base = 8
+        return theme
+    }()
+}
+```
+
+To set every color yourself, copy `DesignSystem/Theme/Presets/FLXTheme+Default.swift`, rename the preset, and change its `colors` and `radius`.
+
+Then use it like any other preset:
+
+```swift
+SettingsView()
+    .flxTheme(.brand)
+```

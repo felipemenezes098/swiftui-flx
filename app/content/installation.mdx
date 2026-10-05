@@ -1,0 +1,178 @@
+import { siteConfig } from "@/config/site"
+
+<DocsHeader>
+
+# Installation
+
+<DocsPageActions />
+
+</DocsHeader>
+
+How the design system is organized and how to add it to your project.
+
+<AiInstall />
+
+Prefer to do it yourself? The steps below use the CLI, or copy the files by hand.
+
+<Callout>
+
+**Using Swift packages?** These steps put `DesignSystem` inside your app. To keep it in its own package instead, see [Swift Packages](/docs/swift-packages).
+
+</Callout>
+
+## Requirements
+
+- iOS 16.4 or later, or macOS 13.3 or later.
+- For the CLI: Node.js and a project created with Xcode 16 or later.
+
+## How it's organized
+
+Every component pulls its values from a `DesignSystem` folder that lives in your own project, laid out like this:
+
+```markdown
+DesignSystem
+├── Tokens
+│ ├── FLXSpacing
+│ ├── FLXRadius
+│ ├── FLXBorderWidth
+│ ├── FLXOpacity
+│ ├── FLXTypography
+│ └── FLXColors
+├── Theme
+│ ├── Color+Dynamic
+│ ├── FLXTheme
+│ ├── FLXThemeEnvironment
+│ └── Presets
+│ ├── FLXTheme+Default
+│ └── FLXTheme+Sienna (optional)
+└── Components
+```
+
+`Tokens` and `Theme` are the foundation every component needs. `FLXTheme+Sienna` is optional, see [Presets](/docs/presets). `Components` is where the pieces you grab from the [components page](/docs/components) end up.
+
+## Where to run the CLI
+
+Run CLI commands from your app's source folder, the one Xcode compiles, or point to it with `--cwd`:
+
+```markdown
+MyApp
+├── MyApp.xcodeproj
+└── MyApp ← run here, or pass --cwd MyApp
+```
+
+From the folder that holds `MyApp.xcodeproj`, the files land outside your target and won't compile.
+
+- **Projects created before Xcode 16** list their files one by one. After the CLI adds files, add them to your target in Xcode with **File > Add Files to "MyApp"**.
+- **Extensions, such as a widget,** need the files in their target too. Or keep `DesignSystem` in a [Swift package](/docs/swift-packages) and import it from both.
+- **Your changes are safe.** If a file you edited already exists, the CLI asks before overwriting it. Answer No to keep your version.
+
+## Add the foundation
+
+Add it once, before any component.
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<CodeBlockCommand
+  command={`shadcn@latest add ${siteConfig.url}/r/foundation.json`}
+/>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy the tokens</Step>
+
+Fixed values, the same regardless of theme.
+
+<CodeBlockFromFile
+  filePath="registry/design-system/Tokens/FLXSpacing.swift"
+  title="DesignSystem/Tokens/FLXSpacing.swift"
+/>
+
+<CodeBlockFromFile
+  filePath="registry/design-system/Tokens/FLXRadius.swift"
+  title="DesignSystem/Tokens/FLXRadius.swift"
+/>
+
+<CodeBlockFromFile
+  filePath="registry/design-system/Tokens/FLXBorderWidth.swift"
+  title="DesignSystem/Tokens/FLXBorderWidth.swift"
+/>
+
+<CodeBlockFromFile
+  filePath="registry/design-system/Tokens/FLXOpacity.swift"
+  title="DesignSystem/Tokens/FLXOpacity.swift"
+/>
+
+<CodeBlockFromFile
+  filePath="registry/design-system/Tokens/FLXTypography.swift"
+  title="DesignSystem/Tokens/FLXTypography.swift"
+/>
+
+<CodeBlockFromFile
+  filePath="registry/design-system/Tokens/FLXColors.swift"
+  title="DesignSystem/Tokens/FLXColors.swift"
+/>
+
+<Step>Copy the theme</Step>
+
+Resolves light/dark mode and holds the default preset.
+
+<CodeBlockFromFile
+  filePath="registry/design-system/Theme/Color+Dynamic.swift"
+  title="DesignSystem/Theme/Color+Dynamic.swift"
+/>
+
+<CodeBlockFromFile
+  filePath="registry/design-system/Theme/FLXTheme.swift"
+  title="DesignSystem/Theme/FLXTheme.swift"
+/>
+
+<CodeBlockFromFile
+  filePath="registry/design-system/Theme/FLXThemeEnvironment.swift"
+  title="DesignSystem/Theme/FLXThemeEnvironment.swift"
+/>
+
+<CodeBlockFromFile
+  filePath="registry/design-system/Theme/Presets/FLXTheme+Default.swift"
+  title="DesignSystem/Theme/Presets/FLXTheme+Default.swift"
+/>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+That's all the setup. Components use `FLXTheme.default` automatically, so there's nothing to configure. Grab any component from the [components page](/docs/components) and it's ready to use.
+
+## Use it in your views
+
+Use the tokens for spacing and fonts, and read colors from the theme:
+
+```swift
+struct ProjectRow: View {
+    @Environment(\.flxTheme) private var theme
+
+    var body: some View {
+        Text("Q3 roadmap")
+            .flxFont(.headline)
+            .foregroundStyle(theme.colors.foreground)
+            .padding(FLXSpacing.lg)
+            .background(theme.colors.card)
+    }
+}
+```
+
+`.flxFont(_:)` scales with Dynamic Type, and so do control heights. Titles work like native SwiftUI: a string literal such as `FLXButton("Save")` is a `LocalizedStringKey` and gets translated, a String Catalog symbol such as `FLXButton(.save)` works too, and a `String` variable is shown as is.
+
+To use a different theme, see [Presets](/docs/presets).

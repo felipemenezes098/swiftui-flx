@@ -1,0 +1,94 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "swiftui-flx-design-system",
+  "homepage": "https://swiftui.flexnative.com",
+  "items": [
+    {
+      "name": "foundation",
+      "type": "registry:file",
+      "title": "Foundation",
+      "description": "Tokens and the default theme every component reads from.",
+      "meta": {
+        "platforms": {
+          "iOS": "16.4",
+          "iPadOS": "16.4",
+          "macOS": "13.3"
+        },
+        "license": "MIT"
+      },
+      "files": [
+        {
+          "path": "Tokens/FLXSpacing.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Tokens/FLXSpacing.swift"
+        },
+        {
+          "path": "Tokens/FLXRadius.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Tokens/FLXRadius.swift"
+        },
+        {
+          "path": "Tokens/FLXBorderWidth.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Tokens/FLXBorderWidth.swift"
+        },
+        {
+          "path": "Tokens/FLXOpacity.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Tokens/FLXOpacity.swift"
+        },
+        {
+          "path": "Tokens/FLXTypography.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Tokens/FLXTypography.swift"
+        },
+        {
+          "path": "Tokens/FLXColors.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Tokens/FLXColors.swift"
+        },
+        {
+          "path": "Theme/Color+Dynamic.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Theme/Color+Dynamic.swift"
+        },
+        {
+          "path": "Theme/FLXTheme.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Theme/FLXTheme.swift"
+        },
+        {
+          "path": "Theme/FLXThemeEnvironment.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Theme/FLXThemeEnvironment.swift"
+        },
+        {
+          "path": "Theme/Presets/FLXTheme+Default.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Theme/Presets/FLXTheme+Default.swift"
+        }
+      ]
+    },
+    {
+      "name": "preset-sienna",
+      "type": "registry:file",
+      "title": "Sienna Preset",
+      "description": "Cream paper, burnt-earth ink, and a larger base radius.",
+      "meta": {
+        "platforms": {
+          "iOS": "16.4",
+          "iPadOS": "16.4",
+          "macOS": "13.3"
+        },
+        "license": "MIT"
+      },
+      "files": [
+        {
+          "path": "Theme/Presets/FLXTheme+Sienna.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Theme/Presets/FLXTheme+Sienna.swift"
+        }
+      ]
+    }
+  ]
+}

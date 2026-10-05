@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "ios-picker",
+  "title": "Picker",
+  "description": "Displays a dropdown for selecting one value from a set of options.",
+  "files": [
+    {
+      "path": "registry/components/picker/FLXPicker.swift",
+      "content": "import SwiftUI\n\n/// Wraps the native `Picker` (`.menu` style, SwiftUI's dropdown/select) with FLX's\n/// theme tokens. `PickerStyle` doesn't support custom conformances (unlike\n/// `ButtonStyle`/`ToggleStyle`), so there's no `FLXPickerStyle` protocol or\n/// `.flxSelectStyle(_:)` override here — just default modifiers applied once.\n@available(macOS, unavailable)\npublic struct FLXPicker<SelectionValue: Hashable, Content: View, Label: View>: View {\n    @Environment(\\.flxTheme) private var theme\n    @Environment(\\.isEnabled) private var isEnabled\n\n    @Binding private var selection: SelectionValue\n    private let isDecorated: Bool\n    private let content: () -> Content\n    private let label: () -> Label\n\n    /// Custom-label init (e.g. an icon or `FLXAvatar` as the trigger). The\n    /// caller owns the whole trigger appearance, so no input-box decoration\n    /// (background/border/padding) is applied here — only `.menu` behavior.\n    public init(\n        selection: Binding<SelectionValue>,\n        @ViewBuilder content: @escaping () -> Content,\n        @ViewBuilder label: @escaping () -> Label\n    ) {\n        self._selection = selection\n        self.isDecorated = false\n        self.content = content\n        self.label = label\n    }\n\n    private init(\n        selection: Binding<SelectionValue>,\n        isDecorated: Bool,\n        @ViewBuilder content: @escaping () -> Content,\n        @ViewBuilder label: @escaping () -> Label\n    ) {\n        self._selection = selection\n        self.isDecorated = isDecorated\n        self.content = content\n        self.label = label\n    }\n\n    public var body: some View {\n        let picker = Picker(selection: $selection, content: content) {\n            label().fixedSize()\n        }\n            .pickerStyle(.menu)\n            .tint(theme.colors.foreground)\n\n        if isDecorated {\n            picker\n                .flxFont(.body)\n                .background(theme.colors.card)\n                .overlay(\n                    RoundedRectangle(cornerRadius: theme.radius.md)\n                        .strokeBorder(theme.colors.input, lineWidth: FLXBorderWidth.thin)\n                )\n                .clipShape(RoundedRectangle(cornerRadius: theme.radius.md))\n                .opacity(isEnabled ? 1 : FLXOpacity.disabled)\n        } else {\n            picker\n                .opacity(isEnabled ? 1 : FLXOpacity.disabled)\n        }\n    }\n}\n\n@available(macOS, unavailable)\nextension FLXPicker where Label == Text {\n    public init(\n        _ titleKey: LocalizedStringKey = \"\",\n        selection: Binding<SelectionValue>,\n        @ViewBuilder content: @escaping () -> Content\n    ) {\n        self.init(selection: selection, isDecorated: true, content: content) {\n            Text(titleKey)\n        }\n    }\n\n    @_disfavoredOverload\n    public init(\n        _ titleResource: LocalizedStringResource,\n        selection: Binding<SelectionValue>,\n        @ViewBuilder content: @escaping () -> Content\n    ) {\n        self.init(selection: selection, isDecorated: true, content: content) {\n            Text(titleResource)\n        }\n    }\n\n    @_disfavoredOverload\n    public init<S: StringProtocol>(\n        _ title: S,\n        selection: Binding<SelectionValue>,\n        @ViewBuilder content: @escaping () -> Content\n    ) {\n        self.init(selection: selection, isDecorated: true, content: content) {\n            Text(title)\n        }\n    }\n}\n",
+      "type": "registry:file",
+      "target": "~/DesignSystem/Components/FLXPicker/FLXPicker.swift"
+    }
+  ],
+  "meta": {
+    "platforms": {
+      "iOS": "16.4",
+      "iPadOS": "16.4"
+    },
+    "license": "MIT"
+  },
+  "type": "registry:file"
+}

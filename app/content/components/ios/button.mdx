@@ -1,0 +1,240 @@
+import { siteConfig } from "@/config/site"
+
+<DocsHeader>
+
+# Button
+
+<DocsPageActions />
+
+</DocsHeader>
+
+<DocsAvailability />
+
+Triggers an action or event, such as submitting a form.
+
+<ComponentPreviewCode
+  alt="FLXButton variants"
+  image={{ light: "/images/components/ios/button/button-usage.webp", dark: "/images/components/ios/button/button-usage-dark.webp" }}
+  filePath="registry/components/button/button-usage-example.swift"
+  collapsible
+/>
+
+## Installation
+
+Requires the [design system foundation](/docs/installation#add-the-foundation) (tokens and theme).
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<CodeBlockCommand
+  command={`shadcn@latest add ${siteConfig.url}/r/ios-button.json`}
+/>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy the style</Step>
+
+<CodeBlockFromFile
+  filePath="registry/components/button/FLXButtonStyle.swift"
+  title="FLXButtonStyle.swift"
+/>
+
+<Step>Copy the component</Step>
+
+<CodeBlockFromFile
+  filePath="registry/components/button/FLXButton.swift"
+  title="FLXButton.swift"
+/>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```swift
+FLXButton("Save", variant: .primary) { /* action */ }
+```
+
+## Variants
+
+Five variants, set via `variant:`.
+
+### Primary
+
+<ComponentPreviewCode
+  alt="FLXButton primary variant"
+  image={{ light: "/images/components/ios/button/button-primary.webp", dark: "/images/components/ios/button/button-primary-dark.webp" }}
+  code={`FLXButton("Primary", variant: .primary) {}`}
+/>
+
+### Outline
+
+<ComponentPreviewCode
+  alt="FLXButton outline variant"
+  image={{ light: "/images/components/ios/button/button-outline.webp", dark: "/images/components/ios/button/button-outline-dark.webp" }}
+  code={`FLXButton("Outline", variant: .outline) {}`}
+/>
+
+### Secondary
+
+<ComponentPreviewCode
+  alt="FLXButton secondary variant"
+  image={{ light: "/images/components/ios/button/button-secondary.webp", dark: "/images/components/ios/button/button-secondary-dark.webp" }}
+  code={`FLXButton("Secondary", variant: .secondary) {}`}
+/>
+
+### Ghost
+
+<ComponentPreviewCode
+  alt="FLXButton ghost variant"
+  image={{ light: "/images/components/ios/button/button-ghost.webp", dark: "/images/components/ios/button/button-ghost-dark.webp" }}
+  code={`FLXButton("Ghost", variant: .ghost) {}`}
+/>
+
+### Link
+
+<ComponentPreviewCode
+  alt="FLXButton link variant"
+  image={{ light: "/images/components/ios/button/button-link.webp", dark: "/images/components/ios/button/button-link-dark.webp" }}
+  code={`FLXButton("Link", variant: .link) {}`}
+/>
+
+## Destructive
+
+Set via `role:`, like the native `Button`.
+
+<ComponentPreviewCode
+  alt="FLXButton destructive role"
+  image={{ light: "/images/components/ios/button/button-destructive.webp", dark: "/images/components/ios/button/button-destructive-dark.webp" }}
+  code={`FLXButton("Destructive", role: .destructive) {}`}
+/>
+
+## Sizes
+
+Set via `.controlSize(_:)`, like native controls. For an icon-only button, use `.labelStyle(.iconOnly)`.
+
+<ComponentPreviewCode
+  alt="FLXButton sizes"
+  image={{ light: "/images/components/ios/button/button-sizes.webp", dark: "/images/components/ios/button/button-sizes-dark.webp" }}
+  code={`FLXButton("Small") {}
+    .controlSize(.small)
+FLXButton("Regular") {}
+FLXButton("Large") {}
+    .controlSize(.large)
+FLXButton("Add", systemImage: "plus") {}
+    .labelStyle(.iconOnly)
+`}
+/>
+
+## Custom styling
+
+`FLXButtonStyle` conforms to SwiftUI's native `ButtonStyle`. Override rendering for a subtree with any `ButtonStyle` via `.flxButtonStyle(_:)`:
+
+<ComponentPreviewCode
+  alt="FLXButton custom styling"
+  image={{ light: "/images/components/ios/button/button-custom.webp", dark: "/images/components/ios/button/button-custom-dark.webp" }}
+  code={`
+struct FLXPillButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .flxFont(.body, weight: .medium)
+            .padding(.horizontal, FLXSpacing.xl)
+            .padding(.vertical, FLXSpacing.md)
+            .foregroundStyle(.white)
+            .background(.blue.gradient)
+            .clipShape(Capsule())
+            .opacity(configuration.isPressed ? FLXOpacity.pressed : 1)
+    }
+}
+
+HStack(spacing: FLXSpacing.md) {
+    FLXButton("Pill", variant: .primary) {}
+    FLXButton("Pill", variant: .primary) {}
+        .flxButtonStyle(FLXPillButtonStyle())
+}
+`}
+collapsible
+/>
+
+## API Reference
+
+### FLXButton
+
+```swift
+init(
+    role: ButtonRole? = nil,
+    variant: FLXButtonVariant = .primary,
+    action: @escaping () -> Void,
+    @ViewBuilder label: @escaping () -> Label
+)
+
+init(
+    _ titleKey: LocalizedStringKey,
+    role: ButtonRole? = nil,
+    variant: FLXButtonVariant = .primary,
+    action: @escaping () -> Void
+)
+
+init(
+    _ titleResource: LocalizedStringResource,
+    role: ButtonRole? = nil,
+    variant: FLXButtonVariant = .primary,
+    action: @escaping () -> Void
+)
+
+init<S: StringProtocol>(
+    _ title: S,
+    role: ButtonRole? = nil,
+    variant: FLXButtonVariant = .primary,
+    action: @escaping () -> Void
+)
+
+init(
+    _ titleKey: LocalizedStringKey,
+    systemImage: String,
+    role: ButtonRole? = nil,
+    variant: FLXButtonVariant = .primary,
+    action: @escaping () -> Void
+)
+
+init(
+    _ titleResource: LocalizedStringResource,
+    systemImage: String,
+    role: ButtonRole? = nil,
+    variant: FLXButtonVariant = .primary,
+    action: @escaping () -> Void
+)
+
+init<S: StringProtocol>(
+    _ title: S,
+    systemImage: String,
+    role: ButtonRole? = nil,
+    variant: FLXButtonVariant = .primary,
+    action: @escaping () -> Void
+)
+```
+
+### Variants
+
+| Case        | Description                           |
+| ----------- | ------------------------------------- |
+| `primary`   | Filled with `theme.colors.primary`.   |
+| `outline`   | Transparent, bordered.                |
+| `secondary` | Filled with `theme.colors.secondary`. |
+| `ghost`     | Transparent, no border.               |
+| `link`      | Text-only, styled like a hyperlink.   |
+
+For more information about FLXButton props, see the [Apple documentation](https://developer.apple.com/documentation/swiftui/button).

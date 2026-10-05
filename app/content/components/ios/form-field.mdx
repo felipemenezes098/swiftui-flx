@@ -1,0 +1,158 @@
+import { siteConfig } from "@/config/site"
+
+<DocsHeader>
+
+# Form Field
+
+<DocsPageActions />
+
+</DocsHeader>
+
+<DocsAvailability />
+
+Groups a label, control, description, and error message for a form field.
+
+<ComponentPreviewCode
+  alt="FLXFormField example"
+  image={{ light: "/images/components/ios/form-field/form-field-usage.webp", dark: "/images/components/ios/form-field/form-field-usage-dark.webp" }}
+  filePath="registry/components/form-field/form-field-usage-example.swift"
+  collapsible
+/>
+
+## Installation
+
+Requires the [design system foundation](/docs/installation#add-the-foundation) (tokens and theme).
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<CodeBlockCommand
+  command={`shadcn@latest add ${siteConfig.url}/r/ios-form-field.json`}
+/>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy the style</Step>
+
+<CodeBlockFromFile
+  filePath="registry/components/form-field/FLXFormFieldStyle.swift"
+  title="FLXFormFieldStyle.swift"
+/>
+
+<Step>Copy the component</Step>
+
+<CodeBlockFromFile
+  filePath="registry/components/form-field/FLXFormField.swift"
+  title="FLXFormField.swift"
+/>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```swift
+FLXFormField {
+    FLXFieldLabel("Email") {
+        FLXTextField("teammate@company.com", text: $email)
+    }
+}
+```
+
+## Composition
+
+`FLXFormField` has no `label`/`description`/`error` parameters. Compose [`FLXFieldLabel`](/docs/components/ios/field-label), the control, `FLXFormFieldDescription`, and `FLXFormFieldError` as children:
+
+<ComponentPreviewCode
+  alt="FLXFormField with a description and a conditional error"
+  image={{ light: "/images/components/ios/form-field/form-field-error.webp", dark: "/images/components/ios/form-field/form-field-error-dark.webp" }}
+  code={`FLXFormField {
+    FLXFieldLabel("Username") {
+        FLXTextField("Username", text: $username)
+    }
+    FLXFormFieldDescription("Visible to other members.")
+    if username.count < 3 {
+        FLXFormFieldError("Must be at least 3 characters.")
+    }
+}
+`}
+/>
+
+## Custom styling
+
+`FLXFormFieldStyle`, `FLXFormFieldDescriptionStyle`, and `FLXFormFieldErrorStyle` are FLX protocols. Override each independently via `.flxFormFieldStyle(_:)`, `.flxFormFieldDescriptionStyle(_:)`, and `.flxFormFieldErrorStyle(_:)`:
+
+<ComponentPreviewCode
+  alt="FLXFormField custom error styling"
+  image={{ light: "/images/components/ios/form-field/form-field-custom.webp", dark: "/images/components/ios/form-field/form-field-custom-dark.webp" }}
+  code={`struct FLXWarningFormFieldErrorStyle: FLXFormFieldErrorStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        Label {
+            configuration.text
+        } icon: {
+            Image(systemName: "exclamationmark.triangle.fill")
+        }
+            .flxFont(.footnote)
+            .foregroundStyle(.orange)
+    }
+}
+
+VStack(spacing: FLXSpacing.lg) {
+    FLXFormField {
+        FLXFieldLabel("Email") {
+            FLXTextField("Email", text: $email)
+        }
+        FLXFormFieldError("Something went wrong.")
+    }
+    FLXFormField {
+        FLXFieldLabel("Email") {
+            FLXTextField("Email", text: $email)
+        }
+        FLXFormFieldError("Something went wrong.")
+    }
+    .flxFormFieldErrorStyle(FLXWarningFormFieldErrorStyle())
+}
+`}
+  collapsible
+/>
+
+## API Reference
+
+### FLXFormField
+
+```swift
+init(@ViewBuilder content: @escaping () -> Content)
+```
+
+### FLXFormFieldDescription
+
+```swift
+init(_ textKey: LocalizedStringKey)
+
+init(_ textResource: LocalizedStringResource)
+
+init<S: StringProtocol>(_ text: S)
+```
+
+### FLXFormFieldError
+
+```swift
+init(_ textKey: LocalizedStringKey)
+
+init(_ textResource: LocalizedStringResource)
+
+init<S: StringProtocol>(_ text: S)
+```

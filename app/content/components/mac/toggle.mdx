@@ -1,0 +1,113 @@
+import { siteConfig } from "@/config/site"
+
+<DocsHeader>
+
+# Toggle
+
+<DocsPageActions />
+
+</DocsHeader>
+
+<DocsAvailability />
+
+Displays a checkbox for an on/off value.
+
+<ComponentPreviewCode
+  filePath="registry/components/toggle/toggle-usage-example+macOS.swift"
+  image={{
+    light: "/images/components/mac/toggle/toggle-usage.webp",
+    dark: "/images/components/mac/toggle/toggle-usage-dark.webp",
+  }}
+  collapsible
+/>
+
+## Installation
+
+Requires the [design system foundation](/docs/installation#add-the-foundation) (tokens and theme).
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<CodeBlockCommand
+  command={`shadcn@latest add ${siteConfig.url}/r/mac-toggle.json`}
+/>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy the style</Step>
+
+<CodeBlockFromFile
+  filePath="registry/components/toggle/FLXToggleStyle.swift"
+  title="FLXToggleStyle.swift"
+/>
+
+<Step>Copy the checkbox</Step>
+
+<CodeBlockFromFile
+  filePath="registry/components/toggle/FLXToggleStyle+macOS.swift"
+  title="FLXToggleStyle+macOS.swift"
+/>
+
+<Step>Copy the component</Step>
+
+<CodeBlockFromFile
+  filePath="registry/components/toggle/FLXToggle.swift"
+  title="FLXToggle.swift"
+/>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```swift
+FLXToggle("Wi-Fi", isOn: $wifi)
+```
+
+`FLXToggle` is always controlled via `isOn`. On macOS it draws a checkbox, like SwiftUI's default `Toggle` on the Mac, with the label on the trailing side. The box follows `.controlSize(_:)`.
+
+## Custom styling
+
+`FLXToggleStyle` conforms to SwiftUI's native `ToggleStyle`. Override rendering for a subtree with any `ToggleStyle` via `.flxToggleStyle(_:)`:
+
+<ComponentPreviewCode
+  code={`VStack(alignment: .leading, spacing: FLXSpacing.sm) {
+    FLXToggle("Default style", isOn: $isOn)
+    FLXToggle("Switch style", isOn: $isOn)
+        .flxToggleStyle(.switch)
+}
+`}
+  image={{
+    light: "/images/components/mac/toggle/toggle-custom.webp",
+    dark: "/images/components/mac/toggle/toggle-custom-dark.webp",
+  }}
+/>
+
+## API Reference
+
+### FLXToggle
+
+```swift
+init(isOn: Binding<Bool>, @ViewBuilder label: @escaping () -> Label)
+
+init(_ titleKey: LocalizedStringKey, isOn: Binding<Bool>)
+
+init(_ titleResource: LocalizedStringResource, isOn: Binding<Bool>)
+
+init<S: StringProtocol>(_ title: S, isOn: Binding<Bool>)
+```
+
+For more information about FLXToggle props, see the [Apple documentation](https://developer.apple.com/documentation/swiftui/toggle).

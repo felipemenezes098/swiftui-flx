@@ -1,0 +1,114 @@
+import { siteConfig } from "@/config/site"
+
+<DocsHeader>
+
+# Slider
+
+<DocsPageActions />
+
+</DocsHeader>
+
+<DocsAvailability />
+
+Displays a control for selecting a value from a bounded range.
+
+<ComponentPreviewCode
+  alt="FLXSlider example"
+  image={{ light: "/images/components/ios/slider/slider-usage.webp", dark: "/images/components/ios/slider/slider-usage-dark.webp" }}
+  filePath="registry/components/slider/slider-usage-example.swift"
+  collapsible
+/>
+
+## Installation
+
+Requires the [design system foundation](/docs/installation#add-the-foundation) (tokens and theme).
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<CodeBlockCommand
+  command={`shadcn@latest add ${siteConfig.url}/r/ios-slider.json`}
+/>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy the component</Step>
+
+<CodeBlockFromFile
+  filePath="registry/components/slider/FLXSlider.swift"
+  title="FLXSlider.swift"
+/>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```swift
+FLXSlider("Brightness", value: $brightness)
+```
+
+The title is read by VoiceOver but not rendered. Pair `FLXSlider` with [`FLXFieldLabel`](/docs/components/ios/field-label) for a visible caption.
+
+## Range and step
+
+Pass `in:` for custom bounds and `step:` to snap to increments. Defaults to `0...1` with no step.
+
+<ComponentPreviewCode
+  alt="FLXSlider with a custom range and step"
+  image={{ light: "/images/components/ios/slider/slider-range.webp", dark: "/images/components/ios/slider/slider-range-dark.webp" }}
+  code={`FLXSlider("Text Size", value: $textSize, in: 1...5, step: 1)`}
+/>
+
+## Custom styling
+
+SwiftUI's `Slider` has no style protocol, so there's no `FLXSliderStyle` or override. `FLXSlider` applies `.tint(_:)` with the theme's primary color. Track height, thumb shape, and range (two-thumb) sliders require a custom view.
+
+## API Reference
+
+### FLXSlider
+
+```swift
+init(
+    value: Binding<Double>,
+    in bounds: ClosedRange<Double> = 0...1,
+    step: Double.Stride? = nil,
+    @ViewBuilder label: @escaping () -> Label
+)
+
+init(
+    _ titleKey: LocalizedStringKey = "",
+    value: Binding<Double>,
+    in bounds: ClosedRange<Double> = 0...1,
+    step: Double.Stride? = nil
+)
+
+init(
+    _ titleResource: LocalizedStringResource,
+    value: Binding<Double>,
+    in bounds: ClosedRange<Double> = 0...1,
+    step: Double.Stride? = nil
+)
+
+init<S: StringProtocol>(
+    _ title: S,
+    value: Binding<Double>,
+    in bounds: ClosedRange<Double> = 0...1,
+    step: Double.Stride? = nil
+)
+```
+
+For more information about FLXSlider props, see the [Apple documentation](https://developer.apple.com/documentation/swiftui/slider).

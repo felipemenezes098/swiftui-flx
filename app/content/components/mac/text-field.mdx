@@ -1,0 +1,85 @@
+import { siteConfig } from "@/config/site"
+
+<DocsHeader>
+
+# Text Field
+
+<DocsPageActions />
+
+</DocsHeader>
+
+<DocsAvailability />
+
+Displays a single-line text input.
+
+<ComponentPreviewCode
+  filePath="registry/components/text-field/text-field-usage-example.swift"
+  image={{ light: "/images/components/mac/text-field/text-field-usage.webp", dark: "/images/components/mac/text-field/text-field-usage-dark.webp" }}
+  collapsible
+/>
+
+## Installation
+
+Requires the [design system foundation](/docs/installation#add-the-foundation) (tokens and theme).
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<CodeBlockCommand
+  command={`shadcn@latest add ${siteConfig.url}/r/mac-text-field.json`}
+/>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy the component</Step>
+
+<CodeBlockFromFile
+  filePath="registry/components/text-field/FLXTextField.swift"
+  title="FLXTextField.swift"
+/>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```swift
+FLXTextField("Email", text: $email)
+```
+
+On macOS, the border takes the theme's ring color while the field has focus, since the Mac doesn't draw its own focus ring around it.
+
+## Custom styling
+
+`TextFieldStyle` doesn't support custom conformances, so there's no `FLXTextFieldStyle` or override.
+
+## API Reference
+
+### FLXTextField
+
+```swift
+init(
+    _ titleKey: LocalizedStringResource = "",
+    text: Binding<String>
+)
+
+init<S: StringProtocol>(
+    _ title: S,
+    text: Binding<String>
+)
+```
+
+For more information about FLXTextField props, see the [Apple documentation](https://developer.apple.com/documentation/swiftui/textfield).

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "mac-text-field",
+  "title": "Text Field",
+  "description": "Displays a single-line text input.",
+  "files": [
+    {
+      "path": "registry/components/text-field/FLXTextField.swift",
+      "content": "import SwiftUI\n\n/// Wraps the native `TextField` with FLX's theme tokens. `TextFieldStyle` doesn't\n/// support custom conformances (no \"Creating custom styles\" section, no public\n/// `makeBody(configuration:)` — same limitation as `PickerStyle`/`FLXPicker`), so\n/// there's no `FLXTextFieldStyle` protocol or `.flxInputStyle(_:)` override here — just\n/// default modifiers applied once, on top of `.textFieldStyle(.plain)` to strip the\n/// platform's own chrome first.\npublic struct FLXTextField: View {\n    @Environment(\\.flxTheme) private var theme\n    @Environment(\\.isEnabled) private var isEnabled\n    @FocusState private var isFocused: Bool\n\n    private let title: String\n    @Binding private var text: String\n    private let groupFocus: FocusState<Bool>.Binding?\n\n    public init(_ titleKey: LocalizedStringResource = \"\", text: Binding<String>) {\n        self.init(String(localized: titleKey), text: text, groupFocus: nil)\n    }\n\n    @_disfavoredOverload\n    public init<S: StringProtocol>(_ title: S, text: Binding<String>) {\n        self.init(String(title), text: text, groupFocus: nil)\n    }\n\n    /// Undecorated entry point for `FLXTextFieldGroup`: no background/border of\n    /// its own, so the group's own box is the only one drawn, and the group owns the\n    /// focus so a tap anywhere in its box focuses this field. Not part of the public\n    /// API — `FLXTextField` on its own is always the full boxed field above.\n    init(_ title: String, text: Binding<String>, groupFocus: FocusState<Bool>.Binding?) {\n        self.title = title\n        self._text = text\n        self.groupFocus = groupFocus\n    }\n\n    public var body: some View {\n        let field = TextField(title, text: $text)\n            .textFieldStyle(.plain)\n            .flxFont(.body)\n            .foregroundStyle(theme.colors.foreground)\n            .padding(.vertical, FLXTextFieldMetrics.verticalPadding)\n\n        if let groupFocus {\n            field\n                .focused(groupFocus)\n                .padding(.horizontal, FLXSpacing.sm)\n        } else {\n            field\n                .focused($isFocused)\n                .padding(.horizontal, FLXTextFieldMetrics.horizontalPadding)\n                .background(theme.colors.card)\n                .overlay(\n                    RoundedRectangle(cornerRadius: theme.radius.md)\n                        .strokeBorder(borderColor, lineWidth: borderWidth)\n                )\n                .clipShape(RoundedRectangle(cornerRadius: theme.radius.md))\n                .contentShape(Rectangle())\n                .onTapGesture { isFocused = true }\n                .opacity(isEnabled ? 1 : FLXOpacity.disabled)\n        }\n    }\n\n    private var borderColor: Color {\n        #if os(macOS)\n        if isFocused { return theme.colors.ring }\n        #endif\n        return theme.colors.input\n    }\n\n    private var borderWidth: CGFloat {\n        #if os(macOS)\n        if isFocused { return FLXBorderWidth.thick }\n        #endif\n        return FLXBorderWidth.thin\n    }\n}\n\nprivate enum FLXTextFieldMetrics {\n    #if os(macOS)\n    static let verticalPadding: CGFloat = 4\n    #else\n    static let verticalPadding: CGFloat = 6\n    #endif\n    static let horizontalPadding: CGFloat = FLXSpacing.md\n}\n",
+      "type": "registry:file",
+      "target": "~/DesignSystem/Components/FLXTextField/FLXTextField.swift"
+    }
+  ],
+  "meta": {
+    "platforms": {
+      "macOS": "13.3"
+    },
+    "license": "MIT"
+  },
+  "type": "registry:file"
+}

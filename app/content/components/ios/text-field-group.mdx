@@ -1,0 +1,203 @@
+import { siteConfig } from "@/config/site"
+
+<DocsHeader>
+
+# Text Field Group
+
+<DocsPageActions />
+
+</DocsHeader>
+
+<DocsAvailability />
+
+Wraps a text field in a shared box with optional leading and trailing addons.
+
+<ComponentPreviewCode
+  alt="FLXTextFieldGroup example"
+  image={{ light: "/images/components/ios/text-field-group/text-field-group-usage.webp", dark: "/images/components/ios/text-field-group/text-field-group-usage-dark.webp" }}
+  filePath="registry/components/text-field-group/text-field-group-usage-example.swift"
+  collapsible
+/>
+
+## Installation
+
+Requires the [design system foundation](/docs/installation#add-the-foundation) (tokens and theme), plus [`FLXTextField`](/docs/components/ios/text-field) and [`FLXSecureField`](/docs/components/ios/secure-field).
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<CodeBlockCommand
+  command={`shadcn@latest add ${siteConfig.url}/r/ios-text-field-group.json`}
+/>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy the style</Step>
+
+<CodeBlockFromFile
+  filePath="registry/components/text-field-group/FLXTextFieldGroupStyle.swift"
+  title="FLXTextFieldGroupStyle.swift"
+/>
+
+<Step>Copy the component</Step>
+
+<CodeBlockFromFile
+  filePath="registry/components/text-field-group/FLXTextFieldGroup.swift"
+  title="FLXTextFieldGroup.swift"
+/>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```swift
+FLXTextFieldGroup("Search", text: $search) {
+    FLXTextFieldGroupAddon {
+        Image(systemName: "magnifyingglass")
+    }
+}
+```
+
+## Composition
+
+`FLXTextFieldGroup` draws a single shared box around an optional leading addon, the field, and an optional trailing addon. `FLXTextFieldGroupAddon` tints its content with the theme's muted foreground, for an icon, a `Text` prefix/suffix, or a `Button`.
+
+<ComponentPreviewCode
+  alt="FLXTextFieldGroup leading and trailing addons"
+  image={{ light: "/images/components/ios/text-field-group/text-field-group-addons.webp", dark: "/images/components/ios/text-field-group/text-field-group-addons-dark.webp" }}
+  code={`FLXTextFieldGroup("0.00", text: $amount, leading: {
+    FLXTextFieldGroupAddon { Text("$") }
+}, trailing: {
+    FLXTextFieldGroupAddon { Text("USD") }
+})
+`}
+/>
+
+There are two initializers: leading-only, and leading-and-trailing. With a single trailing closure, `FLXTextFieldGroup(...) { ... }` always binds to `leading`.
+
+## Secure variant
+
+`FLXSecureTextFieldGroup` draws the same box, wrapping `FLXSecureField` instead of `FLXTextField`.
+
+<ComponentPreviewCode
+  alt="FLXSecureTextFieldGroup"
+  image={{ light: "/images/components/ios/text-field-group/text-field-group-secure.webp", dark: "/images/components/ios/text-field-group/text-field-group-secure-dark.webp" }}
+  code={`FLXSecureTextFieldGroup("Password", text: $password) {
+    FLXTextFieldGroupAddon { Image(systemName: "lock") }
+}
+`}
+/>
+
+## Custom styling
+
+`FLXTextFieldGroupStyle` is an FLX protocol. Override it for a subtree via `.flxTextFieldGroupStyle(_:)`:
+
+<ComponentPreviewCode
+  alt="FLXTextFieldGroup custom styling"
+  image={{ light: "/images/components/ios/text-field-group/text-field-group-custom.webp", dark: "/images/components/ios/text-field-group/text-field-group-custom-dark.webp" }}
+  code={`struct FLXPillTextFieldGroupStyle: FLXTextFieldGroupStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.content
+            .padding(.horizontal, FLXSpacing.xs)
+            .padding(.vertical, FLXSpacing.xs)
+            .background(.quaternary, in: Capsule())
+    }
+}
+
+VStack(spacing: FLXSpacing.md) {
+    FLXTextFieldGroup("Search", text: $search) {
+        FLXTextFieldGroupAddon { Image(systemName: "magnifyingglass") }
+    }
+    FLXTextFieldGroup("Search", text: $search) {
+        FLXTextFieldGroupAddon { Image(systemName: "magnifyingglass") }
+    }
+    .flxTextFieldGroupStyle(FLXPillTextFieldGroupStyle())
+}
+`}
+  collapsible
+/>
+
+`configuration.content` is the row with the field and addons, and `configuration.isFocused` tells whether the field has focus.
+
+## API Reference
+
+### FLXTextFieldGroup
+
+```swift
+init(
+    _ titleKey: LocalizedStringResource = "",
+    text: Binding<String>,
+    @ViewBuilder leading: @escaping () -> Leading = { EmptyView() }
+) where Trailing == EmptyView
+
+init<S: StringProtocol>(
+    _ title: S,
+    text: Binding<String>,
+    @ViewBuilder leading: @escaping () -> Leading = { EmptyView() }
+) where Trailing == EmptyView
+
+init(
+    _ titleKey: LocalizedStringResource = "",
+    text: Binding<String>,
+    @ViewBuilder leading: @escaping () -> Leading = { EmptyView() },
+    @ViewBuilder trailing: @escaping () -> Trailing
+)
+
+init<S: StringProtocol>(
+    _ title: S,
+    text: Binding<String>,
+    @ViewBuilder leading: @escaping () -> Leading = { EmptyView() },
+    @ViewBuilder trailing: @escaping () -> Trailing
+)
+```
+
+### FLXTextFieldGroupAddon
+
+```swift
+init(@ViewBuilder content: @escaping () -> Content)
+```
+
+### FLXSecureTextFieldGroup
+
+```swift
+init(
+    _ titleKey: LocalizedStringResource = "",
+    text: Binding<String>,
+    @ViewBuilder leading: @escaping () -> Leading = { EmptyView() }
+) where Trailing == EmptyView
+
+init<S: StringProtocol>(
+    _ title: S,
+    text: Binding<String>,
+    @ViewBuilder leading: @escaping () -> Leading = { EmptyView() }
+) where Trailing == EmptyView
+
+init(
+    _ titleKey: LocalizedStringResource = "",
+    text: Binding<String>,
+    @ViewBuilder leading: @escaping () -> Leading = { EmptyView() },
+    @ViewBuilder trailing: @escaping () -> Trailing
+)
+
+init<S: StringProtocol>(
+    _ title: S,
+    text: Binding<String>,
+    @ViewBuilder leading: @escaping () -> Leading = { EmptyView() },
+    @ViewBuilder trailing: @escaping () -> Trailing
+)
+```
+

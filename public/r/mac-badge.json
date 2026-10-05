@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "mac-badge",
+  "title": "Badge",
+  "description": "Displays a small label for status, category, or count.",
+  "files": [
+    {
+      "path": "registry/components/badge/FLXBadgeStyle.swift",
+      "content": "import SwiftUI\n\n@MainActor\npublic protocol FLXBadgeStyle {\n    associatedtype Body: View\n    typealias Configuration = FLXBadgeStyleConfiguration\n\n    @ViewBuilder func makeBody(configuration: Configuration) -> Body\n}\n\npublic struct FLXBadgeStyleConfiguration {\n    public let text: Text\n    public let variant: FLXBadgeVariant\n}\n\npublic struct FLXDefaultBadgeStyle: FLXBadgeStyle {\n    public init() {}\n\n    public func makeBody(configuration: Configuration) -> some View {\n        FLXDefaultBadgeStyleBody(configuration: configuration)\n    }\n}\n\nprivate struct FLXDefaultBadgeStyleBody: View {\n    @Environment(\\.flxTheme) private var theme\n    @Environment(\\.colorScheme) private var colorScheme\n\n    let configuration: FLXBadgeStyleConfiguration\n\n    var body: some View {\n        configuration.text\n            .flxFont(.caption, weight: .semibold)\n            .padding(.horizontal, FLXSpacing.sm)\n            .padding(.vertical, FLXSpacing.xs / 2)\n            .foregroundStyle(foregroundColor)\n            .background(backgroundColor)\n            .overlay(\n                RoundedRectangle(cornerRadius: theme.radius.full)\n                    .strokeBorder(borderColor, lineWidth: configuration.variant == .outline ? FLXBorderWidth.thin : 0)\n            )\n            .clipShape(RoundedRectangle(cornerRadius: theme.radius.full))\n    }\n\n    private var backgroundColor: Color {\n        switch configuration.variant {\n        case .primary: theme.colors.primary\n        case .secondary: theme.colors.secondary\n        case .destructive: destructiveBackground\n        case .outline: .clear\n        }\n    }\n\n    private var destructiveBackground: Color {\n        switch colorScheme {\n        case .dark: theme.colors.destructive.opacity(FLXOpacity.destructiveDark)\n        default: theme.colors.destructive\n        }\n    }\n\n    private var foregroundColor: Color {\n        switch configuration.variant {\n        case .primary: theme.colors.primaryForeground\n        case .secondary: theme.colors.secondaryForeground\n        case .destructive: theme.colors.destructiveForeground\n        case .outline: theme.colors.foreground\n        }\n    }\n\n    private var borderColor: Color {\n        switch configuration.variant {\n        case .outline: theme.colors.border\n        default: .clear\n        }\n    }\n}\n\nstruct AnyFLXBadgeStyle: FLXBadgeStyle {\n    private let _makeBody: (Configuration) -> AnyView\n\n    init<S: FLXBadgeStyle>(_ style: S) {\n        _makeBody = { AnyView(style.makeBody(configuration: $0)) }\n    }\n\n    func makeBody(configuration: Configuration) -> AnyView {\n        _makeBody(configuration)\n    }\n}\n\nprivate struct FLXBadgeStyleKey: EnvironmentKey {\n    static let defaultValue: AnyFLXBadgeStyle? = nil\n}\n\nextension EnvironmentValues {\n    var flxBadgeStyle: AnyFLXBadgeStyle? {\n        get { self[FLXBadgeStyleKey.self] }\n        set { self[FLXBadgeStyleKey.self] = newValue }\n    }\n}\n\nextension View {\n    public func flxBadgeStyle<S: FLXBadgeStyle>(_ style: S) -> some View {\n        environment(\\.flxBadgeStyle, AnyFLXBadgeStyle(style))\n    }\n}\n",
+      "type": "registry:file",
+      "target": "~/DesignSystem/Components/FLXBadge/FLXBadgeStyle.swift"
+    },
+    {
+      "path": "registry/components/badge/FLXBadge.swift",
+      "content": "import SwiftUI\n\npublic enum FLXBadgeVariant {\n    case primary\n    case secondary\n    case destructive\n    case outline\n}\n\npublic struct FLXBadge: View {\n    @Environment(\\.flxBadgeStyle) private var style\n\n    private let text: Text\n    private let variant: FLXBadgeVariant\n\n    public init(_ textKey: LocalizedStringKey, variant: FLXBadgeVariant = .primary) {\n        self.text = Text(textKey)\n        self.variant = variant\n    }\n\n    @_disfavoredOverload\n    public init(_ textResource: LocalizedStringResource, variant: FLXBadgeVariant = .primary) {\n        self.text = Text(textResource)\n        self.variant = variant\n    }\n\n    @_disfavoredOverload\n    public init<S: StringProtocol>(_ text: S, variant: FLXBadgeVariant = .primary) {\n        self.text = Text(text)\n        self.variant = variant\n    }\n\n    public var body: some View {\n        (style ?? AnyFLXBadgeStyle(FLXDefaultBadgeStyle())).makeBody(configuration: .init(text: text, variant: variant))\n    }\n}\n",
+      "type": "registry:file",
+      "target": "~/DesignSystem/Components/FLXBadge/FLXBadge.swift"
+    }
+  ],
+  "meta": {
+    "platforms": {
+      "macOS": "13.3"
+    },
+    "license": "MIT"
+  },
+  "type": "registry:file"
+}

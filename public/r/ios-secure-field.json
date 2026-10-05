@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "ios-secure-field",
+  "title": "Secure Field",
+  "description": "Displays an obscured text input for passwords and other sensitive text.",
+  "files": [
+    {
+      "path": "registry/components/secure-field/FLXSecureField.swift",
+      "content": "import SwiftUI\n\n/// Wraps the native `SecureField` with FLX's theme tokens. `TextFieldStyle` doesn't\n/// support custom conformances (no \"Creating custom styles\" section, no public\n/// `makeBody(configuration:)` — same limitation as `PickerStyle`/`FLXPicker` and\n/// `FLXTextField`), so there's no `FLXSecureFieldStyle` protocol or\n/// `.flxSecureFieldStyle(_:)` override here — just default modifiers applied once,\n/// on top of `.textFieldStyle(.plain)` to strip the platform's own chrome first.\n///\n/// `SecureField` is a distinct native control from `TextField` (not a style\n/// variant of it) — it hides typed characters, blocks cut/copy of its contents,\n/// and hides itself in iOS screenshots. Those are system-level privacy behaviors,\n/// so this is its own component rather than a `.isSecure` flag on `FLXTextField`.\npublic struct FLXSecureField: View {\n    @Environment(\\.flxTheme) private var theme\n    @Environment(\\.isEnabled) private var isEnabled\n    @FocusState private var isFocused: Bool\n\n    private let title: String\n    @Binding private var text: String\n    private let groupFocus: FocusState<Bool>.Binding?\n\n    public init(_ titleKey: LocalizedStringResource = \"\", text: Binding<String>) {\n        self.init(String(localized: titleKey), text: text, groupFocus: nil)\n    }\n\n    @_disfavoredOverload\n    public init<S: StringProtocol>(_ title: S, text: Binding<String>) {\n        self.init(String(title), text: text, groupFocus: nil)\n    }\n\n    /// Undecorated entry point for `FLXTextFieldGroup`: no background/border of\n    /// its own, so the group's own box is the only one drawn, and the group owns the\n    /// focus so a tap anywhere in its box focuses this field. Not part of the public\n    /// API — `FLXSecureField` on its own is always the full boxed field above.\n    init(_ title: String, text: Binding<String>, groupFocus: FocusState<Bool>.Binding?) {\n        self.title = title\n        self._text = text\n        self.groupFocus = groupFocus\n    }\n\n    public var body: some View {\n        let field = SecureField(title, text: $text)\n            .textFieldStyle(.plain)\n            .flxFont(.body)\n            .foregroundStyle(theme.colors.foreground)\n            .padding(.vertical, FLXSecureFieldMetrics.verticalPadding)\n\n        if let groupFocus {\n            field\n                .focused(groupFocus)\n                .padding(.horizontal, FLXSpacing.sm)\n        } else {\n            field\n                .focused($isFocused)\n                .padding(.horizontal, FLXSecureFieldMetrics.horizontalPadding)\n                .background(theme.colors.card)\n                .overlay(\n                    RoundedRectangle(cornerRadius: theme.radius.md)\n                        .strokeBorder(borderColor, lineWidth: borderWidth)\n                )\n                .clipShape(RoundedRectangle(cornerRadius: theme.radius.md))\n                .contentShape(Rectangle())\n                .onTapGesture { isFocused = true }\n                .opacity(isEnabled ? 1 : FLXOpacity.disabled)\n        }\n    }\n\n    private var borderColor: Color {\n        #if os(macOS)\n        if isFocused { return theme.colors.ring }\n        #endif\n        return theme.colors.input\n    }\n\n    private var borderWidth: CGFloat {\n        #if os(macOS)\n        if isFocused { return FLXBorderWidth.thick }\n        #endif\n        return FLXBorderWidth.thin\n    }\n}\n\nprivate enum FLXSecureFieldMetrics {\n    #if os(macOS)\n    static let verticalPadding: CGFloat = 4\n    #else\n    static let verticalPadding: CGFloat = 6\n    #endif\n    static let horizontalPadding: CGFloat = FLXSpacing.md\n}\n",
+      "type": "registry:file",
+      "target": "~/DesignSystem/Components/FLXSecureField/FLXSecureField.swift"
+    }
+  ],
+  "meta": {
+    "platforms": {
+      "iOS": "16.4",
+      "iPadOS": "16.4"
+    },
+    "license": "MIT"
+  },
+  "type": "registry:file"
+}

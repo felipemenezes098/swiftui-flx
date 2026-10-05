@@ -1,0 +1,75 @@
+/* Shiki output styling — consumed by CodeBlockShiki / CodeBlockShikiClient
+   (components/core/shiki-highlighter.ts). Kept out of globals.css since it's
+   specific to that one highlighter integration, not the CodeBlock primitives
+   themselves. */
+
+.shiki {
+  @apply px-0 py-3;
+  background-color: transparent !important;
+}
+
+.shiki,
+.shiki span {
+  color: var(--shiki-light);
+}
+
+.dark .shiki,
+.dark .shiki span {
+  color: var(--shiki-dark);
+}
+
+.shiki code {
+  @apply px-0;
+}
+
+.shiki .line {
+  @apply block px-4 py-0.5;
+}
+
+/* Line numbers (shiki-highlighter.ts's "AddLineNumbers" transformer) */
+.shiki.shiki-line-numbers {
+  counter-reset: line;
+}
+
+.shiki.shiki-line-numbers .line {
+  counter-increment: line;
+  @apply flex py-1;
+}
+
+.shiki.shiki-line-numbers .line::before {
+  content: counter(line);
+  @apply text-muted-foreground w-8 shrink-0 pr-8 text-right opacity-60 select-none;
+}
+
+/* transformerNotationHighlight / transformerMetaHighlight */
+.shiki .line.highlighted {
+  @apply bg-muted/50 border-l-primary/50 border-l-2 pl-2;
+}
+
+/* transformerMetaWordHighlight */
+.shiki .highlighted-word {
+  @apply rounded bg-yellow-200 px-1 dark:bg-yellow-800/50;
+}
+
+/* transformerNotationDiff */
+.shiki .line.diff {
+  @apply relative inline-block w-full;
+}
+
+.shiki .line.diff.add {
+  @apply bg-emerald-300/20! dark:bg-emerald-700/20!;
+}
+
+.shiki .line.diff.add::before {
+  content: '+';
+  @apply text-emerald-600 dark:text-emerald-400 absolute left-2;
+}
+
+.shiki .line.diff.remove {
+  @apply bg-red-300/20! opacity-70 dark:bg-red-600/20!;
+}
+
+.shiki .line.diff.remove::before {
+  content: '-';
+  @apply text-red-600 dark:text-red-400 absolute left-2;
+}

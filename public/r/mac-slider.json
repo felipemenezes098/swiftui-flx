@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "mac-slider",
+  "title": "Slider",
+  "description": "Displays a control for selecting a value from a bounded range.",
+  "files": [
+    {
+      "path": "registry/components/slider/FLXSlider.swift",
+      "content": "import SwiftUI\n\n/// Wraps the native `Slider` with FLX's theme tokens. Unlike `Button`/`Toggle`/`ProgressView`,\n/// SwiftUI's `Slider` has no public `SliderStyle` protocol at all (not even a\n/// non-conformable enum like `PickerStyle`) — so there's no `FLXSliderStyle` or\n/// `.flxSliderStyle(_:)` override here, just `.tint(_:)` applied once. Track height,\n/// thumb shape/image, and a range (two-thumb) slider are all unreachable without\n/// dropping to `UISlider` or a fully custom view — out of scope for this component.\npublic struct FLXSlider<Label: View>: View {\n    @Environment(\\.flxTheme) private var theme\n    @Environment(\\.isEnabled) private var isEnabled\n\n    @Binding private var value: Double\n    private let bounds: ClosedRange<Double>\n    private let step: Double.Stride?\n    private let label: () -> Label\n\n    public init(\n        value: Binding<Double>,\n        in bounds: ClosedRange<Double> = 0...1,\n        step: Double.Stride? = nil,\n        @ViewBuilder label: @escaping () -> Label\n    ) {\n        self._value = value\n        self.bounds = bounds\n        self.step = step\n        self.label = label\n    }\n\n    public var body: some View {\n        Group {\n            if let step {\n                Slider(value: $value, in: bounds, step: step, label: label)\n            } else {\n                Slider(value: $value, in: bounds, label: label)\n            }\n        }\n        .tint(theme.colors.primary)\n        .opacity(isEnabled ? 1 : FLXOpacity.disabled)\n    }\n}\n\nextension FLXSlider where Label == Text {\n    /// `titleKey` is accessibility-only (read by VoiceOver) — the native `Slider`\n    /// never renders its label visually, so this doesn't behave like\n    /// `FLXTextField`'s `titleKey` placeholder. Pair with `FLXFieldLabel` for a\n    /// visible caption.\n    public init(_ titleKey: LocalizedStringKey = \"\", value: Binding<Double>, in bounds: ClosedRange<Double> = 0...1, step: Double.Stride? = nil) {\n        self.init(value: value, in: bounds, step: step) {\n            Text(titleKey)\n        }\n    }\n\n    @_disfavoredOverload\n    public init(_ titleResource: LocalizedStringResource, value: Binding<Double>, in bounds: ClosedRange<Double> = 0...1, step: Double.Stride? = nil) {\n        self.init(value: value, in: bounds, step: step) {\n            Text(titleResource)\n        }\n    }\n\n    @_disfavoredOverload\n    public init<S: StringProtocol>(_ title: S, value: Binding<Double>, in bounds: ClosedRange<Double> = 0...1, step: Double.Stride? = nil) {\n        self.init(value: value, in: bounds, step: step) {\n            Text(title)\n        }\n    }\n}\n",
+      "type": "registry:file",
+      "target": "~/DesignSystem/Components/FLXSlider/FLXSlider.swift"
+    }
+  ],
+  "meta": {
+    "platforms": {
+      "macOS": "13.3"
+    },
+    "license": "MIT"
+  },
+  "type": "registry:file"
+}

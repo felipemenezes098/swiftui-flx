@@ -1,0 +1,162 @@
+import { siteConfig } from "@/config/site"
+
+<DocsHeader>
+
+# Field Label
+
+<DocsPageActions />
+
+</DocsHeader>
+
+<DocsAvailability />
+
+Pairs a caption with a form control.
+
+<ComponentPreviewCode
+  alt="FLXFieldLabel example"
+  image={{ light: "/images/components/ios/field-label/field-label-usage.webp", dark: "/images/components/ios/field-label/field-label-usage-dark.webp" }}
+  filePath="registry/components/field-label/field-label-usage-example.swift"
+  collapsible
+/>
+
+## Installation
+
+Requires the [design system foundation](/docs/installation#add-the-foundation) (tokens and theme).
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<CodeBlockCommand
+  command={`shadcn@latest add ${siteConfig.url}/r/ios-field-label.json`}
+/>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy the style</Step>
+
+<CodeBlockFromFile
+  filePath="registry/components/field-label/FLXFieldLabelStyle.swift"
+  title="FLXFieldLabelStyle.swift"
+/>
+
+<Step>Copy the component</Step>
+
+<CodeBlockFromFile
+  filePath="registry/components/field-label/FLXFieldLabel.swift"
+  title="FLXFieldLabel.swift"
+/>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```swift
+FLXFieldLabel("Email") {
+    FLXTextField(text: $email)
+}
+```
+
+The pairing is structural, not id-based like HTML's `<label for="">`. If the wrapped control has no visible text, set `.accessibilityLabel(_:)` on it.
+
+## Orientation
+
+Two orientations, set via `orientation:`. Defaults to `.vertical`.
+
+<ComponentPreviewCode
+  alt="FLXFieldLabel orientations"
+  image={{ light: "/images/components/ios/field-label/field-label-orientations.webp", dark: "/images/components/ios/field-label/field-label-orientations-dark.webp" }}
+  code={`FLXFieldLabel("Email") {
+    FLXTextField(text: $email)
+}
+FLXFieldLabel("Notifications", orientation: .horizontal) {
+    FLXToggle("", isOn: $notifications)
+        .labelsHidden()
+}
+`}
+/>
+
+## Custom styling
+
+`FLXFieldLabelStyle` conforms to SwiftUI's native `LabeledContentStyle`. Override rendering for a subtree with any `LabeledContentStyle` via `.flxFieldLabelStyle(_:)`:
+
+<ComponentPreviewCode
+  alt="FLXFieldLabel custom styling"
+  image={{ light: "/images/components/ios/field-label/field-label-custom.webp", dark: "/images/components/ios/field-label/field-label-custom-dark.webp" }}
+  code={`struct FLXCaptionLabelStyle: LabeledContentStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        VStack(alignment: .leading, spacing: FLXSpacing.xs) {
+            configuration.label
+                .flxFont(.caption, weight: .semibold)
+                .textCase(.uppercase)
+                .tracking(1)
+                .foregroundStyle(.secondary)
+            configuration.content
+        }
+    }
+}
+
+VStack(spacing: FLXSpacing.lg) {
+    FLXFieldLabel("Default style") {
+        FLXTextField(text: $email)
+    }
+    FLXFieldLabel("Caption style") {
+        FLXTextField(text: $email)
+    }
+    .flxFieldLabelStyle(FLXCaptionLabelStyle())
+}
+`}
+  collapsible
+/>
+
+## API Reference
+
+### FLXFieldLabel
+
+```swift
+init(
+    orientation: FLXFieldLabelOrientation = .vertical,
+    @ViewBuilder content: @escaping () -> Content,
+    @ViewBuilder label: @escaping () -> Label
+)
+
+init(
+    _ titleKey: LocalizedStringKey,
+    orientation: FLXFieldLabelOrientation = .vertical,
+    @ViewBuilder content: @escaping () -> Content
+)
+
+init(
+    _ titleResource: LocalizedStringResource,
+    orientation: FLXFieldLabelOrientation = .vertical,
+    @ViewBuilder content: @escaping () -> Content
+)
+
+init<S: StringProtocol>(
+    _ title: S,
+    orientation: FLXFieldLabelOrientation = .vertical,
+    @ViewBuilder content: @escaping () -> Content
+)
+```
+
+### Orientation
+
+| Case         | Description                              |
+| ------------ | ------------------------------------------ |
+| `vertical`   | Label above the control.                   |
+| `horizontal` | Label and control on the same row.         |
+
+For more information about FLXFieldLabel props, see the [Apple documentation](https://developer.apple.com/documentation/swiftui/labeledcontent).

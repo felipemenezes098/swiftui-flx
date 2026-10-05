@@ -1,0 +1,142 @@
+import { siteConfig } from "@/config/site"
+
+<DocsHeader>
+
+# Existing Projects
+
+<DocsPageActions />
+
+</DocsHeader>
+
+Add the design system to an app you already have, with your own colors, one screen at a time. Nothing in your app changes until you use a component.
+
+<AiInstall variant="existing" />
+
+## Before you start
+
+- **Deployment target.** Your app needs iOS 16.4, iPadOS 16.4 or macOS 13.3 or later.
+- **How your project lists files.** Projects created with Xcode 16 or later pick up new files on their own. Older projects list files one by one, so you add new files to the target in Xcode.
+- **Where shared code lives.** In the app target, or in Swift packages.
+
+## Where DesignSystem lives
+
+| Your app | Put `DesignSystem` |
+| --- | --- |
+| One app target | In the app's source folder, as in [Installation](/docs/installation) |
+| App with extensions, such as a widget | In a [Swift package](/docs/swift-packages) that both import, or in each target |
+| Code split into Swift packages | In its own [Swift package](/docs/swift-packages) |
+| Project generated with Tuist or XcodeGen | In a folder your project spec already includes, then regenerate the project |
+
+## Add the foundation
+
+The foundation holds the tokens and the theme every component reads from. Add it once:
+
+<CodeBlockCommand
+  command={`shadcn@latest add ${siteConfig.url}/r/foundation.json`}
+/>
+
+Then add the components you need from the [components page](/docs/components). For an app that runs on iPhone and Mac, add both the iOS and the macOS version of each component.
+
+Prefer not to use the CLI? Copy the files by hand, following [Installation](/docs/installation).
+
+## Bring your brand
+
+Components read every color and the base radius from the theme. Create a preset with your app's values and every component follows it.
+
+### Map your colors
+
+Match the colors your app already has to the theme's tokens. Leave the rest as the default preset sets them.
+
+| Your app's color | Token |
+| --- | --- |
+| Brand color, used on primary buttons and links | `primary` |
+| Focus ring on text fields, usually the brand color | `ring` |
+| Text and icons on the brand color | `primaryForeground` |
+| Screen background | `background` |
+| Main text | `foreground`, `cardForeground`, `popoverForeground` |
+| Cards and surfaces | `card` |
+| Sheets | `popover` |
+| Secondary text, such as captions and descriptions | `mutedForeground` |
+| Soft fills, such as secondary buttons and badges | `secondary`, `secondaryForeground` |
+| Subtle backgrounds, such as avatars and muted rows | `muted` |
+| Borders and separators | `border` |
+| Text field and control outlines | `input` |
+| Errors and destructive actions | `destructive` |
+
+### Create the preset
+
+Put it next to the other presets, in `DesignSystem/Theme/Presets/FLXTheme+Brand.swift`. Start from the default preset and change what your brand defines. Colors from your asset catalog already switch between light and dark mode, so you can use them as they are:
+
+```swift
+import SwiftUI
+
+extension FLXTheme {
+    static let brand: FLXTheme = {
+        var theme = FLXTheme.default
+        theme.colors.primary = Color("BrandPrimary")
+        theme.colors.primaryForeground = .white
+        theme.colors.ring = Color("BrandPrimary")
+        theme.colors.background = Color("Background")
+        theme.colors.card = Color("Surface")
+        theme.colors.mutedForeground = Color("TextSecondary")
+        theme.radius.base = 12
+        return theme
+    }()
+}
+```
+
+For colors defined in code, pass a light and a dark value:
+
+```swift
+theme.colors.muted = Color(flxLight: .indigo.opacity(0.1), dark: .indigo.opacity(0.3))
+```
+
+### Set the radius
+
+`radius.base` is the corner radius of cards, sheets and rows, so set it to your cards' radius. Buttons and inputs use 2pt less, and badges are fully rounded.
+
+### Apply it
+
+Start with the screen you're moving to the components:
+
+```swift
+NewProjectView()
+    .flxTheme(.brand)
+```
+
+When most of the app uses the components, make it the default in `DesignSystem/Theme/FLXThemeEnvironment.swift`. This also covers views hosted in UIKit:
+
+```swift
+private struct FLXThemeKey: EnvironmentKey {
+    static let defaultValue: FLXTheme = .brand
+}
+```
+
+See [Presets](/docs/presets) for every token a preset can set.
+
+### Use your font
+
+Components use the system font through `flxFont`. To change it, edit `FLXFontModifier` in `DesignSystem/Tokens/FLXTypography.swift`, so it still scales with Dynamic Type:
+
+- **A custom font:** return `Font.custom(_:size:relativeTo:)` with the text style.
+- **A system design, such as rounded:** return `.system(typography.textStyle, design: .rounded, weight: weight)`.
+
+## Adopt gradually
+
+You don't need to migrate anything. Components work next to the views you already have.
+
+- **Start with one screen.** Use a few components there with `.flxTheme(.brand)`, and check them in light and dark mode.
+- **Keep your own components.** Replace them only when it helps, one at a time.
+
+## Common cases
+
+- **Projects created before Xcode 16.** After adding files, add them to your target with **File > Add Files to "MyApp"**.
+- **Tuist or XcodeGen.** Your project file is generated, so don't add files in Xcode. Put `DesignSystem` in a folder your project spec includes and regenerate.
+- **Extensions, such as a widget.** They need the files in their target too, or a shared [Swift package](/docs/swift-packages).
+- **UIKit apps.** Components are SwiftUI views. Use them in your SwiftUI screens, or host them with `UIHostingController`.
+- **Mac Catalyst.** Catalyst apps build as iOS, so add the iOS version of each component.
+- **SwiftLint.** If your rules flag the new files, exclude `DesignSystem` in `.swiftlint.yml` or adjust the files to your rules. They're yours.
+
+## Updating later
+
+Run the same command again to get a newer version of a component. If you edited a file, the CLI asks before overwriting it. Answer No to keep your version.

@@ -1,0 +1,129 @@
+import { siteConfig } from "@/config/site"
+
+<DocsHeader>
+
+# Badge
+
+<DocsPageActions />
+
+</DocsHeader>
+
+<DocsAvailability />
+
+Displays a small label for status, category, or count.
+
+<ComponentPreviewCode
+  filePath="registry/components/badge/badge-usage-example.swift"
+  image={{ light: "/images/components/mac/badge/badge-usage.webp", dark: "/images/components/mac/badge/badge-usage-dark.webp" }}
+  collapsible
+/>
+
+## Installation
+
+Requires the [design system foundation](/docs/installation#add-the-foundation) (tokens and theme).
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<CodeBlockCommand
+  command={`shadcn@latest add ${siteConfig.url}/r/mac-badge.json`}
+/>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy the style</Step>
+
+<CodeBlockFromFile
+  filePath="registry/components/badge/FLXBadgeStyle.swift"
+  title="FLXBadgeStyle.swift"
+/>
+
+<Step>Copy the component</Step>
+
+<CodeBlockFromFile
+  filePath="registry/components/badge/FLXBadge.swift"
+  title="FLXBadge.swift"
+/>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```swift
+FLXBadge("New", variant: .primary)
+```
+
+## Variants
+
+Four variants, set via `variant:`.
+
+<ComponentPreviewCode
+  code={`FLXBadge("Primary", variant: .primary)
+FLXBadge("Secondary", variant: .secondary)
+FLXBadge("Destructive", variant: .destructive)
+FLXBadge("Outline", variant: .outline)
+`}
+  image={{ light: "/images/components/mac/badge/badge-variants.webp", dark: "/images/components/mac/badge/badge-variants-dark.webp" }}
+/>
+
+## Custom styling
+
+`FLXBadgeStyle` is an FLX protocol. Override it for a subtree via `.flxBadgeStyle(_:)`:
+
+<ComponentPreviewCode
+  code={`struct FLXAccentBadgeStyle: FLXBadgeStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.text
+            .flxFont(.caption, weight: .semibold)
+            .padding(.horizontal, FLXSpacing.sm)
+            .padding(.vertical, FLXSpacing.xs / 2)
+            .foregroundStyle(.white)
+            .background(.green.gradient)
+            .clipShape(Capsule())
+    }
+}
+
+HStack(spacing: FLXSpacing.md) {
+    FLXBadge("New", variant: .primary)
+    FLXBadge("New", variant: .primary)
+        .flxBadgeStyle(FLXAccentBadgeStyle())
+}
+`}
+  image={{ light: "/images/components/mac/badge/badge-custom.webp", dark: "/images/components/mac/badge/badge-custom-dark.webp" }}
+  collapsible
+/>
+
+## API Reference
+
+### FLXBadge
+
+```swift
+init(_ textKey: LocalizedStringKey, variant: FLXBadgeVariant = .primary)
+
+init(_ textResource: LocalizedStringResource, variant: FLXBadgeVariant = .primary)
+
+init<S: StringProtocol>(_ text: S, variant: FLXBadgeVariant = .primary)
+```
+
+### Variants
+
+| Case          | Description                             |
+| ------------- | ---------------------------------------- |
+| `primary`     | Filled with `theme.colors.primary`.     |
+| `secondary`   | Filled with `theme.colors.secondary`.   |
+| `destructive` | Filled with `theme.colors.destructive`. |
+| `outline`     | Transparent, bordered.                  |

@@ -1,0 +1,189 @@
+import { siteConfig } from "@/config/site"
+
+<DocsHeader>
+
+# Card
+
+<DocsPageActions />
+
+</DocsHeader>
+
+<DocsAvailability />
+
+A card is a container that can be used to display content in a styled way.
+
+<ComponentPreviewCode
+  alt="FLXCard example"
+  image={{ light: "/images/components/ios/card/card-usage.webp", dark: "/images/components/ios/card/card-usage-dark.webp" }}
+  filePath="registry/components/card/card-usage-example.swift"
+  collapsible
+/>
+
+## Installation
+
+Requires the [design system foundation](/docs/installation#add-the-foundation) (tokens and theme).
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<CodeBlockCommand
+  command={`shadcn@latest add ${siteConfig.url}/r/ios-card.json`}
+/>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy the style</Step>
+
+<CodeBlockFromFile
+  filePath="registry/components/card/FLXCardStyle.swift"
+  title="FLXCardStyle.swift"
+/>
+
+<Step>Copy the component</Step>
+
+<CodeBlockFromFile
+  filePath="registry/components/card/FLXCard.swift"
+  title="FLXCard.swift"
+/>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```swift
+FLXCard {
+    FLXCardHeader {
+        FLXCardTitle("Create project")
+        FLXCardDescription("Deploy your new project in one click.")
+    }
+    FLXCardContent {
+        Text("Project details go here.")
+    }
+    FLXCardFooter {
+        FLXButton("Cancel", variant: .outline) {}
+        FLXButton("Deploy", variant: .primary) {}
+    }
+}
+```
+
+## Composition
+
+`FLXCard` is a plain container, so pick whichever sections you need. Use the following composition to build a card:
+
+```
+FLXCard
+├── FLXCardHeader
+│   ├── FLXCardTitle
+│   └── FLXCardDescription
+├── FLXCardContent
+└── FLXCardFooter
+```
+
+None of the sections are required, and `FLXCardHeader` is a plain `VStack`, so you can lay out its contents however you like.
+
+## Custom styling
+
+`FLXCardStyle`, `FLXCardTitleStyle`, and `FLXCardDescriptionStyle` are FLX protocols. Override each independently for a subtree via `.flxCardStyle(_:)`, `.flxCardTitleStyle(_:)`, and `.flxCardDescriptionStyle(_:)`:
+
+<ComponentPreviewCode
+  alt="FLXCard custom styling"
+  image={{ light: "/images/components/ios/card/card-custom.webp", dark: "/images/components/ios/card/card-custom-dark.webp" }}
+  code={`struct FLXOutlinedCardStyle: FLXCardStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        FLXOutlinedCardStyleBody(configuration: configuration)
+    }
+}
+
+struct FLXOutlinedCardStyleBody: View {
+    @Environment(\\.flxTheme) private var theme
+
+    let configuration: FLXCardStyleConfiguration
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: FLXSpacing.lg) {
+            configuration.content
+        }
+        .padding(FLXSpacing.lg)
+        .overlay(
+            RoundedRectangle(cornerRadius: theme.radius.lg)
+                .strokeBorder(.blue, lineWidth: FLXBorderWidth.thick)
+        )
+    }
+}
+
+HStack(spacing: FLXSpacing.md) {
+    FLXCard {
+        FLXCardHeader {
+            FLXCardTitle("Featured")
+        }
+    }
+    FLXCard {
+        FLXCardHeader {
+            FLXCardTitle("Featured")
+        }
+    }
+    .flxCardStyle(FLXOutlinedCardStyle())
+}
+`}
+  collapsible
+/>
+
+## API Reference
+
+### FLXCard
+
+```swift
+init(@ViewBuilder content: @escaping () -> Content)
+```
+
+### FLXCardHeader
+
+```swift
+init(@ViewBuilder content: @escaping () -> Content)
+```
+
+### FLXCardTitle
+
+```swift
+init(_ titleKey: LocalizedStringKey)
+
+init(_ titleResource: LocalizedStringResource)
+
+init<S: StringProtocol>(_ title: S)
+```
+
+### FLXCardDescription
+
+```swift
+init(_ textKey: LocalizedStringKey)
+
+init(_ textResource: LocalizedStringResource)
+
+init<S: StringProtocol>(_ text: S)
+```
+
+### FLXCardContent
+
+```swift
+init(@ViewBuilder content: @escaping () -> Content)
+```
+
+### FLXCardFooter
+
+```swift
+init(@ViewBuilder content: @escaping () -> Content)
+```

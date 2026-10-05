@@ -1,0 +1,10 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "swiftui-flx",
+  "homepage": "https://swiftui.flexnative.com",
+  "include": [
+    "./registry/design-system/registry.json",
+    "./registry/components/registry.json"
+  ],
+  "items": []
+}

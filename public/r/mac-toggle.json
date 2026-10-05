@@ -1,0 +1,33 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "mac-toggle",
+  "title": "Toggle",
+  "description": "Displays a checkbox for an on/off value.",
+  "files": [
+    {
+      "path": "registry/components/toggle/FLXToggleStyle.swift",
+      "content": "import SwiftUI\n\npublic struct FLXToggleStyle: ToggleStyle {\n    public init() {}\n\n    public func makeBody(configuration: Configuration) -> some View {\n        FLXToggleStyleBody(configuration: configuration)\n    }\n}\n\nstruct AnyFLXToggleStyle: ToggleStyle {\n    private let _makeBody: (Configuration) -> AnyView\n\n    init<S: ToggleStyle>(_ style: S) {\n        _makeBody = { AnyView(style.makeBody(configuration: $0)) }\n    }\n\n    func makeBody(configuration: Configuration) -> some View {\n        _makeBody(configuration)\n    }\n}\n\nprivate struct FLXToggleStyleOverrideKey: EnvironmentKey {\n    static let defaultValue: AnyFLXToggleStyle? = nil\n}\n\nextension EnvironmentValues {\n    var flxToggleStyleOverride: AnyFLXToggleStyle? {\n        get { self[FLXToggleStyleOverrideKey.self] }\n        set { self[FLXToggleStyleOverrideKey.self] = newValue }\n    }\n}\n\nextension View {\n    public func flxToggleStyle<S: ToggleStyle>(_ style: S) -> some View {\n        environment(\\.flxToggleStyleOverride, AnyFLXToggleStyle(style))\n    }\n}\n",
+      "type": "registry:file",
+      "target": "~/DesignSystem/Components/FLXToggle/FLXToggleStyle.swift"
+    },
+    {
+      "path": "registry/components/toggle/FLXToggleStyle+macOS.swift",
+      "content": "#if os(macOS)\nimport SwiftUI\n\nstruct FLXToggleStyleBody: View {\n    @Environment(\\.flxTheme) private var theme\n    @Environment(\\.isEnabled) private var isEnabled\n    @Environment(\\.controlSize) private var controlSize\n\n    let configuration: FLXToggleStyle.Configuration\n\n    var body: some View {\n        Button {\n            configuration.isOn.toggle()\n        } label: {\n            HStack(spacing: FLXToggleMetrics.labelSpacing(controlSize)) {\n                box\n                configuration.label\n                    .flxFont(FLXTypography.control(controlSize))\n                    .foregroundStyle(theme.colors.foreground)\n            }\n            .contentShape(Rectangle())\n        }\n        .buttonStyle(.plain)\n        .opacity(isEnabled ? 1 : FLXOpacity.disabled)\n    }\n\n    private var box: some View {\n        let side = FLXToggleMetrics.boxSize(controlSize)\n        return RoundedRectangle(cornerRadius: FLXToggleMetrics.cornerRadius)\n            .fill(configuration.isOn ? theme.colors.primary : theme.colors.card)\n            .overlay(\n                RoundedRectangle(cornerRadius: FLXToggleMetrics.cornerRadius)\n                    .strokeBorder(configuration.isOn ? theme.colors.primary : theme.colors.input, lineWidth: FLXBorderWidth.thin)\n            )\n            .overlay {\n                if configuration.isOn {\n                    Image(systemName: \"checkmark\")\n                        .font(.system(size: side * FLXToggleMetrics.checkmarkScale, weight: .bold))\n                        .foregroundStyle(theme.colors.primaryForeground)\n                }\n            }\n            .frame(width: side, height: side)\n    }\n}\n\nprivate enum FLXToggleMetrics {\n    static let cornerRadius: CGFloat = 4\n    static let checkmarkScale: CGFloat = 0.6\n\n    static func boxSize(_ controlSize: ControlSize) -> CGFloat {\n        switch controlSize {\n        case .mini: 12\n        case .small: 14\n        case .regular: 16\n        case .large, .extraLarge: 18\n        @unknown default: 16\n        }\n    }\n\n    static func labelSpacing(_ controlSize: ControlSize) -> CGFloat {\n        switch controlSize {\n        case .mini, .small: 4\n        case .regular, .large, .extraLarge: 5\n        @unknown default: 5\n        }\n    }\n}\n#endif\n",
+      "type": "registry:file",
+      "target": "~/DesignSystem/Components/FLXToggle/FLXToggleStyle+macOS.swift"
+    },
+    {
+      "path": "registry/components/toggle/FLXToggle.swift",
+      "content": "import SwiftUI\n\n/// Always controlled — mirrors `FLXTextField`'s `text: Binding<String>`. The on/off\n/// value is application data the caller needs to read regardless, so there's no\n/// uncontrolled variant (unlike `FLXCollapsible`'s ephemeral open/closed state).\npublic struct FLXToggle<Label: View>: View {\n    @Environment(\\.flxToggleStyleOverride) private var styleOverride\n\n    @Binding private var isOn: Bool\n    private let label: () -> Label\n\n    public init(isOn: Binding<Bool>, @ViewBuilder label: @escaping () -> Label) {\n        self._isOn = isOn\n        self.label = label\n    }\n\n    public var body: some View {\n        Toggle(isOn: $isOn, label: label)\n            .toggleStyle(styleOverride ?? AnyFLXToggleStyle(FLXToggleStyle()))\n    }\n}\n\nextension FLXToggle where Label == Text {\n    public init(_ titleKey: LocalizedStringKey, isOn: Binding<Bool>) {\n        self.init(isOn: isOn) {\n            Text(titleKey)\n        }\n    }\n\n    @_disfavoredOverload\n    public init(_ titleResource: LocalizedStringResource, isOn: Binding<Bool>) {\n        self.init(isOn: isOn) {\n            Text(titleResource)\n        }\n    }\n\n    @_disfavoredOverload\n    public init<S: StringProtocol>(_ title: S, isOn: Binding<Bool>) {\n        self.init(isOn: isOn) {\n            Text(title)\n        }\n    }\n}\n",
+      "type": "registry:file",
+      "target": "~/DesignSystem/Components/FLXToggle/FLXToggle.swift"
+    }
+  ],
+  "meta": {
+    "platforms": {
+      "macOS": "13.3"
+    },
+    "license": "MIT"
+  },
+  "type": "registry:file"
+}

@@ -1,0 +1,34 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "ios-toggle",
+  "title": "Toggle",
+  "description": "Displays a switch for an on/off value.",
+  "files": [
+    {
+      "path": "registry/components/toggle/FLXToggleStyle.swift",
+      "content": "import SwiftUI\n\npublic struct FLXToggleStyle: ToggleStyle {\n    public init() {}\n\n    public func makeBody(configuration: Configuration) -> some View {\n        FLXToggleStyleBody(configuration: configuration)\n    }\n}\n\nstruct AnyFLXToggleStyle: ToggleStyle {\n    private let _makeBody: (Configuration) -> AnyView\n\n    init<S: ToggleStyle>(_ style: S) {\n        _makeBody = { AnyView(style.makeBody(configuration: $0)) }\n    }\n\n    func makeBody(configuration: Configuration) -> some View {\n        _makeBody(configuration)\n    }\n}\n\nprivate struct FLXToggleStyleOverrideKey: EnvironmentKey {\n    static let defaultValue: AnyFLXToggleStyle? = nil\n}\n\nextension EnvironmentValues {\n    var flxToggleStyleOverride: AnyFLXToggleStyle? {\n        get { self[FLXToggleStyleOverrideKey.self] }\n        set { self[FLXToggleStyleOverrideKey.self] = newValue }\n    }\n}\n\nextension View {\n    public func flxToggleStyle<S: ToggleStyle>(_ style: S) -> some View {\n        environment(\\.flxToggleStyleOverride, AnyFLXToggleStyle(style))\n    }\n}\n",
+      "type": "registry:file",
+      "target": "~/DesignSystem/Components/FLXToggle/FLXToggleStyle.swift"
+    },
+    {
+      "path": "registry/components/toggle/FLXToggleStyle+iOS.swift",
+      "content": "#if os(iOS)\nimport SwiftUI\n\nstruct FLXToggleStyleBody: View {\n    @Environment(\\.flxTheme) private var theme\n    @Environment(\\.isEnabled) private var isEnabled\n\n    let configuration: FLXToggleStyle.Configuration\n\n    var body: some View {\n        HStack(spacing: FLXSpacing.md) {\n            configuration.label\n                .flxFont(.body)\n                .foregroundStyle(theme.colors.foreground)\n            Spacer(minLength: FLXSpacing.md)\n            track\n        }\n        .opacity(isEnabled ? 1 : FLXOpacity.disabled)\n    }\n\n    private var track: some View {\n        Button {\n            configuration.isOn.toggle()\n        } label: {\n            Capsule()\n                .fill(configuration.isOn ? theme.colors.primary : theme.colors.input)\n                .frame(width: FLXToggleMetrics.trackWidth, height: FLXToggleMetrics.trackHeight)\n                .overlay(alignment: .leading) {\n                    Circle()\n                        .fill(configuration.isOn ? theme.colors.primaryForeground : .white)\n                        .frame(width: FLXToggleMetrics.thumbDiameter, height: FLXToggleMetrics.thumbDiameter)\n                        .padding(.horizontal, FLXToggleMetrics.thumbInset)\n                        .offset(x: configuration.isOn ? thumbTravel : 0)\n                }\n        }\n        .buttonStyle(.plain)\n        .animation(.easeInOut(duration: 0.15), value: configuration.isOn)\n    }\n\n    private var thumbTravel: CGFloat {\n        FLXToggleMetrics.trackWidth\n            - FLXToggleMetrics.thumbDiameter\n            - FLXToggleMetrics.thumbInset * 2\n    }\n}\n\nprivate enum FLXToggleMetrics {\n    static let trackWidth: CGFloat = 44\n    static let trackHeight: CGFloat = 24\n    static let thumbDiameter: CGFloat = 20\n    static let thumbInset: CGFloat = 2\n}\n#endif\n",
+      "type": "registry:file",
+      "target": "~/DesignSystem/Components/FLXToggle/FLXToggleStyle+iOS.swift"
+    },
+    {
+      "path": "registry/components/toggle/FLXToggle.swift",
+      "content": "import SwiftUI\n\n/// Always controlled — mirrors `FLXTextField`'s `text: Binding<String>`. The on/off\n/// value is application data the caller needs to read regardless, so there's no\n/// uncontrolled variant (unlike `FLXCollapsible`'s ephemeral open/closed state).\npublic struct FLXToggle<Label: View>: View {\n    @Environment(\\.flxToggleStyleOverride) private var styleOverride\n\n    @Binding private var isOn: Bool\n    private let label: () -> Label\n\n    public init(isOn: Binding<Bool>, @ViewBuilder label: @escaping () -> Label) {\n        self._isOn = isOn\n        self.label = label\n    }\n\n    public var body: some View {\n        Toggle(isOn: $isOn, label: label)\n            .toggleStyle(styleOverride ?? AnyFLXToggleStyle(FLXToggleStyle()))\n    }\n}\n\nextension FLXToggle where Label == Text {\n    public init(_ titleKey: LocalizedStringKey, isOn: Binding<Bool>) {\n        self.init(isOn: isOn) {\n            Text(titleKey)\n        }\n    }\n\n    @_disfavoredOverload\n    public init(_ titleResource: LocalizedStringResource, isOn: Binding<Bool>) {\n        self.init(isOn: isOn) {\n            Text(titleResource)\n        }\n    }\n\n    @_disfavoredOverload\n    public init<S: StringProtocol>(_ title: S, isOn: Binding<Bool>) {\n        self.init(isOn: isOn) {\n            Text(title)\n        }\n    }\n}\n",
+      "type": "registry:file",
+      "target": "~/DesignSystem/Components/FLXToggle/FLXToggle.swift"
+    }
+  ],
+  "meta": {
+    "platforms": {
+      "iOS": "16.4",
+      "iPadOS": "16.4"
+    },
+    "license": "MIT"
+  },
+  "type": "registry:file"
+}

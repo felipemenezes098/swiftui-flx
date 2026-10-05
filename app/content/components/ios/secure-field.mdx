@@ -1,0 +1,86 @@
+import { siteConfig } from "@/config/site"
+
+<DocsHeader>
+
+# Secure Field
+
+<DocsPageActions />
+
+</DocsHeader>
+
+<DocsAvailability />
+
+Displays an obscured text input for passwords and other sensitive text.
+
+<ComponentPreviewCode
+  alt="FLXSecureField example"
+  image={{ light: "/images/components/ios/secure-field/secure-field-usage.webp", dark: "/images/components/ios/secure-field/secure-field-usage-dark.webp" }}
+  filePath="registry/components/secure-field/secure-field-usage-example.swift"
+  collapsible
+/>
+
+## Installation
+
+Requires the [design system foundation](/docs/installation#add-the-foundation) (tokens and theme).
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<CodeBlockCommand
+  command={`shadcn@latest add ${siteConfig.url}/r/ios-secure-field.json`}
+/>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy the component</Step>
+
+<CodeBlockFromFile
+  filePath="registry/components/secure-field/FLXSecureField.swift"
+  title="FLXSecureField.swift"
+/>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```swift
+FLXSecureField("Password", text: $password)
+```
+
+`SecureField` is a separate native control from `TextField`: it hides typed characters, blocks cut/copy, and is hidden in iOS screenshots.
+
+## Custom styling
+
+`TextFieldStyle` doesn't support custom conformances, so there's no `FLXSecureFieldStyle` or override.
+
+## API Reference
+
+### FLXSecureField
+
+```swift
+init(
+    _ titleKey: LocalizedStringResource = "",
+    text: Binding<String>
+)
+
+init<S: StringProtocol>(
+    _ title: S,
+    text: Binding<String>
+)
+```
+
+For more information about FLXSecureField props, see the [Apple documentation](https://developer.apple.com/documentation/swiftui/securefield).

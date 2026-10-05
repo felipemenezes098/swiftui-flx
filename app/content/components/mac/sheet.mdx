@@ -1,0 +1,107 @@
+import { siteConfig } from "@/config/site"
+
+<DocsHeader>
+
+# Sheet
+
+<DocsPageActions />
+
+</DocsHeader>
+
+<DocsAvailability />
+
+Presents content in a sheet over the current view, driven by an item binding.
+
+<ComponentPreviewCode
+  filePath="registry/components/sheet/sheet-usage-example.swift"
+  image={{ light: "/images/components/mac/sheet/sheet-usage.webp", dark: "/images/components/mac/sheet/sheet-usage-dark.webp" }}
+  collapsible
+/>
+
+## Installation
+
+Requires the [design system foundation](/docs/installation#add-the-foundation) (tokens and theme).
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<CodeBlockCommand
+  command={`shadcn@latest add ${siteConfig.url}/r/mac-sheet.json`}
+/>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy the component</Step>
+
+<CodeBlockFromFile
+  filePath="registry/components/sheet/FLXSheet.swift"
+  title="FLXSheet.swift"
+/>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```swift
+FLXButton("Show details", variant: .primary) {
+    selectedDocument = Document(id: "Q3 roadmap.pdf")
+}
+.flxSheet(item: $selectedDocument) { document in
+    Text(document.title)
+        .padding()
+}
+```
+
+`flxSheet` is a `View` modifier, like `.sheet`. It's always controlled: `item` comes from the presenting screen.
+
+## Behavior
+
+VoiceOver focus returns to the trigger when the sheet dismisses.
+
+## Size
+
+On macOS, a sheet sizes itself to its content, like a native sheet on the Mac, and `presentationDetents` has no effect. Give the content a size with `.frame(_:)`:
+
+<ComponentPreviewCode
+  code={`FLXButton("Show details", variant: .outline) {
+    selectedDocument = Document(id: "Q3 roadmap.pdf")
+}
+.flxSheet(item: $selectedDocument) { document in
+    Text(document.title)
+        .frame(minWidth: 360, minHeight: 240)
+}
+`}
+  image={{ light: "/images/components/mac/sheet/sheet-sizes.webp", dark: "/images/components/mac/sheet/sheet-sizes-dark.webp" }}
+/>
+
+## Custom styling
+
+`.sheet` has no style protocol, so there's no `FLXSheetStyle` or override.
+
+## API Reference
+
+### flxSheet
+
+```swift
+func flxSheet<Item: Identifiable, SheetContent: View>(
+    item: Binding<Item?>,
+    onDismiss: (() -> Void)? = nil,
+    @ViewBuilder content: @escaping (Item) -> SheetContent
+) -> some View
+```
+
+For more information about `.sheet`, see the [Apple documentation](https://developer.apple.com/documentation/swiftui/view/sheet(item:ondismiss:content:)).

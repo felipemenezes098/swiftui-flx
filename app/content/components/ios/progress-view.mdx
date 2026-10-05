@@ -1,0 +1,199 @@
+import { siteConfig } from "@/config/site"
+
+<DocsHeader>
+
+# Progress View
+
+<DocsPageActions />
+
+</DocsHeader>
+
+<DocsAvailability />
+
+Displays progress toward completion of a task, as a bar or a spinner.
+
+<ComponentPreviewCode
+  alt="FLXProgressView example"
+  image={{ light: "/images/components/ios/progress-view/progress-view-usage.webp", dark: "/images/components/ios/progress-view/progress-view-usage-dark.webp" }}
+  filePath="registry/components/progress-view/progress-view-usage-example.swift"
+  collapsible
+/>
+
+## Installation
+
+Requires the [design system foundation](/docs/installation#add-the-foundation) (tokens and theme).
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<CodeBlockCommand
+  command={`shadcn@latest add ${siteConfig.url}/r/ios-progress-view.json`}
+/>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy the style</Step>
+
+<CodeBlockFromFile
+  filePath="registry/components/progress-view/FLXProgressViewStyle.swift"
+  title="FLXProgressViewStyle.swift"
+/>
+
+<Step>Copy the component</Step>
+
+<CodeBlockFromFile
+  filePath="registry/components/progress-view/FLXProgressView.swift"
+  title="FLXProgressView.swift"
+/>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```swift
+FLXProgressView("Downloading", value: 0.6)
+```
+
+Pass `value` for a linear bar, or omit it for a circular spinner.
+
+The `label`/`currentValueLabel` initializer takes views. `label` renders above the bar, `currentValueLabel` below it:
+
+```swift
+FLXProgressView(value: 0.6) {
+    Text("Downloading")
+} currentValueLabel: {
+    Text("60%")
+}
+```
+
+## Variants
+
+Three variants, set via `variant:`.
+
+<ComponentPreviewCode
+  alt="FLXProgressView variants"
+  image={{ light: "/images/components/ios/progress-view/progress-view-variants.webp", dark: "/images/components/ios/progress-view/progress-view-variants-dark.webp" }}
+  code={`FLXProgressView("Uploading", value: 0.7, variant: .primary)
+FLXProgressView("Uploading", value: 0.7, variant: .secondary)
+FLXProgressView("Upload failed", value: 0.4, variant: .destructive)
+`}
+/>
+
+## Sizes
+
+The spinner is sized via `.controlSize(_:)`, like the native `ProgressView`. The bar keeps a fixed 4pt track, like the native one on iPhone.
+
+<ComponentPreviewCode
+  alt="FLXProgressView sizes"
+  image={{ light: "/images/components/ios/progress-view/progress-view-sizes.webp", dark: "/images/components/ios/progress-view/progress-view-sizes-dark.webp" }}
+  code={`FLXProgressView()
+    .controlSize(.small)
+FLXProgressView()
+FLXProgressView()
+    .controlSize(.large)
+`}
+/>
+
+## Custom styling
+
+`FLXProgressViewStyle` conforms to SwiftUI's native `ProgressViewStyle`. Override rendering for a subtree with any `ProgressViewStyle` via `.flxProgressViewStyle(_:)`:
+
+<ComponentPreviewCode
+  alt="FLXProgressView custom styling"
+  image={{ light: "/images/components/ios/progress-view/progress-view-custom.webp", dark: "/images/components/ios/progress-view/progress-view-custom-dark.webp" }}
+  code={`struct FLXThickProgressViewStyle: ProgressViewStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        if let fractionCompleted = configuration.fractionCompleted {
+            VStack(alignment: .leading, spacing: FLXSpacing.xs) {
+                configuration.label
+                Capsule()
+                    .fill(.green.opacity(0.2))
+                    .frame(height: FLXSpacing.md)
+                    .overlay(alignment: .leading) {
+                        GeometryReader { proxy in
+                            Capsule()
+                                .fill(.green.gradient)
+                                .frame(width: proxy.size.width * fractionCompleted)
+                        }
+                    }
+            }
+        } else {
+            ProgressView(configuration)
+                .tint(.green)
+        }
+    }
+}
+
+VStack(alignment: .leading, spacing: FLXSpacing.xl) {
+    FLXProgressView("Uploading", value: 0.7)
+    FLXProgressView("Uploading", value: 0.7)
+        .flxProgressViewStyle(FLXThickProgressViewStyle())
+}
+`}
+  collapsible
+/>
+
+## API Reference
+
+### FLXProgressView
+
+```swift
+init(
+    value: Double? = nil,
+    total: Double = 1.0,
+    variant: FLXProgressViewVariant = .primary,
+    @ViewBuilder label: @escaping () -> Label,
+    @ViewBuilder currentValueLabel: @escaping () -> CurrentValueLabel
+)
+
+init(
+    value: Double? = nil,
+    total: Double = 1.0,
+    variant: FLXProgressViewVariant = .primary
+)
+
+init(
+    _ titleKey: LocalizedStringKey,
+    value: Double? = nil,
+    total: Double = 1.0,
+    variant: FLXProgressViewVariant = .primary
+)
+
+init(
+    _ titleResource: LocalizedStringResource,
+    value: Double? = nil,
+    total: Double = 1.0,
+    variant: FLXProgressViewVariant = .primary
+)
+
+init<S: StringProtocol>(
+    _ title: S,
+    value: Double? = nil,
+    total: Double = 1.0,
+    variant: FLXProgressViewVariant = .primary
+)
+```
+
+### Variants
+
+| Case          | Description                             |
+| ------------- | --------------------------------------- |
+| `primary`     | Filled with `theme.colors.primary`.     |
+| `secondary`   | Filled with `theme.colors.secondary`.   |
+| `destructive` | Filled with `theme.colors.destructive`. |
+
+For more information about FLXProgressView props, see the [Apple documentation](https://developer.apple.com/documentation/swiftui/progressview).

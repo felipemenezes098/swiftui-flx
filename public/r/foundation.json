@@ -1,0 +1,77 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "foundation",
+  "title": "Foundation",
+  "description": "Tokens and the default theme every component reads from.",
+  "files": [
+    {
+      "path": "registry/design-system/Tokens/FLXSpacing.swift",
+      "content": "import CoreGraphics\n\npublic enum FLXSpacing {\n    public static let none: CGFloat = 0\n    public static let xs: CGFloat = 4\n    public static let sm: CGFloat = 8\n    public static let md: CGFloat = 12\n    public static let lg: CGFloat = 16\n    public static let xl: CGFloat = 24\n    public static let xxl: CGFloat = 32\n    public static let xxxl: CGFloat = 48\n}\n",
+      "type": "registry:file",
+      "target": "~/DesignSystem/Tokens/FLXSpacing.swift"
+    },
+    {
+      "path": "registry/design-system/Tokens/FLXRadius.swift",
+      "content": "import CoreGraphics\n\npublic struct FLXRadiusScale: Sendable {\n    public var base: CGFloat\n\n    public init(base: CGFloat) {\n        self.base = base\n    }\n\n    public var sm: CGFloat { max(0, base - 4) }\n    public var md: CGFloat { max(0, base - 2) }\n    public var lg: CGFloat { base }\n    public var xl: CGFloat { base + 4 }\n    public var xxl: CGFloat { base + 8 }\n    public var full: CGFloat { 9999 }\n}\n",
+      "type": "registry:file",
+      "target": "~/DesignSystem/Tokens/FLXRadius.swift"
+    },
+    {
+      "path": "registry/design-system/Tokens/FLXBorderWidth.swift",
+      "content": "import CoreGraphics\n\npublic enum FLXBorderWidth {\n    public static let thin: CGFloat = 1\n    public static let regular: CGFloat = 1.5\n    public static let thick: CGFloat = 2\n}\n",
+      "type": "registry:file",
+      "target": "~/DesignSystem/Tokens/FLXBorderWidth.swift"
+    },
+    {
+      "path": "registry/design-system/Tokens/FLXOpacity.swift",
+      "content": "public enum FLXOpacity {\n    public static let disabled: Double = 0.5\n    public static let pressed: Double = 0.7\n    public static let destructiveDark: Double = 0.6\n}\n",
+      "type": "registry:file",
+      "target": "~/DesignSystem/Tokens/FLXOpacity.swift"
+    },
+    {
+      "path": "registry/design-system/Tokens/FLXTypography.swift",
+      "content": "import SwiftUI\n\npublic enum FLXTypography {\n    case largeTitle\n    case title\n    case title2\n    case title3\n\n    case headline\n    case body\n    case callout\n\n    case subheadline\n    case footnote\n    case caption\n    case caption2\n\n    public var weight: Font.Weight {\n        switch self {\n        case .largeTitle, .title: .bold\n        case .title2, .title3, .headline: .semibold\n        case .body, .callout, .subheadline, .footnote, .caption, .caption2: .regular\n        }\n    }\n\n    public var textStyle: Font.TextStyle {\n        switch self {\n        case .largeTitle: .largeTitle\n        case .title: .title\n        case .title2: .title2\n        case .title3: .title3\n        case .headline: .headline\n        case .body: .body\n        case .callout: .callout\n        case .subheadline: .subheadline\n        case .footnote: .footnote\n        case .caption: .caption\n        case .caption2: .caption2\n        }\n    }\n\n    public static func control(_ controlSize: ControlSize) -> FLXTypography {\n        switch controlSize {\n        case .mini, .small: .subheadline\n        case .regular, .large, .extraLarge: .body\n        @unknown default: .body\n        }\n    }\n}\n\nprivate struct FLXFontModifier: ViewModifier {\n    private let typography: FLXTypography\n    private let weight: Font.Weight\n\n    init(typography: FLXTypography, weight: Font.Weight?) {\n        self.typography = typography\n        self.weight = weight ?? typography.weight\n    }\n\n    func body(content: Content) -> some View {\n        content.font(.system(typography.textStyle, weight: weight))\n    }\n}\n\nextension View {\n    public func flxFont(_ typography: FLXTypography, weight: Font.Weight? = nil) -> some View {\n        modifier(FLXFontModifier(typography: typography, weight: weight))\n    }\n}\n",
+      "type": "registry:file",
+      "target": "~/DesignSystem/Tokens/FLXTypography.swift"
+    },
+    {
+      "path": "registry/design-system/Tokens/FLXColors.swift",
+      "content": "import SwiftUI\n\npublic struct FLXColorTokens: Sendable {\n    public var background: Color\n    public var foreground: Color\n\n    public var card: Color\n    public var cardForeground: Color\n\n    public var popover: Color\n    public var popoverForeground: Color\n\n    public var primary: Color\n    public var primaryForeground: Color\n\n    public var secondary: Color\n    public var secondaryForeground: Color\n\n    public var muted: Color\n    public var mutedForeground: Color\n\n    public var accent: Color\n    public var accentForeground: Color\n\n    public var destructive: Color\n    public var destructiveForeground: Color\n\n    public var border: Color\n    public var input: Color\n    public var ring: Color\n\n    public init(\n        background: Color,\n        foreground: Color,\n        card: Color,\n        cardForeground: Color,\n        popover: Color,\n        popoverForeground: Color,\n        primary: Color,\n        primaryForeground: Color,\n        secondary: Color,\n        secondaryForeground: Color,\n        muted: Color,\n        mutedForeground: Color,\n        accent: Color,\n        accentForeground: Color,\n        destructive: Color,\n        destructiveForeground: Color,\n        border: Color,\n        input: Color,\n        ring: Color\n    ) {\n        self.background = background\n        self.foreground = foreground\n        self.card = card\n        self.cardForeground = cardForeground\n        self.popover = popover\n        self.popoverForeground = popoverForeground\n        self.primary = primary\n        self.primaryForeground = primaryForeground\n        self.secondary = secondary\n        self.secondaryForeground = secondaryForeground\n        self.muted = muted\n        self.mutedForeground = mutedForeground\n        self.accent = accent\n        self.accentForeground = accentForeground\n        self.destructive = destructive\n        self.destructiveForeground = destructiveForeground\n        self.border = border\n        self.input = input\n        self.ring = ring\n    }\n}\n",
+      "type": "registry:file",
+      "target": "~/DesignSystem/Tokens/FLXColors.swift"
+    },
+    {
+      "path": "registry/design-system/Theme/Color+Dynamic.swift",
+      "content": "import SwiftUI\n\nextension Color {\n    public init(flxLight light: Color, dark: Color) {\n        #if os(macOS)\n        self.init(NSColor(name: nil) { appearance in\n            switch appearance.bestMatch(from: [.aqua, .darkAqua]) {\n            case .darkAqua: NSColor(dark)\n            default: NSColor(light)\n            }\n        })\n        #else\n        self.init(UIColor { traits in\n            traits.userInterfaceStyle == .dark ? UIColor(dark) : UIColor(light)\n        })\n        #endif\n    }\n}\n",
+      "type": "registry:file",
+      "target": "~/DesignSystem/Theme/Color+Dynamic.swift"
+    },
+    {
+      "path": "registry/design-system/Theme/FLXTheme.swift",
+      "content": "import Foundation\n\npublic struct FLXTheme: Sendable {\n    public var colors: FLXColorTokens\n    public var radius: FLXRadiusScale\n\n    public init(colors: FLXColorTokens, radius: FLXRadiusScale) {\n        self.colors = colors\n        self.radius = radius\n    }\n}\n",
+      "type": "registry:file",
+      "target": "~/DesignSystem/Theme/FLXTheme.swift"
+    },
+    {
+      "path": "registry/design-system/Theme/FLXThemeEnvironment.swift",
+      "content": "import SwiftUI\n\nprivate struct FLXThemeKey: EnvironmentKey {\n    static let defaultValue: FLXTheme = .default\n}\n\nextension EnvironmentValues {\n    public var flxTheme: FLXTheme {\n        get { self[FLXThemeKey.self] }\n        set { self[FLXThemeKey.self] = newValue }\n    }\n}\n\nextension View {\n    public func flxTheme(_ theme: FLXTheme) -> some View {\n        environment(\\.flxTheme, theme)\n    }\n}\n",
+      "type": "registry:file",
+      "target": "~/DesignSystem/Theme/FLXThemeEnvironment.swift"
+    },
+    {
+      "path": "registry/design-system/Theme/Presets/FLXTheme+Default.swift",
+      "content": "import SwiftUI\n\nextension FLXTheme {\n    public static let `default` = FLXTheme(\n        colors: FLXColorTokens(\n            background: Color(\n                flxLight: Color(red: 0.9816, green: 0.9816, blue: 0.9816),\n                dark: Color(red: 0.0666, green: 0.0666, blue: 0.0666)\n            ),\n            foreground: Color(\n                flxLight: Color(red: 0.1255, green: 0.1255, blue: 0.1255),\n                dark: Color(red: 0.9333, green: 0.9333, blue: 0.9333)\n            ),\n            card: Color(\n                flxLight: Color(red: 0.9999, green: 1.0000, blue: 1.0000),\n                dark: Color(red: 0.0980, green: 0.0980, blue: 0.0980)\n            ),\n            cardForeground: Color(\n                flxLight: Color(red: 0.1255, green: 0.1255, blue: 0.1255),\n                dark: Color(red: 0.9333, green: 0.9333, blue: 0.9333)\n            ),\n            popover: Color(\n                flxLight: Color(red: 0.9816, green: 0.9816, blue: 0.9816),\n                dark: Color(red: 0.0980, green: 0.0980, blue: 0.0980)\n            ),\n            popoverForeground: Color(\n                flxLight: Color(red: 0.1255, green: 0.1255, blue: 0.1255),\n                dark: Color(red: 0.9333, green: 0.9333, blue: 0.9333)\n            ),\n            primary: Color(\n                flxLight: Color(red: 0.3060, green: 0.2392, blue: 0.2157),\n                dark: Color(red: 0.9883, green: 0.9883, blue: 0.9883)\n            ),\n            primaryForeground: Color(\n                flxLight: Color(red: 1.0000, green: 1.0000, blue: 1.0000),\n                dark: Color(red: 0.0313, green: 0.1019, blue: 0.1059)\n            ),\n            secondary: Color(\n                flxLight: Color(red: 0.9411, green: 0.9411, blue: 0.9411),\n                dark: Color(red: 0.1215, green: 0.1176, blue: 0.1099)\n            ),\n            secondaryForeground: Color(\n                flxLight: Color(red: 0.2707, green: 0.1686, blue: 0.1294),\n                dark: Color(red: 1.0000, green: 1.0000, blue: 1.0000)\n            ),\n            muted: Color(\n                flxLight: Color(red: 0.9372, green: 0.9372, blue: 0.9372),\n                dark: Color(red: 0.1334, green: 0.1334, blue: 0.1334)\n            ),\n            mutedForeground: Color(\n                flxLight: Color(red: 0.3921, green: 0.3921, blue: 0.3921),\n                dark: Color(red: 0.7058, green: 0.7058, blue: 0.7058)\n            ),\n            accent: Color(\n                flxLight: Color(red: 0.9098, green: 0.9098, blue: 0.9098),\n                dark: Color(red: 0.1647, green: 0.1647, blue: 0.1647)\n            ),\n            accentForeground: Color(\n                flxLight: Color(red: 0.1255, green: 0.1255, blue: 0.1255),\n                dark: Color(red: 0.9333, green: 0.9333, blue: 0.9333)\n            ),\n            destructive: Color(\n                flxLight: Color(red: 0.8276, green: 0.2257, blue: 0.1029),\n                dark: Color(red: 0.8994, green: 0.3111, blue: 0.1911)\n            ),\n            destructiveForeground: Color(\n                flxLight: Color(red: 1.0000, green: 1.0000, blue: 1.0000),\n                dark: Color(red: 1.0000, green: 1.0000, blue: 1.0000)\n            ),\n            border: Color(\n                flxLight: Color(red: 0.9111, green: 0.9111, blue: 0.9111),\n                dark: Color(red: 0.1255, green: 0.1176, blue: 0.0941)\n            ),\n            input: Color(\n                flxLight: Color(red: 0.8470, green: 0.8470, blue: 0.8470),\n                dark: Color(red: 0.1764, green: 0.1765, blue: 0.1765)\n            ),\n            ring: Color(\n                flxLight: Color(red: 0.3922, green: 0.2902, blue: 0.2510),\n                dark: Color(red: 1.0000, green: 0.8784, blue: 0.7607)\n            )\n        ),\n        radius: FLXRadiusScale(base: 0.7 * 16)\n    )\n}\n",
+      "type": "registry:file",
+      "target": "~/DesignSystem/Theme/Presets/FLXTheme+Default.swift"
+    }
+  ],
+  "meta": {
+    "platforms": {
+      "iOS": "16.4",
+      "iPadOS": "16.4",
+      "macOS": "13.3"
+    },
+    "license": "MIT"
+  },
+  "type": "registry:file"
+}

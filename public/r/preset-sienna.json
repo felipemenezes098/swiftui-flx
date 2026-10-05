@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "preset-sienna",
+  "title": "Sienna Preset",
+  "description": "Cream paper, burnt-earth ink, and a larger base radius.",
+  "files": [
+    {
+      "path": "registry/design-system/Theme/Presets/FLXTheme+Sienna.swift",
+      "content": "import SwiftUI\n\nextension FLXTheme {\n    public static let sienna = FLXTheme(\n        colors: FLXColorTokens(\n            background: Color(\n                flxLight: Color(red: 0.9779, green: 0.9657, blue: 0.9475),\n                dark: Color(red: 0.0666, green: 0.0666, blue: 0.0666)\n            ),\n            foreground: Color(\n                flxLight: Color(red: 0.1788, green: 0.1421, blue: 0.1181),\n                dark: Color(red: 0.9324, green: 0.9203, blue: 0.8990)\n            ),\n            card: Color(\n                flxLight: Color(red: 1.0000, green: 0.9993, blue: 0.9858),\n                dark: Color(red: 0.0823, green: 0.0784, blue: 0.0785)\n            ),\n            cardForeground: Color(\n                flxLight: Color(red: 0.1788, green: 0.1421, blue: 0.1181),\n                dark: Color(red: 0.9324, green: 0.9203, blue: 0.8990)\n            ),\n            popover: Color(\n                flxLight: Color(red: 1.0000, green: 0.9993, blue: 0.9858),\n                dark: Color(red: 0.0823, green: 0.0784, blue: 0.0785)\n            ),\n            popoverForeground: Color(\n                flxLight: Color(red: 0.1788, green: 0.1421, blue: 0.1181),\n                dark: Color(red: 0.9324, green: 0.9203, blue: 0.8990)\n            ),\n            primary: Color(\n                flxLight: Color(red: 0.2591, green: 0.1929, blue: 0.1536),\n                dark: Color(red: 0.9054, green: 0.8651, blue: 0.7998)\n            ),\n            primaryForeground: Color(\n                flxLight: Color(red: 0.9820, green: 0.9728, blue: 0.9567),\n                dark: Color(red: 0.1496, green: 0.1141, blue: 0.0908)\n            ),\n            secondary: Color(\n                flxLight: Color(red: 0.9432, green: 0.9259, blue: 0.9001),\n                dark: Color(red: 0.1627, green: 0.1411, blue: 0.1256)\n            ),\n            secondaryForeground: Color(\n                flxLight: Color(red: 0.2393, green: 0.1865, blue: 0.1555),\n                dark: Color(red: 0.9324, green: 0.9203, blue: 0.8990)\n            ),\n            muted: Color(\n                flxLight: Color(red: 0.9548, green: 0.9391, blue: 0.9159),\n                dark: Color(red: 0.1564, green: 0.1369, blue: 0.1229)\n            ),\n            mutedForeground: Color(\n                flxLight: Color(red: 0.4289, green: 0.3966, blue: 0.3699),\n                dark: Color(red: 0.6859, green: 0.6588, blue: 0.6270)\n            ),\n            accent: Color(\n                flxLight: Color(red: 0.9352, green: 0.9040, blue: 0.8646),\n                dark: Color(red: 0.2005, green: 0.1740, blue: 0.1519)\n            ),\n            accentForeground: Color(\n                flxLight: Color(red: 0.2016, green: 0.1602, blue: 0.1330),\n                dark: Color(red: 0.9324, green: 0.9203, blue: 0.8990)\n            ),\n            destructive: Color(\n                flxLight: Color(red: 0.7640, green: 0.2728, blue: 0.1895),\n                dark: Color(red: 0.8199, green: 0.3528, blue: 0.2736)\n            ),\n            destructiveForeground: Color(\n                flxLight: Color(red: 0.9924, green: 0.9863, blue: 0.9755),\n                dark: Color(red: 0.9792, green: 0.9731, blue: 0.9624)\n            ),\n            border: Color(\n                flxLight: Color(red: 0.9043, green: 0.8870, blue: 0.8615),\n                dark: Color(red: 0.1832, green: 0.1600, blue: 0.1421)\n            ),\n            input: Color(\n                flxLight: Color(red: 0.8671, green: 0.8483, blue: 0.8204),\n                dark: Color(red: 0.2130, green: 0.1892, blue: 0.1708)\n            ),\n            ring: Color(\n                flxLight: Color(red: 0.2591, green: 0.1929, blue: 0.1536),\n                dark: Color(red: 0.9054, green: 0.8651, blue: 0.7998)\n            )\n        ),\n        radius: FLXRadiusScale(base: 0.875 * 16) // --radius: 0.875rem\n    )\n}\n",
+      "type": "registry:file",
+      "target": "~/DesignSystem/Theme/Presets/FLXTheme+Sienna.swift"
+    }
+  ],
+  "meta": {
+    "platforms": {
+      "iOS": "16.4",
+      "iPadOS": "16.4",
+      "macOS": "13.3"
+    },
+    "license": "MIT"
+  },
+  "type": "registry:file"
+}

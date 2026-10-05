@@ -1,0 +1,802 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "swiftui-flx-components",
+  "homepage": "https://swiftui.flexnative.com",
+  "items": [
+    {
+      "name": "ios-button",
+      "type": "registry:file",
+      "title": "Button",
+      "description": "Triggers an action or event, such as submitting a form.",
+      "meta": {
+        "platforms": {
+          "iOS": "16.4",
+          "iPadOS": "16.4"
+        },
+        "license": "MIT"
+      },
+      "files": [
+        {
+          "path": "button/FLXButtonStyle.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXButton/FLXButtonStyle.swift"
+        },
+        {
+          "path": "button/FLXButton.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXButton/FLXButton.swift"
+        }
+      ]
+    },
+    {
+      "name": "mac-button",
+      "type": "registry:file",
+      "title": "Button",
+      "description": "Triggers an action or event, such as submitting a form.",
+      "meta": {
+        "platforms": {
+          "macOS": "13.3"
+        },
+        "license": "MIT"
+      },
+      "files": [
+        {
+          "path": "button/FLXButtonStyle.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXButton/FLXButtonStyle.swift"
+        },
+        {
+          "path": "button/FLXButton.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXButton/FLXButton.swift"
+        }
+      ]
+    },
+    {
+      "name": "ios-card",
+      "type": "registry:file",
+      "title": "Card",
+      "description": "A card is a container that can be used to display content in a styled way.",
+      "meta": {
+        "platforms": {
+          "iOS": "16.4",
+          "iPadOS": "16.4"
+        },
+        "license": "MIT"
+      },
+      "files": [
+        {
+          "path": "card/FLXCardStyle.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXCard/FLXCardStyle.swift"
+        },
+        {
+          "path": "card/FLXCard.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXCard/FLXCard.swift"
+        }
+      ]
+    },
+    {
+      "name": "mac-card",
+      "type": "registry:file",
+      "title": "Card",
+      "description": "A card is a container that can be used to display content in a styled way.",
+      "meta": {
+        "platforms": {
+          "macOS": "13.3"
+        },
+        "license": "MIT"
+      },
+      "files": [
+        {
+          "path": "card/FLXCardStyle.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXCard/FLXCardStyle.swift"
+        },
+        {
+          "path": "card/FLXCard.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXCard/FLXCard.swift"
+        }
+      ]
+    },
+    {
+      "name": "ios-avatar",
+      "type": "registry:file",
+      "title": "Avatar",
+      "description": "Displays a user's profile picture, with initials as a fallback.",
+      "meta": {
+        "platforms": {
+          "iOS": "16.4",
+          "iPadOS": "16.4"
+        },
+        "license": "MIT"
+      },
+      "files": [
+        {
+          "path": "avatar/FLXAvatarStyle.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXAvatar/FLXAvatarStyle.swift"
+        },
+        {
+          "path": "avatar/FLXAvatar.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXAvatar/FLXAvatar.swift"
+        }
+      ]
+    },
+    {
+      "name": "mac-avatar",
+      "type": "registry:file",
+      "title": "Avatar",
+      "description": "Displays a user's profile picture, with initials as a fallback.",
+      "meta": {
+        "platforms": {
+          "macOS": "13.3"
+        },
+        "license": "MIT"
+      },
+      "files": [
+        {
+          "path": "avatar/FLXAvatarStyle.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXAvatar/FLXAvatarStyle.swift"
+        },
+        {
+          "path": "avatar/FLXAvatar.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXAvatar/FLXAvatar.swift"
+        }
+      ]
+    },
+    {
+      "name": "ios-badge",
+      "type": "registry:file",
+      "title": "Badge",
+      "description": "Displays a small label for status, category, or count.",
+      "meta": {
+        "platforms": {
+          "iOS": "16.4",
+          "iPadOS": "16.4"
+        },
+        "license": "MIT"
+      },
+      "files": [
+        {
+          "path": "badge/FLXBadgeStyle.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXBadge/FLXBadgeStyle.swift"
+        },
+        {
+          "path": "badge/FLXBadge.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXBadge/FLXBadge.swift"
+        }
+      ]
+    },
+    {
+      "name": "mac-badge",
+      "type": "registry:file",
+      "title": "Badge",
+      "description": "Displays a small label for status, category, or count.",
+      "meta": {
+        "platforms": {
+          "macOS": "13.3"
+        },
+        "license": "MIT"
+      },
+      "files": [
+        {
+          "path": "badge/FLXBadgeStyle.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXBadge/FLXBadgeStyle.swift"
+        },
+        {
+          "path": "badge/FLXBadge.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXBadge/FLXBadge.swift"
+        }
+      ]
+    },
+    {
+      "name": "ios-item",
+      "type": "registry:file",
+      "title": "Item",
+      "description": "Displays a row of content, such as a list entry, notification, or settings row.",
+      "meta": {
+        "platforms": {
+          "iOS": "16.4",
+          "iPadOS": "16.4"
+        },
+        "license": "MIT"
+      },
+      "files": [
+        {
+          "path": "item/FLXItemStyle.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXItem/FLXItemStyle.swift"
+        },
+        {
+          "path": "item/FLXItem.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXItem/FLXItem.swift"
+        }
+      ]
+    },
+    {
+      "name": "mac-item",
+      "type": "registry:file",
+      "title": "Item",
+      "description": "Displays a row of content, such as a list entry, notification, or settings row.",
+      "meta": {
+        "platforms": {
+          "macOS": "13.3"
+        },
+        "license": "MIT"
+      },
+      "files": [
+        {
+          "path": "item/FLXItemStyle.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXItem/FLXItemStyle.swift"
+        },
+        {
+          "path": "item/FLXItem.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXItem/FLXItem.swift"
+        }
+      ]
+    },
+    {
+      "name": "ios-menu",
+      "type": "registry:file",
+      "title": "Menu",
+      "description": "Displays a list of actions or options revealed from a button or custom trigger.",
+      "meta": {
+        "platforms": {
+          "iOS": "16.4",
+          "iPadOS": "16.4"
+        },
+        "license": "MIT"
+      },
+      "registryDependencies": [
+        "https://swiftui.flexnative.com/r/ios-button.json"
+      ],
+      "files": [
+        {
+          "path": "menu/FLXMenu.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXMenu/FLXMenu.swift"
+        }
+      ]
+    },
+    {
+      "name": "ios-picker",
+      "type": "registry:file",
+      "title": "Picker",
+      "description": "Displays a dropdown for selecting one value from a set of options.",
+      "meta": {
+        "platforms": {
+          "iOS": "16.4",
+          "iPadOS": "16.4"
+        },
+        "license": "MIT"
+      },
+      "files": [
+        {
+          "path": "picker/FLXPicker.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXPicker/FLXPicker.swift"
+        }
+      ]
+    },
+    {
+      "name": "ios-progress-view",
+      "type": "registry:file",
+      "title": "Progress View",
+      "description": "Displays progress toward completion of a task, as a bar or a spinner.",
+      "meta": {
+        "platforms": {
+          "iOS": "16.4",
+          "iPadOS": "16.4"
+        },
+        "license": "MIT"
+      },
+      "files": [
+        {
+          "path": "progress-view/FLXProgressViewStyle.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXProgressView/FLXProgressViewStyle.swift"
+        },
+        {
+          "path": "progress-view/FLXProgressView.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXProgressView/FLXProgressView.swift"
+        }
+      ]
+    },
+    {
+      "name": "mac-progress-view",
+      "type": "registry:file",
+      "title": "Progress View",
+      "description": "Displays progress toward completion of a task, as a bar or a spinner.",
+      "meta": {
+        "platforms": {
+          "macOS": "13.3"
+        },
+        "license": "MIT"
+      },
+      "files": [
+        {
+          "path": "progress-view/FLXProgressViewStyle.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXProgressView/FLXProgressViewStyle.swift"
+        },
+        {
+          "path": "progress-view/FLXProgressView.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXProgressView/FLXProgressView.swift"
+        }
+      ]
+    },
+    {
+      "name": "ios-sheet",
+      "type": "registry:file",
+      "title": "Sheet",
+      "description": "Presents content in a sheet over the current view, driven by an item binding.",
+      "meta": {
+        "platforms": {
+          "iOS": "16.4",
+          "iPadOS": "16.4"
+        },
+        "license": "MIT"
+      },
+      "files": [
+        {
+          "path": "sheet/FLXSheet.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXSheet/FLXSheet.swift"
+        }
+      ]
+    },
+    {
+      "name": "mac-sheet",
+      "type": "registry:file",
+      "title": "Sheet",
+      "description": "Presents content in a sheet over the current view, driven by an item binding.",
+      "meta": {
+        "platforms": {
+          "macOS": "13.3"
+        },
+        "license": "MIT"
+      },
+      "files": [
+        {
+          "path": "sheet/FLXSheet.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXSheet/FLXSheet.swift"
+        }
+      ]
+    },
+    {
+      "name": "ios-slider",
+      "type": "registry:file",
+      "title": "Slider",
+      "description": "Displays a control for selecting a value from a bounded range.",
+      "meta": {
+        "platforms": {
+          "iOS": "16.4",
+          "iPadOS": "16.4"
+        },
+        "license": "MIT"
+      },
+      "files": [
+        {
+          "path": "slider/FLXSlider.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXSlider/FLXSlider.swift"
+        }
+      ]
+    },
+    {
+      "name": "mac-slider",
+      "type": "registry:file",
+      "title": "Slider",
+      "description": "Displays a control for selecting a value from a bounded range.",
+      "meta": {
+        "platforms": {
+          "macOS": "13.3"
+        },
+        "license": "MIT"
+      },
+      "files": [
+        {
+          "path": "slider/FLXSlider.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXSlider/FLXSlider.swift"
+        }
+      ]
+    },
+    {
+      "name": "ios-toggle",
+      "type": "registry:file",
+      "title": "Toggle",
+      "description": "Displays a switch for an on/off value.",
+      "meta": {
+        "platforms": {
+          "iOS": "16.4",
+          "iPadOS": "16.4"
+        },
+        "license": "MIT"
+      },
+      "files": [
+        {
+          "path": "toggle/FLXToggleStyle.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXToggle/FLXToggleStyle.swift"
+        },
+        {
+          "path": "toggle/FLXToggleStyle+iOS.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXToggle/FLXToggleStyle+iOS.swift"
+        },
+        {
+          "path": "toggle/FLXToggle.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXToggle/FLXToggle.swift"
+        }
+      ]
+    },
+    {
+      "name": "mac-toggle",
+      "type": "registry:file",
+      "title": "Toggle",
+      "description": "Displays a checkbox for an on/off value.",
+      "meta": {
+        "platforms": {
+          "macOS": "13.3"
+        },
+        "license": "MIT"
+      },
+      "files": [
+        {
+          "path": "toggle/FLXToggleStyle.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXToggle/FLXToggleStyle.swift"
+        },
+        {
+          "path": "toggle/FLXToggleStyle+macOS.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXToggle/FLXToggleStyle+macOS.swift"
+        },
+        {
+          "path": "toggle/FLXToggle.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXToggle/FLXToggle.swift"
+        }
+      ]
+    },
+    {
+      "name": "ios-collapsible",
+      "type": "registry:file",
+      "title": "Collapsible",
+      "description": "Displays content that can be expanded and collapsed.",
+      "meta": {
+        "platforms": {
+          "iOS": "16.4",
+          "iPadOS": "16.4"
+        },
+        "license": "MIT"
+      },
+      "files": [
+        {
+          "path": "collapsible/FLXCollapsibleStyle.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXCollapsible/FLXCollapsibleStyle.swift"
+        },
+        {
+          "path": "collapsible/FLXCollapsible.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXCollapsible/FLXCollapsible.swift"
+        }
+      ]
+    },
+    {
+      "name": "mac-collapsible",
+      "type": "registry:file",
+      "title": "Collapsible",
+      "description": "Displays content that can be expanded and collapsed.",
+      "meta": {
+        "platforms": {
+          "macOS": "13.3"
+        },
+        "license": "MIT"
+      },
+      "files": [
+        {
+          "path": "collapsible/FLXCollapsibleStyle.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXCollapsible/FLXCollapsibleStyle.swift"
+        },
+        {
+          "path": "collapsible/FLXCollapsible.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXCollapsible/FLXCollapsible.swift"
+        }
+      ]
+    },
+    {
+      "name": "ios-secure-field",
+      "type": "registry:file",
+      "title": "Secure Field",
+      "description": "Displays an obscured text input for passwords and other sensitive text.",
+      "meta": {
+        "platforms": {
+          "iOS": "16.4",
+          "iPadOS": "16.4"
+        },
+        "license": "MIT"
+      },
+      "files": [
+        {
+          "path": "secure-field/FLXSecureField.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXSecureField/FLXSecureField.swift"
+        }
+      ]
+    },
+    {
+      "name": "mac-secure-field",
+      "type": "registry:file",
+      "title": "Secure Field",
+      "description": "Displays an obscured text input for passwords and other sensitive text.",
+      "meta": {
+        "platforms": {
+          "macOS": "13.3"
+        },
+        "license": "MIT"
+      },
+      "files": [
+        {
+          "path": "secure-field/FLXSecureField.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXSecureField/FLXSecureField.swift"
+        }
+      ]
+    },
+    {
+      "name": "ios-text-editor",
+      "type": "registry:file",
+      "title": "Text Editor",
+      "description": "Displays a multi-line text input for long-form content.",
+      "meta": {
+        "platforms": {
+          "iOS": "16.4",
+          "iPadOS": "16.4"
+        },
+        "license": "MIT"
+      },
+      "files": [
+        {
+          "path": "text-editor/FLXTextEditor.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXTextEditor/FLXTextEditor.swift"
+        }
+      ]
+    },
+    {
+      "name": "mac-text-editor",
+      "type": "registry:file",
+      "title": "Text Editor",
+      "description": "Displays a multi-line text input for long-form content.",
+      "meta": {
+        "platforms": {
+          "macOS": "13.3"
+        },
+        "license": "MIT"
+      },
+      "files": [
+        {
+          "path": "text-editor/FLXTextEditor.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXTextEditor/FLXTextEditor.swift"
+        }
+      ]
+    },
+    {
+      "name": "ios-text-field",
+      "type": "registry:file",
+      "title": "Text Field",
+      "description": "Displays a single-line text input.",
+      "meta": {
+        "platforms": {
+          "iOS": "16.4",
+          "iPadOS": "16.4"
+        },
+        "license": "MIT"
+      },
+      "files": [
+        {
+          "path": "text-field/FLXTextField.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXTextField/FLXTextField.swift"
+        }
+      ]
+    },
+    {
+      "name": "mac-text-field",
+      "type": "registry:file",
+      "title": "Text Field",
+      "description": "Displays a single-line text input.",
+      "meta": {
+        "platforms": {
+          "macOS": "13.3"
+        },
+        "license": "MIT"
+      },
+      "files": [
+        {
+          "path": "text-field/FLXTextField.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXTextField/FLXTextField.swift"
+        }
+      ]
+    },
+    {
+      "name": "ios-text-field-group",
+      "type": "registry:file",
+      "title": "Text Field Group",
+      "description": "Wraps a text field in a shared box with optional leading and trailing addons.",
+      "meta": {
+        "platforms": {
+          "iOS": "16.4",
+          "iPadOS": "16.4"
+        },
+        "license": "MIT"
+      },
+      "registryDependencies": [
+        "https://swiftui.flexnative.com/r/ios-text-field.json",
+        "https://swiftui.flexnative.com/r/ios-secure-field.json"
+      ],
+      "files": [
+        {
+          "path": "text-field-group/FLXTextFieldGroupStyle.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXTextFieldGroup/FLXTextFieldGroupStyle.swift"
+        },
+        {
+          "path": "text-field-group/FLXTextFieldGroup.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXTextFieldGroup/FLXTextFieldGroup.swift"
+        }
+      ]
+    },
+    {
+      "name": "mac-text-field-group",
+      "type": "registry:file",
+      "title": "Text Field Group",
+      "description": "Wraps a text field in a shared box with optional leading and trailing addons.",
+      "meta": {
+        "platforms": {
+          "macOS": "13.3"
+        },
+        "license": "MIT"
+      },
+      "registryDependencies": [
+        "https://swiftui.flexnative.com/r/mac-text-field.json",
+        "https://swiftui.flexnative.com/r/mac-secure-field.json"
+      ],
+      "files": [
+        {
+          "path": "text-field-group/FLXTextFieldGroupStyle.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXTextFieldGroup/FLXTextFieldGroupStyle.swift"
+        },
+        {
+          "path": "text-field-group/FLXTextFieldGroup.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXTextFieldGroup/FLXTextFieldGroup.swift"
+        }
+      ]
+    },
+    {
+      "name": "ios-field-label",
+      "type": "registry:file",
+      "title": "Field Label",
+      "description": "Pairs a caption with a form control.",
+      "meta": {
+        "platforms": {
+          "iOS": "16.4",
+          "iPadOS": "16.4"
+        },
+        "license": "MIT"
+      },
+      "files": [
+        {
+          "path": "field-label/FLXFieldLabelStyle.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXFieldLabel/FLXFieldLabelStyle.swift"
+        },
+        {
+          "path": "field-label/FLXFieldLabel.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXFieldLabel/FLXFieldLabel.swift"
+        }
+      ]
+    },
+    {
+      "name": "mac-field-label",
+      "type": "registry:file",
+      "title": "Field Label",
+      "description": "Pairs a caption with a form control.",
+      "meta": {
+        "platforms": {
+          "macOS": "13.3"
+        },
+        "license": "MIT"
+      },
+      "files": [
+        {
+          "path": "field-label/FLXFieldLabelStyle.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXFieldLabel/FLXFieldLabelStyle.swift"
+        },
+        {
+          "path": "field-label/FLXFieldLabel.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXFieldLabel/FLXFieldLabel.swift"
+        }
+      ]
+    },
+    {
+      "name": "ios-form-field",
+      "type": "registry:file",
+      "title": "Form Field",
+      "description": "Groups a label, control, description, and error message for a form field.",
+      "meta": {
+        "platforms": {
+          "iOS": "16.4",
+          "iPadOS": "16.4"
+        },
+        "license": "MIT"
+      },
+      "files": [
+        {
+          "path": "form-field/FLXFormFieldStyle.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXFormField/FLXFormFieldStyle.swift"
+        },
+        {
+          "path": "form-field/FLXFormField.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXFormField/FLXFormField.swift"
+        }
+      ]
+    },
+    {
+      "name": "mac-form-field",
+      "type": "registry:file",
+      "title": "Form Field",
+      "description": "Groups a label, control, description, and error message for a form field.",
+      "meta": {
+        "platforms": {
+          "macOS": "13.3"
+        },
+        "license": "MIT"
+      },
+      "files": [
+        {
+          "path": "form-field/FLXFormFieldStyle.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXFormField/FLXFormFieldStyle.swift"
+        },
+        {
+          "path": "form-field/FLXFormField.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXFormField/FLXFormField.swift"
+        }
+      ]
+    }
+  ]
+}

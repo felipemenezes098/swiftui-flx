@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "ios-menu",
+  "title": "Menu",
+  "description": "Displays a list of actions or options revealed from a button or custom trigger.",
+  "registryDependencies": [
+    "https://swiftui.flexnative.com/r/ios-button.json"
+  ],
+  "files": [
+    {
+      "path": "registry/components/menu/FLXMenu.swift",
+      "content": "import SwiftUI\n\n/// Wraps the native `Menu` (SwiftUI's pull-down/command menu) with FLX's theme tokens.\n/// `MenuStyle`'s `Configuration` only exposes `label` — never `content` — so there's no\n/// `FLXMenuStyle` protocol or `.flxMenuStyle(_:)` override here, the same limitation\n/// `FLXPicker` documents for `PickerStyle`. The menu's content (items, sections, submenus,\n/// dividers) is rendered entirely by the system — its background/blur/corner radius can't\n/// be restyled, which is also how it picks up Liquid Glass for free. The trigger, though,\n/// behaves like a real button for styling purposes, so a decorated trigger reuses\n/// `FLXButtonStyle` directly (and honors the same `.flxButtonStyle(_:)` override a real\n/// `FLXButton` would) instead of inventing a second style mechanism for it.\n@available(macOS, unavailable)\npublic struct FLXMenu<Content: View, Label: View>: View {\n    @Environment(\\.flxButtonStyleOverride) private var styleOverride\n    @Environment(\\.isEnabled) private var isEnabled\n\n    private let content: () -> Content\n    private let label: () -> Label\n    private let variant: FLXButtonVariant?\n\n    /// Custom-label init (e.g. an icon-only trigger or an `FLXAvatar`). The caller owns\n    /// the whole trigger appearance — no `FLXButtonStyle` is applied here.\n    public init(\n        @ViewBuilder content: @escaping () -> Content,\n        @ViewBuilder label: @escaping () -> Label\n    ) {\n        self.content = content\n        self.label = label\n        self.variant = nil\n    }\n\n    private init(\n        variant: FLXButtonVariant,\n        @ViewBuilder content: @escaping () -> Content,\n        @ViewBuilder label: @escaping () -> Label\n    ) {\n        self.content = content\n        self.label = label\n        self.variant = variant\n    }\n\n    public var body: some View {\n        if let variant {\n            Menu(content: content, label: label)\n                .buttonStyle(styleOverride ?? AnyFLXButtonStyle(FLXButtonStyle(variant: variant)))\n        } else {\n            Menu(content: content, label: label)\n                .opacity(isEnabled ? 1 : FLXOpacity.disabled)\n        }\n    }\n}\n\n@available(macOS, unavailable)\nextension FLXMenu where Label == Text {\n    public init(\n        _ titleKey: LocalizedStringKey,\n        variant: FLXButtonVariant = .secondary,\n        @ViewBuilder content: @escaping () -> Content\n    ) {\n        self.init(variant: variant, content: content) {\n            Text(titleKey)\n        }\n    }\n\n    @_disfavoredOverload\n    public init(\n        _ titleResource: LocalizedStringResource,\n        variant: FLXButtonVariant = .secondary,\n        @ViewBuilder content: @escaping () -> Content\n    ) {\n        self.init(variant: variant, content: content) {\n            Text(titleResource)\n        }\n    }\n\n    @_disfavoredOverload\n    public init<S: StringProtocol>(\n        _ title: S,\n        variant: FLXButtonVariant = .secondary,\n        @ViewBuilder content: @escaping () -> Content\n    ) {\n        self.init(variant: variant, content: content) {\n            Text(title)\n        }\n    }\n}\n\n@available(macOS, unavailable)\nextension FLXMenu where Label == SwiftUI.Label<Text, Image> {\n    public init(\n        _ titleKey: LocalizedStringKey,\n        systemImage: String,\n        variant: FLXButtonVariant = .secondary,\n        @ViewBuilder content: @escaping () -> Content\n    ) {\n        self.init(variant: variant, content: content) {\n            SwiftUI.Label(titleKey, systemImage: systemImage)\n        }\n    }\n\n    @_disfavoredOverload\n    public init(\n        _ titleResource: LocalizedStringResource,\n        systemImage: String,\n        variant: FLXButtonVariant = .secondary,\n        @ViewBuilder content: @escaping () -> Content\n    ) {\n        self.init(variant: variant, content: content) {\n            SwiftUI.Label(titleResource, systemImage: systemImage)\n        }\n    }\n\n    @_disfavoredOverload\n    public init<S: StringProtocol>(\n        _ title: S,\n        systemImage: String,\n        variant: FLXButtonVariant = .secondary,\n        @ViewBuilder content: @escaping () -> Content\n    ) {\n        self.init(variant: variant, content: content) {\n            SwiftUI.Label(title, systemImage: systemImage)\n        }\n    }\n}\n",
+      "type": "registry:file",
+      "target": "~/DesignSystem/Components/FLXMenu/FLXMenu.swift"
+    }
+  ],
+  "meta": {
+    "platforms": {
+      "iOS": "16.4",
+      "iPadOS": "16.4"
+    },
+    "license": "MIT"
+  },
+  "type": "registry:file"
+}
