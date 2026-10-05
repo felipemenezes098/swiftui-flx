@@ -1,0 +1,7 @@
+*.ts linguist-documentation
+*.tsx linguist-documentation
+*.mts linguist-documentation
+*.mjs linguist-documentation
+*.mdx linguist-documentation
+*.css linguist-documentation
+public/r/** linguist-generated
