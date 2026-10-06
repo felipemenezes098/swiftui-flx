@@ -49,7 +49,7 @@ export function MacTextFieldPreview() {
         className="flex w-[260px] flex-col gap-4"
       >
         <div className="flex flex-col items-center gap-2 text-center">
-          <Logo.SwiftUI aria-hidden className="size-11 drop-shadow-sm" />
+          <Logo.Tile aria-hidden className="size-11 drop-shadow-sm" />
           <div>
             <p className="text-[15px] font-semibold">Sign in to FLX</p>
             <p className="text-[12px] text-muted-foreground">

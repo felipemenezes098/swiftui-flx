@@ -8,10 +8,10 @@ A shadcn/ui-style design system for SwiftUI: open source components you add to y
 
 [Website](https://swiftui.flexnative.com) · [Components](https://swiftui.flexnative.com/docs/components/ios/avatar) · [Installation](https://swiftui.flexnative.com/docs/installation) · [Presets](https://swiftui.flexnative.com/docs/presets)
 
-![iOS 16.4+](https://img.shields.io/badge/iOS-16.4%2B-000?logo=apple)
-![iPadOS 16.4+](https://img.shields.io/badge/iPadOS-16.4%2B-000?logo=apple)
-![macOS 13.3+](https://img.shields.io/badge/macOS-13.3%2B-000?logo=apple)
-![Swift 5 and 6](https://img.shields.io/badge/Swift-5%20%7C%206-F05138?logo=swift&logoColor=white)
+![iOS 16.4+](https://img.shields.io/badge/iOS-16.4%2B-000)
+![iPadOS 16.4+](https://img.shields.io/badge/iPadOS-16.4%2B-000)
+![macOS 13.3+](https://img.shields.io/badge/macOS-13.3%2B-000)
+![Swift 5 and 6](https://img.shields.io/badge/Swift-5%20%7C%206-F05138)
 ![Components: MIT](https://img.shields.io/badge/components-MIT-blue)
 
 <picture>

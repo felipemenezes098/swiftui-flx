@@ -46,7 +46,12 @@ export function OgImage({ title, description }: Readonly<OgImageProps>) {
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-            <Logo.SwiftUI width={52} height={52} />
+            <Logo.Tile
+              width={52}
+              height={52}
+              tileColor={ogColors.foreground}
+              markColor={ogColors.card}
+            />
             <div
               style={{
                 fontSize: 28,
