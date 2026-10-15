@@ -39,8 +39,8 @@ Using Claude Code, Cursor or Codex? Copy the [Install with AI](https://swiftui.f
 Add the foundation once, then the components you need. Run from your app's source folder, or pass `--cwd` ([details](https://swiftui.flexnative.com/docs/installation#where-to-run-the-cli)):
 
 ```bash
-npx shadcn@latest add https://swiftui.flexnative.com/r/foundation.json --cwd MyApp
-npx shadcn@latest add https://swiftui.flexnative.com/r/ios-button.json --cwd MyApp
+npx shadcn@latest add @swiftui-flx/foundation --cwd MyApp
+npx shadcn@latest add @swiftui-flx/ios-button --cwd MyApp
 ```
 
 Use `mac-button.json` for macOS. Prefer not to use the CLI? Every component page has the source to [copy by hand](https://swiftui.flexnative.com/docs/installation).

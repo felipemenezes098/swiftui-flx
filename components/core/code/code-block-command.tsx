@@ -24,7 +24,7 @@ import { SwiftPackagePath } from "./swift-package-path"
 type PackageManager = "npm" | "pnpm" | "yarn" | "bun"
 
 interface CodeBlockCommandProps {
-  /** The bare command run through a package-manager runner, e.g. "shadcn@latest add <url>". */
+  /** The bare command run through a package-manager runner, e.g. "shadcn@latest add @swiftui-flx/<item>". */
   command: string
   className?: string
 }

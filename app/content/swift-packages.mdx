@@ -1,5 +1,3 @@
-import { siteConfig } from "@/config/site"
-
 <DocsHeader>
 
 # Swift Packages
@@ -74,7 +72,7 @@ Turn on **Swift package** in any install command on this site. Every command the
 Leave the path empty to use `Packages/DesignSystem/Sources`, or type your own, starting from your project folder. Run the commands from that folder, where `MyApp.xcodeproj` is.
 
 <CodeBlockCommand
-  command={`shadcn@latest add ${siteConfig.url}/r/foundation.json`}
+  command="shadcn@latest add @swiftui-flx/foundation"
 />
 
 Then add components from their pages the same way.

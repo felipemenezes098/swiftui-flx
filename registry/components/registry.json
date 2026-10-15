@@ -261,7 +261,7 @@
         "license": "MIT"
       },
       "registryDependencies": [
-        "https://swiftui.flexnative.com/r/ios-button.json"
+        "@swiftui-flx/ios-button"
       ],
       "files": [
         {
@@ -656,8 +656,8 @@
         "license": "MIT"
       },
       "registryDependencies": [
-        "https://swiftui.flexnative.com/r/ios-text-field.json",
-        "https://swiftui.flexnative.com/r/ios-secure-field.json"
+        "@swiftui-flx/ios-text-field",
+        "@swiftui-flx/ios-secure-field"
       ],
       "files": [
         {
@@ -684,8 +684,8 @@
         "license": "MIT"
       },
       "registryDependencies": [
-        "https://swiftui.flexnative.com/r/mac-text-field.json",
-        "https://swiftui.flexnative.com/r/mac-secure-field.json"
+        "@swiftui-flx/mac-text-field",
+        "@swiftui-flx/mac-secure-field"
       ],
       "files": [
         {

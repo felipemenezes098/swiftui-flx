@@ -4,8 +4,8 @@
   "title": "Text Field Group",
   "description": "Wraps a text field in a shared box with optional leading and trailing addons.",
   "registryDependencies": [
-    "https://swiftui.flexnative.com/r/ios-text-field.json",
-    "https://swiftui.flexnative.com/r/ios-secure-field.json"
+    "@swiftui-flx/ios-text-field",
+    "@swiftui-flx/ios-secure-field"
   ],
   "files": [
     {

@@ -340,7 +340,7 @@
       "title": "Menu",
       "description": "Displays a list of actions or options revealed from a button or custom trigger.",
       "registryDependencies": [
-        "https://swiftui.flexnative.com/r/ios-button.json"
+        "@swiftui-flx/ios-button"
       ],
       "files": [
         {
@@ -735,8 +735,8 @@
       "title": "Text Field Group",
       "description": "Wraps a text field in a shared box with optional leading and trailing addons.",
       "registryDependencies": [
-        "https://swiftui.flexnative.com/r/ios-text-field.json",
-        "https://swiftui.flexnative.com/r/ios-secure-field.json"
+        "@swiftui-flx/ios-text-field",
+        "@swiftui-flx/ios-secure-field"
       ],
       "files": [
         {
@@ -764,8 +764,8 @@
       "title": "Text Field Group",
       "description": "Wraps a text field in a shared box with optional leading and trailing addons.",
       "registryDependencies": [
-        "https://swiftui.flexnative.com/r/mac-text-field.json",
-        "https://swiftui.flexnative.com/r/mac-secure-field.json"
+        "@swiftui-flx/mac-text-field",
+        "@swiftui-flx/mac-secure-field"
       ],
       "files": [
         {

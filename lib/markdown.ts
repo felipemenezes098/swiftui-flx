@@ -33,9 +33,7 @@ function readProp(props: string, name: string) {
   )
   if (!template) return undefined
 
-  return template[1]
-    .replaceAll("${siteConfig.url}", siteConfig.url)
-    .replace(/\\(.)/g, "$1")
+  return template[1].replace(/\\(.)/g, "$1")
 }
 
 function absoluteHref(href: string) {
