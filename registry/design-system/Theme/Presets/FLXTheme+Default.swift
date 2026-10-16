@@ -29,11 +29,11 @@ extension FLXTheme {
             ),
             primary: Color(
                 flxLight: Color(red: 0.3060, green: 0.2392, blue: 0.2157),
-                dark: Color(red: 0.5412, green: 0.4157, blue: 0.3686)
+                dark: Color(red: 0.9883, green: 0.9883, blue: 0.9883)
             ),
             primaryForeground: Color(
                 flxLight: Color(red: 1.0000, green: 1.0000, blue: 1.0000),
-                dark: Color(red: 1.0000, green: 1.0000, blue: 1.0000)
+                dark: Color(red: 0.0313, green: 0.1019, blue: 0.1059)
             ),
             secondary: Color(
                 flxLight: Color(red: 0.9411, green: 0.9411, blue: 0.9411),
