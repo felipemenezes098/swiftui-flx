@@ -10,9 +10,9 @@ public struct FLXCollapsible<Label: View, Content: View>: View {
     /// `isExpanded` is optional: pass a `Binding` to control the state from outside
     /// (mirrors Radix's `open`/`onOpenChange`), or omit it to let the component
     /// manage its own state internally (mirrors Radix's uncontrolled default).
-    /// `DisclosureGroup` itself doesn't expose this duality via a single initializer,
-    /// so this is a deliberate deviation from copying its init surface 1:1 — see
-    /// DESIGN_SYSTEM.md section 3, "if the pattern doesn't fit".
+    /// `DisclosureGroup` splits this duality across two initializers; one optional
+    /// binding keeps a single initializer, a deliberate deviation from copying its
+    /// init surface 1:1.
     public init(
         isExpanded: Binding<Bool>? = nil,
         @ViewBuilder content: @escaping () -> Content,

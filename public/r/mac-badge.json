@@ -3,6 +3,9 @@
   "name": "mac-badge",
   "title": "Badge",
   "description": "Displays a small label for status, category, or count.",
+  "registryDependencies": [
+    "@swiftui-flx/foundation"
+  ],
   "files": [
     {
       "path": "registry/components/badge/FLXBadgeStyle.swift",

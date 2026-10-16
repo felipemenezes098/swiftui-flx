@@ -15,6 +15,9 @@
         },
         "license": "MIT"
       },
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "button/FLXButtonStyle.swift",
@@ -39,6 +42,9 @@
         },
         "license": "MIT"
       },
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "button/FLXButtonStyle.swift",
@@ -64,6 +70,9 @@
         },
         "license": "MIT"
       },
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "card/FLXCardStyle.swift",
@@ -88,6 +97,9 @@
         },
         "license": "MIT"
       },
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "card/FLXCardStyle.swift",
@@ -113,6 +125,9 @@
         },
         "license": "MIT"
       },
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "avatar/FLXAvatarStyle.swift",
@@ -137,6 +152,9 @@
         },
         "license": "MIT"
       },
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "avatar/FLXAvatarStyle.swift",
@@ -162,6 +180,9 @@
         },
         "license": "MIT"
       },
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "badge/FLXBadgeStyle.swift",
@@ -186,6 +207,9 @@
         },
         "license": "MIT"
       },
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "badge/FLXBadgeStyle.swift",
@@ -211,6 +235,9 @@
         },
         "license": "MIT"
       },
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "item/FLXItemStyle.swift",
@@ -235,6 +262,9 @@
         },
         "license": "MIT"
       },
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "item/FLXItemStyle.swift",
@@ -261,6 +291,7 @@
         "license": "MIT"
       },
       "registryDependencies": [
+        "@swiftui-flx/foundation",
         "@swiftui-flx/ios-button"
       ],
       "files": [
@@ -283,6 +314,9 @@
         },
         "license": "MIT"
       },
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "picker/FLXPicker.swift",
@@ -303,6 +337,9 @@
         },
         "license": "MIT"
       },
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "progress-view/FLXProgressViewStyle.swift",
@@ -327,6 +364,9 @@
         },
         "license": "MIT"
       },
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "progress-view/FLXProgressViewStyle.swift",
@@ -352,6 +392,9 @@
         },
         "license": "MIT"
       },
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "sheet/FLXSheet.swift",
@@ -371,6 +414,9 @@
         },
         "license": "MIT"
       },
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "sheet/FLXSheet.swift",
@@ -391,6 +437,9 @@
         },
         "license": "MIT"
       },
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "slider/FLXSlider.swift",
@@ -410,6 +459,9 @@
         },
         "license": "MIT"
       },
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "slider/FLXSlider.swift",
@@ -430,6 +482,9 @@
         },
         "license": "MIT"
       },
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "toggle/FLXToggleStyle.swift",
@@ -459,6 +514,9 @@
         },
         "license": "MIT"
       },
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "toggle/FLXToggleStyle.swift",
@@ -489,6 +547,9 @@
         },
         "license": "MIT"
       },
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "collapsible/FLXCollapsibleStyle.swift",
@@ -513,6 +574,9 @@
         },
         "license": "MIT"
       },
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "collapsible/FLXCollapsibleStyle.swift",
@@ -538,6 +602,9 @@
         },
         "license": "MIT"
       },
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "secure-field/FLXSecureField.swift",
@@ -557,6 +624,9 @@
         },
         "license": "MIT"
       },
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "secure-field/FLXSecureField.swift",
@@ -577,6 +647,9 @@
         },
         "license": "MIT"
       },
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "text-editor/FLXTextEditor.swift",
@@ -596,6 +669,9 @@
         },
         "license": "MIT"
       },
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "text-editor/FLXTextEditor.swift",
@@ -616,6 +692,9 @@
         },
         "license": "MIT"
       },
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "text-field/FLXTextField.swift",
@@ -635,6 +714,9 @@
         },
         "license": "MIT"
       },
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "text-field/FLXTextField.swift",
@@ -656,6 +738,7 @@
         "license": "MIT"
       },
       "registryDependencies": [
+        "@swiftui-flx/foundation",
         "@swiftui-flx/ios-text-field",
         "@swiftui-flx/ios-secure-field"
       ],
@@ -684,6 +767,7 @@
         "license": "MIT"
       },
       "registryDependencies": [
+        "@swiftui-flx/foundation",
         "@swiftui-flx/mac-text-field",
         "@swiftui-flx/mac-secure-field"
       ],
@@ -712,6 +796,9 @@
         },
         "license": "MIT"
       },
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "field-label/FLXFieldLabelStyle.swift",
@@ -736,6 +823,9 @@
         },
         "license": "MIT"
       },
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "field-label/FLXFieldLabelStyle.swift",
@@ -761,6 +851,9 @@
         },
         "license": "MIT"
       },
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "form-field/FLXFormFieldStyle.swift",
@@ -785,6 +878,9 @@
         },
         "license": "MIT"
       },
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "form-field/FLXFormFieldStyle.swift",

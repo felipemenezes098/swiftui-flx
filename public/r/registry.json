@@ -73,6 +73,9 @@
       "name": "preset-sienna",
       "title": "Sienna Preset",
       "description": "Cream paper, burnt-earth ink, and a larger base radius.",
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "registry/design-system/Theme/Presets/FLXTheme+Sienna.swift",
@@ -94,6 +97,9 @@
       "name": "ios-button",
       "title": "Button",
       "description": "Triggers an action or event, such as submitting a form.",
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "registry/components/button/FLXButtonStyle.swift",
@@ -119,6 +125,9 @@
       "name": "mac-button",
       "title": "Button",
       "description": "Triggers an action or event, such as submitting a form.",
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "registry/components/button/FLXButtonStyle.swift",
@@ -143,6 +152,9 @@
       "name": "ios-card",
       "title": "Card",
       "description": "A card is a container that can be used to display content in a styled way.",
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "registry/components/card/FLXCardStyle.swift",
@@ -168,6 +180,9 @@
       "name": "mac-card",
       "title": "Card",
       "description": "A card is a container that can be used to display content in a styled way.",
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "registry/components/card/FLXCardStyle.swift",
@@ -192,6 +207,9 @@
       "name": "ios-avatar",
       "title": "Avatar",
       "description": "Displays a user's profile picture, with initials as a fallback.",
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "registry/components/avatar/FLXAvatarStyle.swift",
@@ -217,6 +235,9 @@
       "name": "mac-avatar",
       "title": "Avatar",
       "description": "Displays a user's profile picture, with initials as a fallback.",
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "registry/components/avatar/FLXAvatarStyle.swift",
@@ -241,6 +262,9 @@
       "name": "ios-badge",
       "title": "Badge",
       "description": "Displays a small label for status, category, or count.",
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "registry/components/badge/FLXBadgeStyle.swift",
@@ -266,6 +290,9 @@
       "name": "mac-badge",
       "title": "Badge",
       "description": "Displays a small label for status, category, or count.",
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "registry/components/badge/FLXBadgeStyle.swift",
@@ -290,6 +317,9 @@
       "name": "ios-item",
       "title": "Item",
       "description": "Displays a row of content, such as a list entry, notification, or settings row.",
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "registry/components/item/FLXItemStyle.swift",
@@ -315,6 +345,9 @@
       "name": "mac-item",
       "title": "Item",
       "description": "Displays a row of content, such as a list entry, notification, or settings row.",
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "registry/components/item/FLXItemStyle.swift",
@@ -340,6 +373,7 @@
       "title": "Menu",
       "description": "Displays a list of actions or options revealed from a button or custom trigger.",
       "registryDependencies": [
+        "@swiftui-flx/foundation",
         "@swiftui-flx/ios-button"
       ],
       "files": [
@@ -362,6 +396,9 @@
       "name": "ios-picker",
       "title": "Picker",
       "description": "Displays a dropdown for selecting one value from a set of options.",
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "registry/components/picker/FLXPicker.swift",
@@ -382,6 +419,9 @@
       "name": "ios-progress-view",
       "title": "Progress View",
       "description": "Displays progress toward completion of a task, as a bar or a spinner.",
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "registry/components/progress-view/FLXProgressViewStyle.swift",
@@ -407,6 +447,9 @@
       "name": "mac-progress-view",
       "title": "Progress View",
       "description": "Displays progress toward completion of a task, as a bar or a spinner.",
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "registry/components/progress-view/FLXProgressViewStyle.swift",
@@ -431,6 +474,9 @@
       "name": "ios-sheet",
       "title": "Sheet",
       "description": "Presents content in a sheet over the current view, driven by an item binding.",
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "registry/components/sheet/FLXSheet.swift",
@@ -451,6 +497,9 @@
       "name": "mac-sheet",
       "title": "Sheet",
       "description": "Presents content in a sheet over the current view, driven by an item binding.",
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "registry/components/sheet/FLXSheet.swift",
@@ -470,6 +519,9 @@
       "name": "ios-slider",
       "title": "Slider",
       "description": "Displays a control for selecting a value from a bounded range.",
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "registry/components/slider/FLXSlider.swift",
@@ -490,6 +542,9 @@
       "name": "mac-slider",
       "title": "Slider",
       "description": "Displays a control for selecting a value from a bounded range.",
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "registry/components/slider/FLXSlider.swift",
@@ -509,6 +564,9 @@
       "name": "ios-toggle",
       "title": "Toggle",
       "description": "Displays a switch for an on/off value.",
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "registry/components/toggle/FLXToggleStyle.swift",
@@ -539,6 +597,9 @@
       "name": "mac-toggle",
       "title": "Toggle",
       "description": "Displays a checkbox for an on/off value.",
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "registry/components/toggle/FLXToggleStyle.swift",
@@ -568,6 +629,9 @@
       "name": "ios-collapsible",
       "title": "Collapsible",
       "description": "Displays content that can be expanded and collapsed.",
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "registry/components/collapsible/FLXCollapsibleStyle.swift",
@@ -593,6 +657,9 @@
       "name": "mac-collapsible",
       "title": "Collapsible",
       "description": "Displays content that can be expanded and collapsed.",
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "registry/components/collapsible/FLXCollapsibleStyle.swift",
@@ -617,6 +684,9 @@
       "name": "ios-secure-field",
       "title": "Secure Field",
       "description": "Displays an obscured text input for passwords and other sensitive text.",
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "registry/components/secure-field/FLXSecureField.swift",
@@ -637,6 +707,9 @@
       "name": "mac-secure-field",
       "title": "Secure Field",
       "description": "Displays an obscured text input for passwords and other sensitive text.",
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "registry/components/secure-field/FLXSecureField.swift",
@@ -656,6 +729,9 @@
       "name": "ios-text-editor",
       "title": "Text Editor",
       "description": "Displays a multi-line text input for long-form content.",
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "registry/components/text-editor/FLXTextEditor.swift",
@@ -676,6 +752,9 @@
       "name": "mac-text-editor",
       "title": "Text Editor",
       "description": "Displays a multi-line text input for long-form content.",
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "registry/components/text-editor/FLXTextEditor.swift",
@@ -695,6 +774,9 @@
       "name": "ios-text-field",
       "title": "Text Field",
       "description": "Displays a single-line text input.",
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "registry/components/text-field/FLXTextField.swift",
@@ -715,6 +797,9 @@
       "name": "mac-text-field",
       "title": "Text Field",
       "description": "Displays a single-line text input.",
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "registry/components/text-field/FLXTextField.swift",
@@ -735,6 +820,7 @@
       "title": "Text Field Group",
       "description": "Wraps a text field in a shared box with optional leading and trailing addons.",
       "registryDependencies": [
+        "@swiftui-flx/foundation",
         "@swiftui-flx/ios-text-field",
         "@swiftui-flx/ios-secure-field"
       ],
@@ -764,6 +850,7 @@
       "title": "Text Field Group",
       "description": "Wraps a text field in a shared box with optional leading and trailing addons.",
       "registryDependencies": [
+        "@swiftui-flx/foundation",
         "@swiftui-flx/mac-text-field",
         "@swiftui-flx/mac-secure-field"
       ],
@@ -791,6 +878,9 @@
       "name": "ios-field-label",
       "title": "Field Label",
       "description": "Pairs a caption with a form control.",
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "registry/components/field-label/FLXFieldLabelStyle.swift",
@@ -816,6 +906,9 @@
       "name": "mac-field-label",
       "title": "Field Label",
       "description": "Pairs a caption with a form control.",
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "registry/components/field-label/FLXFieldLabelStyle.swift",
@@ -840,6 +933,9 @@
       "name": "ios-form-field",
       "title": "Form Field",
       "description": "Groups a label, control, description, and error message for a form field.",
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "registry/components/form-field/FLXFormFieldStyle.swift",
@@ -865,6 +961,9 @@
       "name": "mac-form-field",
       "title": "Form Field",
       "description": "Groups a label, control, description, and error message for a form field.",
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "registry/components/form-field/FLXFormFieldStyle.swift",

@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils"
 export type ShowcaseTheme = "default" | "sienna"
 
 const themes: { id: ShowcaseTheme; name: string; swatch: string }[] = [
-  { id: "default", name: "Default", swatch: "bg-[#4e3d37] dark:bg-[#fcfcfc]" },
+  { id: "default", name: "Default", swatch: "bg-[#4e3d37] dark:bg-[#8a6a5e]" },
   { id: "sienna", name: "Sienna", swatch: "bg-[#cb4832]" },
 ]
 

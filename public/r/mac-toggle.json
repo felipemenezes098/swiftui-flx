@@ -3,6 +3,9 @@
   "name": "mac-toggle",
   "title": "Toggle",
   "description": "Displays a checkbox for an on/off value.",
+  "registryDependencies": [
+    "@swiftui-flx/foundation"
+  ],
   "files": [
     {
       "path": "registry/components/toggle/FLXToggleStyle.swift",
@@ -12,7 +15,7 @@
     },
     {
       "path": "registry/components/toggle/FLXToggleStyle+macOS.swift",
-      "content": "#if os(macOS)\nimport SwiftUI\n\nstruct FLXToggleStyleBody: View {\n    @Environment(\\.flxTheme) private var theme\n    @Environment(\\.isEnabled) private var isEnabled\n    @Environment(\\.controlSize) private var controlSize\n\n    let configuration: FLXToggleStyle.Configuration\n\n    var body: some View {\n        Button {\n            configuration.isOn.toggle()\n        } label: {\n            HStack(spacing: FLXToggleMetrics.labelSpacing(controlSize)) {\n                box\n                configuration.label\n                    .flxFont(FLXTypography.control(controlSize))\n                    .foregroundStyle(theme.colors.foreground)\n            }\n            .contentShape(Rectangle())\n        }\n        .buttonStyle(.plain)\n        .opacity(isEnabled ? 1 : FLXOpacity.disabled)\n    }\n\n    private var box: some View {\n        let side = FLXToggleMetrics.boxSize(controlSize)\n        return RoundedRectangle(cornerRadius: FLXToggleMetrics.cornerRadius)\n            .fill(configuration.isOn ? theme.colors.primary : theme.colors.card)\n            .overlay(\n                RoundedRectangle(cornerRadius: FLXToggleMetrics.cornerRadius)\n                    .strokeBorder(configuration.isOn ? theme.colors.primary : theme.colors.input, lineWidth: FLXBorderWidth.thin)\n            )\n            .overlay {\n                if configuration.isOn {\n                    Image(systemName: \"checkmark\")\n                        .font(.system(size: side * FLXToggleMetrics.checkmarkScale, weight: .bold))\n                        .foregroundStyle(theme.colors.primaryForeground)\n                }\n            }\n            .frame(width: side, height: side)\n    }\n}\n\nprivate enum FLXToggleMetrics {\n    static let cornerRadius: CGFloat = 4\n    static let checkmarkScale: CGFloat = 0.6\n\n    static func boxSize(_ controlSize: ControlSize) -> CGFloat {\n        switch controlSize {\n        case .mini: 12\n        case .small: 14\n        case .regular: 16\n        case .large, .extraLarge: 18\n        @unknown default: 16\n        }\n    }\n\n    static func labelSpacing(_ controlSize: ControlSize) -> CGFloat {\n        switch controlSize {\n        case .mini, .small: 4\n        case .regular, .large, .extraLarge: 5\n        @unknown default: 5\n        }\n    }\n}\n#endif\n",
+      "content": "#if os(macOS)\nimport SwiftUI\n\nstruct FLXToggleStyleBody: View {\n    @Environment(\\.flxTheme) private var theme\n    @Environment(\\.controlSize) private var controlSize\n\n    let configuration: FLXToggleStyle.Configuration\n\n    var body: some View {\n        Toggle(configuration)\n            .toggleStyle(.checkbox)\n            .flxFont(FLXTypography.control(controlSize))\n            .foregroundStyle(theme.colors.foreground)\n    }\n}\n#endif\n",
       "type": "registry:file",
       "target": "~/DesignSystem/Components/FLXToggle/FLXToggleStyle+macOS.swift"
     },

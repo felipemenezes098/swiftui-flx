@@ -3,6 +3,9 @@
   "name": "mac-slider",
   "title": "Slider",
   "description": "Displays a control for selecting a value from a bounded range.",
+  "registryDependencies": [
+    "@swiftui-flx/foundation"
+  ],
   "files": [
     {
       "path": "registry/components/slider/FLXSlider.swift",

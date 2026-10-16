@@ -8,7 +8,7 @@ public enum FLXFieldLabelOrientation {
 /// Pairs a caption with a control (`FLXTextField`, `FLXPicker`, `Toggle`, ...) — the
 /// form-field "label" role, like shadcn's `<Label>`/`<FieldLabel>` or HTML's
 /// `<label>`. Native primitive: `LabeledContent`/`LabeledContentStyle` (both
-/// Apple's, both conformable — see DESIGN_SYSTEM.md 3.1, Caso A). This is a
+/// Apple's, both conformable, so we style the native control). This is a
 /// different job than SwiftUI's own `Label` (icon+text, used inside `Button`,
 /// `Menu`, etc.) — there's no `FLX` counterpart for that one yet.
 ///

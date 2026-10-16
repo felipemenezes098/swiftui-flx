@@ -3,6 +3,9 @@
   "name": "ios-secure-field",
   "title": "Secure Field",
   "description": "Displays an obscured text input for passwords and other sensitive text.",
+  "registryDependencies": [
+    "@swiftui-flx/foundation"
+  ],
   "files": [
     {
       "path": "registry/components/secure-field/FLXSecureField.swift",

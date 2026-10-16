@@ -3,6 +3,9 @@
   "name": "mac-avatar",
   "title": "Avatar",
   "description": "Displays a user's profile picture, with initials as a fallback.",
+  "registryDependencies": [
+    "@swiftui-flx/foundation"
+  ],
   "files": [
     {
       "path": "registry/components/avatar/FLXAvatarStyle.swift",

@@ -3,6 +3,9 @@
   "name": "preset-sienna",
   "title": "Sienna Preset",
   "description": "Cream paper, burnt-earth ink, and a larger base radius.",
+  "registryDependencies": [
+    "@swiftui-flx/foundation"
+  ],
   "files": [
     {
       "path": "registry/design-system/Theme/Presets/FLXTheme+Sienna.swift",

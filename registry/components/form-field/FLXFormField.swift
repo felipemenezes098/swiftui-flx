@@ -4,8 +4,8 @@ import SwiftUI
 /// original 1:1: takes no `label`/`description`/`error` prop — the caller
 /// composes `FLXFieldLabel`, the control, `FLXFormFieldDescription`, and
 /// `FLXFormFieldError` as free children. No native primitive backs this
-/// shape, so it's Caso B (DESIGN_SYSTEM.md §3.3) — `FLXFormFieldStyle` plays
-/// the same thin spacing role `FLXCardStyle` plays for `FLXCard`.
+/// shape, so `FLXFormFieldStyle` is our own protocol and plays the same thin
+/// spacing role `FLXCardStyle` plays for `FLXCard`.
 public struct FLXFormField<Content: View>: View {
     @Environment(\.flxFormFieldStyle) private var style
 

@@ -3,6 +3,9 @@
   "name": "ios-text-field",
   "title": "Text Field",
   "description": "Displays a single-line text input.",
+  "registryDependencies": [
+    "@swiftui-flx/foundation"
+  ],
   "files": [
     {
       "path": "registry/components/text-field/FLXTextField.swift",

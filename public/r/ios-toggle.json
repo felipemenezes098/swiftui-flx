@@ -3,6 +3,9 @@
   "name": "ios-toggle",
   "title": "Toggle",
   "description": "Displays a switch for an on/off value.",
+  "registryDependencies": [
+    "@swiftui-flx/foundation"
+  ],
   "files": [
     {
       "path": "registry/components/toggle/FLXToggleStyle.swift",
@@ -12,7 +15,7 @@
     },
     {
       "path": "registry/components/toggle/FLXToggleStyle+iOS.swift",
-      "content": "#if os(iOS)\nimport SwiftUI\n\nstruct FLXToggleStyleBody: View {\n    @Environment(\\.flxTheme) private var theme\n    @Environment(\\.isEnabled) private var isEnabled\n\n    let configuration: FLXToggleStyle.Configuration\n\n    var body: some View {\n        HStack(spacing: FLXSpacing.md) {\n            configuration.label\n                .flxFont(.body)\n                .foregroundStyle(theme.colors.foreground)\n            Spacer(minLength: FLXSpacing.md)\n            track\n        }\n        .opacity(isEnabled ? 1 : FLXOpacity.disabled)\n    }\n\n    private var track: some View {\n        Button {\n            configuration.isOn.toggle()\n        } label: {\n            Capsule()\n                .fill(configuration.isOn ? theme.colors.primary : theme.colors.input)\n                .frame(width: FLXToggleMetrics.trackWidth, height: FLXToggleMetrics.trackHeight)\n                .overlay(alignment: .leading) {\n                    Circle()\n                        .fill(configuration.isOn ? theme.colors.primaryForeground : .white)\n                        .frame(width: FLXToggleMetrics.thumbDiameter, height: FLXToggleMetrics.thumbDiameter)\n                        .padding(.horizontal, FLXToggleMetrics.thumbInset)\n                        .offset(x: configuration.isOn ? thumbTravel : 0)\n                }\n        }\n        .buttonStyle(.plain)\n        .animation(.easeInOut(duration: 0.15), value: configuration.isOn)\n    }\n\n    private var thumbTravel: CGFloat {\n        FLXToggleMetrics.trackWidth\n            - FLXToggleMetrics.thumbDiameter\n            - FLXToggleMetrics.thumbInset * 2\n    }\n}\n\nprivate enum FLXToggleMetrics {\n    static let trackWidth: CGFloat = 44\n    static let trackHeight: CGFloat = 24\n    static let thumbDiameter: CGFloat = 20\n    static let thumbInset: CGFloat = 2\n}\n#endif\n",
+      "content": "#if os(iOS)\nimport SwiftUI\n\nstruct FLXToggleStyleBody: View {\n    @Environment(\\.flxTheme) private var theme\n\n    let configuration: FLXToggleStyle.Configuration\n\n    var body: some View {\n        Toggle(configuration)\n            .toggleStyle(.switch)\n            .tint(theme.colors.primary)\n            .flxFont(.body)\n            .foregroundStyle(theme.colors.foreground)\n    }\n}\n#endif\n",
       "type": "registry:file",
       "target": "~/DesignSystem/Components/FLXToggle/FLXToggleStyle+iOS.swift"
     },

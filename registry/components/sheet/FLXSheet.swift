@@ -29,8 +29,8 @@ import SwiftUI
 
 private struct FLXSheetModifier<Item: Identifiable, SheetContent: View>: ViewModifier {
     // Reading @Environment directly here is safe, unlike inside a *Style conformance
-    // (section 3.4): a ViewModifier's `body(content:)` is invoked by SwiftUI's normal
-    // render path, not called as a plain function through a type-erasing wrapper.
+    // called through a type-erasing wrapper: a ViewModifier's `body(content:)` is
+    // invoked by SwiftUI's normal render path, not called as a plain function.
     @Environment(\.flxTheme) private var theme
     @AccessibilityFocusState private var isTriggerFocused: Bool
 

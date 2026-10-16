@@ -3,6 +3,9 @@
   "name": "mac-button",
   "title": "Button",
   "description": "Triggers an action or event, such as submitting a form.",
+  "registryDependencies": [
+    "@swiftui-flx/foundation"
+  ],
   "files": [
     {
       "path": "registry/components/button/FLXButtonStyle.swift",

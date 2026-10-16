@@ -3,6 +3,9 @@
   "name": "mac-item",
   "title": "Item",
   "description": "Displays a row of content, such as a list entry, notification, or settings row.",
+  "registryDependencies": [
+    "@swiftui-flx/foundation"
+  ],
   "files": [
     {
       "path": "registry/components/item/FLXItemStyle.swift",

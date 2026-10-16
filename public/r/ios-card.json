@@ -3,6 +3,9 @@
   "name": "ios-card",
   "title": "Card",
   "description": "A card is a container that can be used to display content in a styled way.",
+  "registryDependencies": [
+    "@swiftui-flx/foundation"
+  ],
   "files": [
     {
       "path": "registry/components/card/FLXCardStyle.swift",

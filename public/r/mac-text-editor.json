@@ -3,6 +3,9 @@
   "name": "mac-text-editor",
   "title": "Text Editor",
   "description": "Displays a multi-line text input for long-form content.",
+  "registryDependencies": [
+    "@swiftui-flx/foundation"
+  ],
   "files": [
     {
       "path": "registry/components/text-editor/FLXTextEditor.swift",

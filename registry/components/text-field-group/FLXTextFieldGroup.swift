@@ -1,7 +1,7 @@
 import SwiftUI
 
 /// No native primitive backs this (it's pure layout composition, like shadcn's
-/// InputGroup over `<input>`), so it's Caso B: a `FLXTextFieldGroupStyle` protocol we
+/// InputGroup over `<input>`), so `FLXTextFieldGroupStyle` is a protocol we
 /// designed ourselves, fully overridable via `.flxTextFieldGroupStyle(_:)` — unlike
 /// `FLXTextField`/`FLXSecureField`, there's no ceiling here.
 ///

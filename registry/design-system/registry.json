@@ -82,6 +82,9 @@
         },
         "license": "MIT"
       },
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
       "files": [
         {
           "path": "Theme/Presets/FLXTheme+Sienna.swift",

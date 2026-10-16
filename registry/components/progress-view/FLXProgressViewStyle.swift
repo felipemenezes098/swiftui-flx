@@ -60,8 +60,7 @@ private struct FLXProgressViewStyleBody: View {
     /// No shadcn/HIG spec calls for a recolored track or custom motion here —
     /// the system spinner already nails the look and owns its own accessibility
     /// (VoiceOver "busy" state, reduce-motion, etc.) and sizes itself from the
-    /// environment's `controlSize`, so we only tint it instead of redrawing it
-    /// (see 3.1: style what modifiers reach before reaching for a full custom render).
+    /// environment's `controlSize`, so we only tint it instead of redrawing it.
     private var circularSpinner: some View {
         ProgressView(configuration)
             .progressViewStyle(.circular)

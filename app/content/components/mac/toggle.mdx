@@ -75,7 +75,7 @@ Requires the [design system foundation](/docs/installation#add-the-foundation) (
 FLXToggle("Wi-Fi", isOn: $wifi)
 ```
 
-`FLXToggle` is always controlled via `isOn`. On macOS it draws a checkbox, like SwiftUI's default `Toggle` on the Mac, with the label on the trailing side. The box follows `.controlSize(_:)`.
+`FLXToggle` is always controlled via `isOn`. On macOS it renders SwiftUI's native checkbox, which follows `.controlSize(_:)` and the accent color chosen in System Settings.
 
 ## Custom styling
 

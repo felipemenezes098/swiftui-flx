@@ -3,6 +3,9 @@
   "name": "ios-picker",
   "title": "Picker",
   "description": "Displays a dropdown for selecting one value from a set of options.",
+  "registryDependencies": [
+    "@swiftui-flx/foundation"
+  ],
   "files": [
     {
       "path": "registry/components/picker/FLXPicker.swift",

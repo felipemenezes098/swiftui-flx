@@ -4,6 +4,7 @@
   "title": "Menu",
   "description": "Displays a list of actions or options revealed from a button or custom trigger.",
   "registryDependencies": [
+    "@swiftui-flx/foundation",
     "@swiftui-flx/ios-button"
   ],
   "files": [
