@@ -99,6 +99,24 @@ There are two initializers: leading-only, and leading-and-trailing. With a singl
   image={{ light: "/images/components/mac/text-field-group/text-field-group-secure.webp", dark: "/images/components/mac/text-field-group/text-field-group-secure-dark.webp" }}
 />
 
+## Search
+
+`FLXTextFieldGroup` is for search inside content, like filtering a list or a card. For the window's search, use `.searchable(text:)`: the system places the field in the toolbar and applies Liquid Glass.
+
+<ComponentPreviewCode
+  alt="Native searchable field"
+  image={{ light: "/images/components/mac/text-field-group/text-field-group-search.webp", dark: "/images/components/mac/text-field-group/text-field-group-search-dark.webp" }}
+  code={`@State private var query = ""
+
+NavigationStack {
+    List(["Ana", "Bruno", "Carla"], id: \\.self) { name in
+        Text(name)
+    }
+    .navigationTitle("Contacts")
+}
+.searchable(text: $query)`}
+/>
+
 ## Custom styling
 
 `FLXTextFieldGroupStyle` is an FLX protocol. Override it for a subtree via `.flxTextFieldGroupStyle(_:)`:

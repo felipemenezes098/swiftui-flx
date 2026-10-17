@@ -100,6 +100,24 @@ There are two initializers: leading-only, and leading-and-trailing. With a singl
 `}
 />
 
+## Search
+
+`FLXTextFieldGroup` is for search inside content, like filtering a list or a card. For the screen's search, use `.searchable(text:)`: the system places the field and applies Liquid Glass. On iPhone it sits in the bottom toolbar, and `.searchToolbarBehavior(.minimize)` collapses it into a button.
+
+<ComponentPreviewCode
+  alt="Native searchable field"
+  image={{ light: "/images/components/ios/text-field-group/text-field-group-search.webp", dark: "/images/components/ios/text-field-group/text-field-group-search-dark.webp" }}
+  code={`@State private var query = ""
+
+NavigationStack {
+    List(["Ana", "Bruno", "Carla"], id: \\.self) { name in
+        Text(name)
+    }
+    .navigationTitle("Contacts")
+}
+.searchable(text: $query)`}
+/>
+
 ## Custom styling
 
 `FLXTextFieldGroupStyle` is an FLX protocol. Override it for a subtree via `.flxTextFieldGroupStyle(_:)`:

@@ -143,6 +143,74 @@ FLXMenu("Actions", systemImage: "ellipsis.circle", variant: .link) {
 `}
 />
 
+## Liquid Glass
+
+`FLXMenu` is for the content layer: forms, cards, and lists. For menus that float above content, use the native `Menu` with Apple's glass styles and bring the theme in through `.tint(_:)`. The menu's content already uses Liquid Glass. Requires iOS 26.
+
+### Glass and Glass Prominent
+
+<ComponentPreviewCode
+  alt="Native glass menus tinted with the theme"
+  image={{ light: "/images/components/ios/menu/menu-glass.webp", dark: "/images/components/ios/menu/menu-glass-dark.webp" }}
+  code={`@Environment(\\.flxTheme) private var theme
+
+HStack(spacing: FLXSpacing.md) {
+    Menu("Sort", systemImage: "arrow.up.arrow.down") {
+        Button("Name") {}
+        Button("Date") {}
+    }
+    .buttonStyle(.glass)
+    Menu("New", systemImage: "plus") {
+        Button("Document", systemImage: "doc") {}
+        Button("Folder", systemImage: "folder") {}
+    }
+    .buttonStyle(.glassProminent)
+    .tint(theme.colors.primary)
+}`}
+/>
+
+### Icon-only
+
+<ComponentPreviewCode
+  alt="Icon-only glass menu"
+  image={{ light: "/images/components/ios/menu/menu-glass-icon.webp", dark: "/images/components/ios/menu/menu-glass-icon-dark.webp" }}
+  code={`Menu("More", systemImage: "ellipsis") {
+    Button("Rename", systemImage: "pencil") {}
+    Button("Delete", systemImage: "trash", role: .destructive) {}
+}
+.labelStyle(.iconOnly)
+.buttonBorderShape(.circle)
+.buttonStyle(.glass)
+.controlSize(.large)`}
+/>
+
+### Toolbar
+
+In a toolbar, use a plain `Menu` with no style: the system applies Liquid Glass, and it shares one background with the other items in the same `ToolbarItemGroup`. For a choice like sort order, put a `Picker` inside the menu.
+
+<ComponentPreviewCode
+  alt="Toolbar menu with system Liquid Glass"
+  image={{ light: "/images/components/ios/menu/menu-glass-toolbar.webp", dark: "/images/components/ios/menu/menu-glass-toolbar-dark.webp" }}
+  code={`@State private var sort = "Name"
+
+NavigationStack {
+    Text("No documents")
+        .navigationTitle("Documents")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItemGroup(placement: .primaryAction) {
+                Button("Share", systemImage: "square.and.arrow.up") {}
+                Menu("Sort", systemImage: "arrow.up.arrow.down") {
+                    Picker("Sort", selection: $sort) {
+                        Text("Name").tag("Name")
+                        Text("Date").tag("Date")
+                    }
+                }
+            }
+        }
+}`}
+/>
+
 ## Sizes
 
 Set via `.controlSize(_:)`, like native controls.
