@@ -132,8 +132,8 @@ const componentCatalog: ComponentCatalogEntry[] = [
     slug: "sheet",
     name: "Sheet",
     descriptions: {
-      ios: "Presents content in a sheet over the current view, driven by an item binding.",
-      mac: "Presents content in a sheet over the current view, driven by an item binding.",
+      ios: "Presents FLX components in SwiftUI's native sheet.",
+      mac: "Presents FLX components in SwiftUI's native sheet.",
     },
   },
   {

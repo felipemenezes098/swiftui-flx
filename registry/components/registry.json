@@ -381,51 +381,6 @@
       ]
     },
     {
-      "name": "ios-sheet",
-      "type": "registry:file",
-      "title": "Sheet",
-      "description": "Presents content in a sheet over the current view, driven by an item binding.",
-      "meta": {
-        "platforms": {
-          "iOS": "16.4",
-          "iPadOS": "16.4"
-        },
-        "license": "MIT"
-      },
-      "registryDependencies": [
-        "@swiftui-flx/foundation"
-      ],
-      "files": [
-        {
-          "path": "sheet/FLXSheet.swift",
-          "type": "registry:file",
-          "target": "~/DesignSystem/Components/FLXSheet/FLXSheet.swift"
-        }
-      ]
-    },
-    {
-      "name": "mac-sheet",
-      "type": "registry:file",
-      "title": "Sheet",
-      "description": "Presents content in a sheet over the current view, driven by an item binding.",
-      "meta": {
-        "platforms": {
-          "macOS": "13.3"
-        },
-        "license": "MIT"
-      },
-      "registryDependencies": [
-        "@swiftui-flx/foundation"
-      ],
-      "files": [
-        {
-          "path": "sheet/FLXSheet.swift",
-          "type": "registry:file",
-          "target": "~/DesignSystem/Components/FLXSheet/FLXSheet.swift"
-        }
-      ]
-    },
-    {
       "name": "ios-slider",
       "type": "registry:file",
       "title": "Slider",

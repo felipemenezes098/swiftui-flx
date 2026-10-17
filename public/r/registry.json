@@ -471,51 +471,6 @@
       "type": "registry:file"
     },
     {
-      "name": "ios-sheet",
-      "title": "Sheet",
-      "description": "Presents content in a sheet over the current view, driven by an item binding.",
-      "registryDependencies": [
-        "@swiftui-flx/foundation"
-      ],
-      "files": [
-        {
-          "path": "registry/components/sheet/FLXSheet.swift",
-          "type": "registry:file",
-          "target": "~/DesignSystem/Components/FLXSheet/FLXSheet.swift"
-        }
-      ],
-      "meta": {
-        "platforms": {
-          "iOS": "16.4",
-          "iPadOS": "16.4"
-        },
-        "license": "MIT"
-      },
-      "type": "registry:file"
-    },
-    {
-      "name": "mac-sheet",
-      "title": "Sheet",
-      "description": "Presents content in a sheet over the current view, driven by an item binding.",
-      "registryDependencies": [
-        "@swiftui-flx/foundation"
-      ],
-      "files": [
-        {
-          "path": "registry/components/sheet/FLXSheet.swift",
-          "type": "registry:file",
-          "target": "~/DesignSystem/Components/FLXSheet/FLXSheet.swift"
-        }
-      ],
-      "meta": {
-        "platforms": {
-          "macOS": "13.3"
-        },
-        "license": "MIT"
-      },
-      "type": "registry:file"
-    },
-    {
       "name": "ios-slider",
       "title": "Slider",
       "description": "Displays a control for selecting a value from a bounded range.",

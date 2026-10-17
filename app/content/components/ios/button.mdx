@@ -70,45 +70,141 @@ FLXButton("Save", variant: .primary) { /* action */ }
 
 Five variants, set via `variant:`.
 
-### Primary
-
 <ComponentPreviewCode
-  alt="FLXButton primary variant"
-  image={{ light: "/images/components/ios/button/button-primary.webp", dark: "/images/components/ios/button/button-primary-dark.webp" }}
-  code={`FLXButton("Primary", variant: .primary) {}`}
+  alt="FLXButton variants"
+  image={{ light: "/images/components/ios/button/button-variants.webp", dark: "/images/components/ios/button/button-variants-dark.webp" }}
+  code={`FLXButton("Primary", variant: .primary) {}
+FLXButton("Outline", variant: .outline) {}
+FLXButton("Secondary", variant: .secondary) {}
+FLXButton("Ghost", variant: .ghost) {}
+FLXButton("Link", variant: .link) {}`}
 />
 
-### Outline
+## Liquid Glass
+
+`FLXButton` is for the content layer: forms, cards, and lists. For controls that float above content, use the native `Button` with Apple's glass styles and bring the theme in through `.tint(_:)`. The system draws the glass and updates it with each OS release. Requires iOS 26.
+
+### Glass and Glass Prominent
+
+Use `.glass` for most floating controls and `.glassProminent` for the primary action, which fills with the tint.
 
 <ComponentPreviewCode
-  alt="FLXButton outline variant"
-  image={{ light: "/images/components/ios/button/button-outline.webp", dark: "/images/components/ios/button/button-outline-dark.webp" }}
-  code={`FLXButton("Outline", variant: .outline) {}`}
+  alt="Native glass buttons tinted with the theme"
+  image={{ light: "/images/components/ios/button/button-glass.webp", dark: "/images/components/ios/button/button-glass-dark.webp" }}
+  code={`@Environment(\\.flxTheme) private var theme
+
+HStack(spacing: FLXSpacing.md) {
+    Button("Filters", systemImage: "line.3.horizontal.decrease") {}
+        .buttonStyle(.glass)
+    Button("Add", systemImage: "plus") {}
+        .buttonStyle(.glassProminent)
+        .tint(theme.colors.primary)
+}`}
 />
 
-### Secondary
+### Icon-only
+
+Combine `.labelStyle(.iconOnly)` with `.buttonBorderShape(.circle)`.
 
 <ComponentPreviewCode
-  alt="FLXButton secondary variant"
-  image={{ light: "/images/components/ios/button/button-secondary.webp", dark: "/images/components/ios/button/button-secondary-dark.webp" }}
-  code={`FLXButton("Secondary", variant: .secondary) {}`}
+  alt="Icon-only glass buttons"
+  image={{ light: "/images/components/ios/button/button-glass-icons.webp", dark: "/images/components/ios/button/button-glass-icons-dark.webp" }}
+  code={`HStack(spacing: FLXSpacing.md) {
+    Button("Share", systemImage: "square.and.arrow.up") {}
+        .buttonStyle(.glass)
+    Button("Favorite", systemImage: "heart") {}
+        .buttonStyle(.glass)
+    Button("Add", systemImage: "plus") {}
+        .buttonStyle(.glassProminent)
+        .tint(theme.colors.primary)
+}
+.labelStyle(.iconOnly)
+.buttonBorderShape(.circle)
+.controlSize(.large)`}
 />
 
-### Ghost
+### Glass sizes
+
+Glass buttons follow `.controlSize(_:)`, up to `.extraLarge`.
 
 <ComponentPreviewCode
-  alt="FLXButton ghost variant"
-  image={{ light: "/images/components/ios/button/button-ghost.webp", dark: "/images/components/ios/button/button-ghost-dark.webp" }}
-  code={`FLXButton("Ghost", variant: .ghost) {}`}
+  alt="Glass button sizes"
+  image={{ light: "/images/components/ios/button/button-glass-sizes.webp", dark: "/images/components/ios/button/button-glass-sizes-dark.webp" }}
+  code={`VStack(spacing: FLXSpacing.md) {
+    Button("Small") {}
+        .controlSize(.small)
+    Button("Regular") {}
+    Button("Large") {}
+        .controlSize(.large)
+    Button("Extra large") {}
+        .controlSize(.extraLarge)
+}
+.buttonStyle(.glass)`}
 />
 
-### Link
+### Over media
+
+Over photos and video, use `.glass(.clear)`. It's more transparent than `.glass`, so over bright media add a dark dimming layer to keep the symbols legible.
 
 <ComponentPreviewCode
-  alt="FLXButton link variant"
-  image={{ light: "/images/components/ios/button/button-link.webp", dark: "/images/components/ios/button/button-link-dark.webp" }}
-  code={`FLXButton("Link", variant: .link) {}`}
+  alt="Clear glass buttons over media"
+  image={{ light: "/images/components/ios/button/button-glass-media.webp", dark: "/images/components/ios/button/button-glass-media-dark.webp" }}
+  code={`ZStack(alignment: .bottom) {
+    LinearGradient(
+        colors: [.orange, .pink, .purple],
+        startPoint: .topLeading,
+        endPoint: .bottomTrailing
+    )
+    HStack(spacing: FLXSpacing.md) {
+        Button("Play", systemImage: "play.fill") {}
+        Button("Share", systemImage: "square.and.arrow.up") {}
+    }
+    .labelStyle(.iconOnly)
+    .buttonStyle(.glass(.clear))
+    .buttonBorderShape(.circle)
+    .controlSize(.large)
+    .padding(FLXSpacing.lg)
+}
+.frame(width: 280, height: 180)
+.clipShape(.rect(cornerRadius: 24))`}
 />
+
+### Toolbar
+
+In a toolbar, use a plain `Button` with no style: the system applies Liquid Glass to toolbar items, and items in the same `ToolbarItemGroup` share one background.
+
+<ComponentPreviewCode
+  alt="Toolbar buttons with system Liquid Glass"
+  image={{ light: "/images/components/ios/button/button-glass-toolbar.webp", dark: "/images/components/ios/button/button-glass-toolbar-dark.webp" }}
+  code={`@Environment(\\.flxTheme) private var theme
+
+NavigationStack {
+    VStack(spacing: FLXSpacing.md) {
+        FLXAvatar(size: .large) {
+            FLXAvatarFallback("FM")
+            FLXAvatarImage(url: URL(string: "https://github.com/felipemenezes098.png"))
+        }
+        VStack(spacing: FLXSpacing.xs) {
+            Text("Felipe Menezes")
+                .flxFont(.title3, weight: .semibold)
+            Text("Software Engineer")
+                .flxFont(.callout)
+                .foregroundStyle(theme.colors.mutedForeground)
+        }
+    }
+    .frame(maxWidth: .infinity, maxHeight: .infinity)
+    .navigationTitle("Profile")
+    .navigationBarTitleDisplayMode(.inline)
+    .toolbar {
+        ToolbarItemGroup(placement: .primaryAction) {
+            Button("Share", systemImage: "square.and.arrow.up") {}
+            Button("More", systemImage: "ellipsis") {}
+        }
+    }
+}`}
+/>
+
+Don't use Liquid Glass in the content layer, such as cards, lists, or forms. See Apple's [Materials](https://developer.apple.com/design/human-interface-guidelines/materials) guidelines.
 
 ## Destructive
 
@@ -135,6 +231,17 @@ FLXButton("Large") {}
 FLXButton("Add", systemImage: "plus") {}
     .labelStyle(.iconOnly)
 `}
+/>
+
+## As Link
+
+To open a URL, use SwiftUI's native `Link` and apply `FLXButtonStyle`. `Link` keeps link semantics for VoiceOver and opens the URL itself, so don't use `FLXButton` with `openURL` in its action.
+
+<ComponentPreviewCode
+  alt="Link styled as a button"
+  image={{ light: "/images/components/ios/button/button-as-link.webp", dark: "/images/components/ios/button/button-as-link-dark.webp" }}
+  code={`Link("Open website", destination: url)
+    .buttonStyle(FLXButtonStyle(variant: .primary))`}
 />
 
 ## Custom styling
