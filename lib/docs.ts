@@ -75,6 +75,14 @@ const componentCatalog: ComponentCatalogEntry[] = [
     },
   },
   {
+    slug: "empty",
+    name: "Empty",
+    descriptions: {
+      ios: "Displays an empty state, with an optional icon, title, description, and actions.",
+      mac: "Displays an empty state, with an optional icon, title, description, and actions.",
+    },
+  },
+  {
     slug: "field-label",
     name: "Field Label",
     descriptions: {

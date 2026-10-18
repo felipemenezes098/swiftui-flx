@@ -1,0 +1,242 @@
+<DocsHeader>
+
+# Empty
+
+<DocsPageActions />
+
+</DocsHeader>
+
+<DocsAvailability />
+
+Displays an empty state, with an optional icon, title, description, and actions.
+
+<ComponentPreviewCode
+  alt="FLXEmpty example"
+  image={{ light: "/images/components/mac/empty/empty-usage.webp", dark: "/images/components/mac/empty/empty-usage-dark.webp" }}
+  filePath="registry/components/empty/empty-usage-example.swift"
+  collapsible
+/>
+
+## Installation
+
+Requires the [design system foundation](/docs/installation#add-the-foundation) (tokens and theme).
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<CodeBlockCommand
+  command="shadcn@latest add @swiftui-flx/mac-empty"
+/>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy the style</Step>
+
+<CodeBlockFromFile
+  filePath="registry/components/empty/FLXEmptyStyle.swift"
+  title="FLXEmptyStyle.swift"
+/>
+
+<Step>Copy the component</Step>
+
+<CodeBlockFromFile
+  filePath="registry/components/empty/FLXEmpty.swift"
+  title="FLXEmpty.swift"
+/>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```swift
+FLXEmpty {
+    FLXEmptyHeader {
+        FLXEmptyMedia(variant: .icon) {
+            Image(systemName: "tray")
+        }
+        FLXEmptyTitle("No Data")
+        FLXEmptyDescription("No data found.")
+    }
+    FLXEmptyContent {
+        FLXButton("Add Data") {}
+    }
+}
+```
+
+`FLXEmpty` fills the space it's given and centers its content, so it works as the whole screen or as an overlay on an empty list:
+
+```swift
+List(projects) { project in
+    Text(project.name)
+}
+.overlay {
+    if projects.isEmpty {
+        FLXEmpty {
+            FLXEmptyHeader {
+                FLXEmptyTitle("No Projects Yet")
+            }
+        }
+    }
+}
+```
+
+For search with no results on macOS 14 and later, SwiftUI's `ContentUnavailableView.search` already provides the system empty state.
+
+## Composition
+
+Use the following composition to build an empty state:
+
+```
+FLXEmpty
+├── FLXEmptyHeader
+│   ├── FLXEmptyMedia
+│   ├── FLXEmptyTitle
+│   └── FLXEmptyDescription
+└── FLXEmptyContent
+```
+
+All sections are optional. `FLXEmptyHeader` and `FLXEmptyContent` are centered `VStack`s with a readable maximum width. VoiceOver reads the header as one element, with the title as a heading, and skips the media.
+
+## Media
+
+`FLXEmptyMedia` has two variants, set via `variant:`. `.icon` wraps an SF Symbol in a rounded muted square; `.regular` renders the content as-is, for an avatar or an image:
+
+<ComponentPreviewCode
+  alt="FLXEmpty with an avatar"
+  image={{ light: "/images/components/mac/empty/empty-avatar.webp", dark: "/images/components/mac/empty/empty-avatar-dark.webp" }}
+  code={`FLXEmpty {
+    FLXEmptyHeader {
+        FLXEmptyMedia {
+            FLXAvatar(size: .large) {
+                FLXAvatarImage(url: URL(string: "https://github.com/shadcn.png"))
+            }
+        }
+        FLXEmptyTitle("User Offline")
+        FLXEmptyDescription("This user is currently offline. You can leave a message to notify them or try again later.")
+    }
+    FLXEmptyContent {
+        FLXButton("Leave Message") {}
+            .controlSize(.small)
+    }
+}
+`}
+/>
+
+## Custom styling
+
+Each piece has its own FLX protocol: `FLXEmptyStyle`, `FLXEmptyMediaStyle`, `FLXEmptyTitleStyle`, and `FLXEmptyDescriptionStyle`. Override any of them for a subtree via the matching modifier, e.g. `.flxEmptyStyle(_:)` for a dashed outline:
+
+<ComponentPreviewCode
+  alt="FLXEmpty custom styling"
+  image={{ light: "/images/components/mac/empty/empty-custom.webp", dark: "/images/components/mac/empty/empty-custom-dark.webp" }}
+  code={`struct FLXOutlineEmptyStyle: FLXEmptyStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        FLXOutlineEmptyStyleBody(configuration: configuration)
+    }
+}
+
+private struct FLXOutlineEmptyStyleBody: View {
+    @Environment(\\.flxTheme) private var theme
+
+    let configuration: FLXEmptyStyleConfiguration
+
+    var body: some View {
+        VStack(spacing: FLXSpacing.xl) {
+            configuration.content
+        }
+        .padding(FLXSpacing.xl)
+        .frame(maxWidth: .infinity)
+        .overlay(
+            RoundedRectangle(cornerRadius: theme.radius.lg)
+                .strokeBorder(theme.colors.border, style: StrokeStyle(lineWidth: FLXBorderWidth.thin, dash: [4]))
+        )
+    }
+}
+
+FLXEmpty {
+    FLXEmptyHeader {
+        FLXEmptyMedia(variant: .icon) {
+            Image(systemName: "icloud")
+        }
+        FLXEmptyTitle("Cloud Storage Empty")
+        FLXEmptyDescription("Upload files to your cloud storage to access them anywhere.")
+    }
+    FLXEmptyContent {
+        FLXButton("Upload Files", variant: .outline) {}
+            .controlSize(.small)
+    }
+}
+.flxEmptyStyle(FLXOutlineEmptyStyle())
+`}
+  collapsible
+/>
+
+## API Reference
+
+### FLXEmpty
+
+```swift
+init(@ViewBuilder content: @escaping () -> Content)
+```
+
+### FLXEmptyHeader
+
+```swift
+init(@ViewBuilder content: @escaping () -> Content)
+```
+
+### FLXEmptyMedia
+
+```swift
+init(
+    variant: FLXEmptyMediaVariant = .regular,
+    @ViewBuilder content: @escaping () -> Content
+)
+```
+
+### FLXEmptyTitle
+
+```swift
+init(_ titleKey: LocalizedStringKey)
+
+init(_ titleResource: LocalizedStringResource)
+
+init<S: StringProtocol>(_ title: S)
+```
+
+### FLXEmptyDescription
+
+```swift
+init(_ textKey: LocalizedStringKey)
+
+init(_ textResource: LocalizedStringResource)
+
+init<S: StringProtocol>(_ text: S)
+```
+
+### FLXEmptyContent
+
+```swift
+init(@ViewBuilder content: @escaping () -> Content)
+```
+
+### Media variants
+
+| Case      | Description                                        |
+| --------- | --------------------------------------------------- |
+| `regular` | Renders the content as-is, with no extra styling.  |
+| `icon`    | Rounded, muted square for an SF Symbol.            |

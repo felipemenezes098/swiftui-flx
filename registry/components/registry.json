@@ -279,6 +279,61 @@
       ]
     },
     {
+      "name": "ios-empty",
+      "type": "registry:file",
+      "title": "Empty",
+      "description": "Displays an empty state, with an optional icon, title, description, and actions.",
+      "meta": {
+        "platforms": {
+          "iOS": "16.4",
+          "iPadOS": "16.4"
+        },
+        "license": "MIT"
+      },
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
+      "files": [
+        {
+          "path": "empty/FLXEmptyStyle.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXEmpty/FLXEmptyStyle.swift"
+        },
+        {
+          "path": "empty/FLXEmpty.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXEmpty/FLXEmpty.swift"
+        }
+      ]
+    },
+    {
+      "name": "mac-empty",
+      "type": "registry:file",
+      "title": "Empty",
+      "description": "Displays an empty state, with an optional icon, title, description, and actions.",
+      "meta": {
+        "platforms": {
+          "macOS": "13.3"
+        },
+        "license": "MIT"
+      },
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
+      "files": [
+        {
+          "path": "empty/FLXEmptyStyle.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXEmpty/FLXEmptyStyle.swift"
+        },
+        {
+          "path": "empty/FLXEmpty.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXEmpty/FLXEmpty.swift"
+        }
+      ]
+    },
+    {
       "name": "ios-menu",
       "type": "registry:file",
       "title": "Menu",

@@ -76,6 +76,7 @@ struct SettingsView: View {
 | [Button](https://swiftui.flexnative.com/docs/components/ios/button) | ✓ | ✓ | Primary, outline, secondary, ghost and link variants |
 | [Card](https://swiftui.flexnative.com/docs/components/ios/card) | ✓ | ✓ | Container with header, content and footer |
 | [Collapsible](https://swiftui.flexnative.com/docs/components/ios/collapsible) | ✓ | ✓ | Content that expands and collapses |
+| [Empty](https://swiftui.flexnative.com/docs/components/ios/empty) | ✓ | ✓ | Empty state with icon, title, description and actions |
 | [Field Label](https://swiftui.flexnative.com/docs/components/ios/field-label) | ✓ | ✓ | Caption paired with a form control |
 | [Form Field](https://swiftui.flexnative.com/docs/components/ios/form-field) | ✓ | ✓ | Label, control, description and error together |
 | [Item](https://swiftui.flexnative.com/docs/components/ios/item) | ✓ | ✓ | List, notification and settings rows |
