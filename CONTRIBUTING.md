@@ -44,6 +44,16 @@ Run `npx` from the app's source folder. Use `ios-` items for iOS and `mac-` item
 
 Leave out preview images. The maintainers add them before merging.
 
+## Changelog
+
+Each release gets one entry.
+
+1. Add the entry to `changelog` in `lib/changelog.ts`, with a slug like `2026-11-short-title` and the release date.
+2. Write it in `app/content/changelog/<slug>.mdx`. Start with a bold sentence and use `###` headings. When people need to change their code, add an `### Update your code` section with `<AiInstall variant="update" changelog="<slug>" />` and a short excerpt of each changed file, titled with its path.
+3. When a change needs people to update their code, add it to the entry's `actions` with the component slug and platforms. That component's page then lists it in a Changelog section at the end. Leave `actions` empty when nothing needs to change on their side.
+
+The five newest entries show in full on `/docs/changelog`, and older ones are listed by month.
+
 ## Pull requests
 
 - One change per pull request.

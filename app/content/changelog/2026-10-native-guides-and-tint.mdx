@@ -1,0 +1,70 @@
+**New [List](/docs/components/ios/list) and [Form](/docs/components/ios/form) guides, and a `tint` color in the theme.**
+
+### List
+
+Rows, sections, selection, swipe actions, and pull to refresh, with Apple's own `List` and your theme.
+
+<ComponentPreview
+  platform="ios"
+  alt="Native list of contacts with FLX avatars"
+  image={{ light: "/images/components/ios/list/list-usage.webp", dark: "/images/components/ios/list/list-usage-dark.webp" }}
+/>
+
+### Form
+
+Settings and data-entry screens, with native controls that turn into rows.
+
+<ComponentPreview
+  platform="ios"
+  alt="Native settings form"
+  image={{ light: "/images/components/ios/form/form-usage.webp", dark: "/images/components/ios/form/form-usage-dark.webp" }}
+/>
+
+### Tint
+
+Native controls such as switches, selection marks, and swipe actions draw white content on the tint, so the near-white dark `primary` hid it. The new `tint` matches `primary` in light mode and is a mid-tone in dark mode. `.flxTheme(_:)` now applies it, and `FLXToggle` and `FLXSlider` use it.
+
+### Update your code
+
+<AiInstall variant="update" changelog="2026-10-native-guides-and-tint" />
+
+Or make the changes yourself. If you made your own preset, add `tint:` to it too.
+
+<CodeBlockFromFile
+  title="DesignSystem/Tokens/FLXColors.swift"
+  code={`public struct FLXColorTokens: Sendable {
+    // ...
+    public var ring: Color
+    public var tint: Color
+
+    public init(
+        // ...
+        ring: Color,
+        tint: Color
+    ) {
+        // ...
+        self.ring = ring
+        self.tint = tint
+    }
+}`}
+/>
+
+<CodeBlockFromFile
+  title="DesignSystem/Theme/Presets/FLXTheme+Default.swift"
+  code={`ring: Color(
+    flxLight: Color(red: 0.3922, green: 0.2902, blue: 0.2510),
+    dark: Color(red: 1.0000, green: 0.8784, blue: 0.7607)
+),
+tint: Color(
+    flxLight: Color(red: 0.3060, green: 0.2392, blue: 0.2157),
+    dark: Color(red: 0.6179, green: 0.4996, blue: 0.4580)
+)`}
+/>
+
+<CodeBlockFromFile
+  title="DesignSystem/Theme/FLXThemeEnvironment.swift"
+  code={`public func flxTheme(_ theme: FLXTheme) -> some View {
+    environment(\\.flxTheme, theme)
+        .tint(theme.colors.tint)
+}`}
+/>

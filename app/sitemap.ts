@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next"
 
 import { siteConfig } from "@/config/site"
+import { changelogHref, getChangelogEntries } from "@/lib/changelog"
 import {
   componentHref,
   componentsHref,
@@ -15,6 +16,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/docs/existing-projects",
     "/docs/swift-packages",
     "/docs/presets",
+    changelogHref(),
+    ...getChangelogEntries().map((entry) => changelogHref(entry.slug)),
     "/me",
     ...platforms.flatMap((platform) => [
       componentsHref(platform.id),

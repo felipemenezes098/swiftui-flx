@@ -14,5 +14,6 @@ extension EnvironmentValues {
 extension View {
     public func flxTheme(_ theme: FLXTheme) -> some View {
         environment(\.flxTheme, theme)
+            .tint(theme.colors.tint)
     }
 }

@@ -1,4 +1,5 @@
 import { siteConfig } from "@/config/site"
+import { getChangelogEntries } from "@/lib/changelog"
 import {
   componentHref,
   componentsHref,
@@ -41,6 +42,8 @@ export function markdownUrl(href: string) {
 export function getMarkdownPaths() {
   return [
     ...guides.map((guide) => [guide.slug]),
+    ["changelog"],
+    ...getChangelogEntries().map((entry) => ["changelog", entry.slug]),
     ...platforms.flatMap((platform) => [
       ["components", platform.id],
       ...getComponentDocs(platform.id).map((doc) => [
@@ -96,6 +99,7 @@ export function getLlmsTxt() {
       (guide) =>
         `- [${guide.title}](${markdownUrl(`/docs/${guide.slug}`)}): ${guide.description}`
     ),
+    `- [Changelog](${markdownUrl("/docs/changelog")}): Latest updates and announcements, with the changes you need to make in your code.`,
     "",
     ...componentSections,
     "## Optional",
@@ -145,5 +149,20 @@ export function getExistingProjectPrompt() {
     "8. Build every target that includes the new files and fix any errors.",
     "",
     "Use the FLX tokens and theme instead of hardcoded colors, spacing or fonts. Don't edit project.pbxproj by hand: if files need adding to a target, tell me how to do it in Xcode.",
+  ].join("\n")
+}
+
+export function getUpdatePrompt(changelogSlug: string) {
+  const url = siteConfig.url
+
+  return [
+    "Update swiftui-flx in this project to the release below. It's a set of SwiftUI components that live in the app's own source.",
+    "",
+    `1. Read ${url}/docs/changelog/${changelogSlug}.md and follow its "Update your code" section.`,
+    "2. Find the project's DesignSystem folder and compare each file the changelog shows with mine. Keep my own changes: presets I made, the default theme I chose, and components I edited.",
+    "3. If I made presets of my own, add the new values to them the way the changelog shows for the default preset, and tell me the values you picked.",
+    "4. Don't change anything outside DesignSystem unless the changelog says to.",
+    "5. Build the app for every platform it targets and fix any errors.",
+    "6. Tell me what you changed.",
   ].join("\n")
 }

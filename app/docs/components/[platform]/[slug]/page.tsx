@@ -4,6 +4,7 @@ import { notFound } from "next/navigation"
 import { ComponentPreview } from "@/components/core/docs/component-preview"
 import { ComponentPreviewCode } from "@/components/core/docs/component-preview-code"
 import { DocsAvailability } from "@/components/core/docs/docs-availability"
+import { DocsChangelog } from "@/components/core/docs/docs-changelog"
 import { DocsPageActions } from "@/components/core/docs/docs-page-actions"
 import { DocsToc } from "@/components/core/docs/docs-toc"
 import {
@@ -15,6 +16,7 @@ import {
   isPlatform,
   platforms,
 } from "@/lib/docs"
+import { getComponentChangelog } from "@/lib/changelog"
 import { getDocMarkdown } from "@/lib/markdown"
 import { createDocTitle, createPageMetadata } from "@/lib/metadata"
 import { getDocToc } from "@/lib/toc"
@@ -69,6 +71,10 @@ export default async function ComponentDocPage({ params }: Readonly<Props>) {
     componentHref(platform, slug),
     platform
   )
+  const tocItems = [...toc]
+  if (getComponentChangelog(platform, slug).length > 0) {
+    tocItems.push({ title: "Changelog", url: "#changelog" })
+  }
   const components = {
     ...getMDXComponents({}),
     ComponentPreview: (
@@ -101,8 +107,9 @@ export default async function ComponentDocPage({ params }: Readonly<Props>) {
     <div className="flex w-full gap-10">
       <article className="mx-auto max-w-[50rem] min-w-0 flex-1">
         <Content components={components} />
+        <DocsChangelog platform={platform} slug={slug} />
       </article>
-      <DocsToc items={toc} className="xl:block" />
+      <DocsToc items={tocItems} className="xl:block" />
     </div>
   )
 }

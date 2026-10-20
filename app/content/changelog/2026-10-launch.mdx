@@ -1,0 +1,19 @@
+**swiftui-flx is here.** SwiftUI components for iOS, iPadOS and macOS that live in your own project, the shadcn/ui way. Add them with the shadcn CLI, then read and edit them like any other file in your app.
+
+```bash
+npx shadcn@latest add @swiftui-flx/foundation @swiftui-flx/ios-button
+```
+
+### Built on native controls
+
+Every component starts from the SwiftUI control Apple ships and themes it through its style protocol, so it keeps Dynamic Type, accessibility, and the right look on each platform. For views Apple already gets right, such as List, Form, and Sheet, the docs show how to use them with your theme instead of wrapping them.
+
+Browse the [iOS](/docs/components/ios) and [macOS](/docs/components/mac) components.
+
+### Theme
+
+The foundation brings the tokens and two [presets](/docs/presets), Default and Sienna. `.flxTheme(_:)` applies a preset and its `tint`, so native controls follow the theme in light and dark mode.
+
+### Requirements
+
+iOS 16.4, iPadOS 16.4, or macOS 13.3 and later, in Swift 5 or Swift 6. To get started, follow [Installation](/docs/installation).

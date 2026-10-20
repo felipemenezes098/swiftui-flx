@@ -13,15 +13,14 @@ function MacWindow({
     <div
       data-slot="mac-window"
       className={cn(
-        "relative mx-auto aspect-[8/5] w-full max-w-[30rem] overflow-hidden rounded-2xl bg-background shadow-xl ring-1 ring-black/10 dark:ring-white/15",
+        "mx-auto flex w-full max-w-[30rem] flex-col overflow-hidden rounded-2xl bg-background shadow-xl ring-1 ring-black/10 dark:ring-white/15",
         className
       )}
       {...props}
     >
-      {children}
       <div
-        data-slot="mac-window-traffic-lights"
-        className="absolute top-3.5 left-3.5 z-10 flex gap-2"
+        data-slot="mac-window-title-bar"
+        className="flex h-8 shrink-0 items-center gap-2 border-b px-3.5"
       >
         {trafficLights.map((color) => (
           <span
@@ -29,6 +28,9 @@ function MacWindow({
             className={cn("size-3 rounded-full ring-1 ring-black/10", color)}
           />
         ))}
+      </div>
+      <div data-slot="mac-window-content" className="relative aspect-[8/5]">
+        {children}
       </div>
     </div>
   )

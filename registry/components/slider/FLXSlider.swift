@@ -35,7 +35,7 @@ public struct FLXSlider<Label: View>: View {
                 Slider(value: $value, in: bounds, label: label)
             }
         }
-        .tint(theme.colors.primary)
+        .tint(theme.colors.tint)
         .opacity(isEnabled ? 1 : FLXOpacity.disabled)
     }
 }

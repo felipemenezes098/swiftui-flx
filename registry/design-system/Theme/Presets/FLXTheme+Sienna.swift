@@ -78,6 +78,10 @@ extension FLXTheme {
             ring: Color(
                 flxLight: Color(red: 0.2591, green: 0.1929, blue: 0.1536),
                 dark: Color(red: 0.9054, green: 0.8651, blue: 0.7998)
+            ),
+            tint: Color(
+                flxLight: Color(red: 0.2591, green: 0.1929, blue: 0.1536),
+                dark: Color(red: 0.7147, green: 0.4669, blue: 0.3198)
             )
         ),
         radius: FLXRadiusScale(base: 0.875 * 16) // --radius: 0.875rem

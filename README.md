@@ -6,7 +6,7 @@
 
 A shadcn/ui-style design system for SwiftUI: open source components you add to your app with one command and then own completely.
 
-[Website](https://swiftui.flexnative.com) · [Components](https://swiftui.flexnative.com/docs/components/ios/avatar) · [Installation](https://swiftui.flexnative.com/docs/installation) · [Presets](https://swiftui.flexnative.com/docs/presets)
+[Website](https://swiftui.flexnative.com) · [Components](https://swiftui.flexnative.com/docs/components/ios) · [Installation](https://swiftui.flexnative.com/docs/installation) · [Presets](https://swiftui.flexnative.com/docs/presets) · [Changelog](https://swiftui.flexnative.com/docs/changelog)
 
 ![iOS 16.4+](https://img.shields.io/badge/iOS-16.4%2B-000)
 ![iPadOS 16.4+](https://img.shields.io/badge/iPadOS-16.4%2B-000)
@@ -43,7 +43,7 @@ npx shadcn@latest add @swiftui-flx/foundation --cwd MyApp
 npx shadcn@latest add @swiftui-flx/ios-button --cwd MyApp
 ```
 
-Use `mac-button.json` for macOS. Prefer not to use the CLI? Every component page has the source to [copy by hand](https://swiftui.flexnative.com/docs/installation).
+Use `@swiftui-flx/mac-button` for macOS. Prefer not to use the CLI? Every component page has the source to [copy by hand](https://swiftui.flexnative.com/docs/installation).
 
 ```swift
 import SwiftUI
@@ -84,7 +84,6 @@ struct SettingsView: View {
 | [Picker](https://swiftui.flexnative.com/docs/components/ios/picker) | ✓ | — | Dropdown to pick one value |
 | [Progress View](https://swiftui.flexnative.com/docs/components/ios/progress-view) | ✓ | ✓ | Progress bar or spinner |
 | [Secure Field](https://swiftui.flexnative.com/docs/components/ios/secure-field) | ✓ | ✓ | Password input |
-| [Sheet](https://swiftui.flexnative.com/docs/components/ios/sheet) | ✓ | ✓ | Content presented over the current view |
 | [Slider](https://swiftui.flexnative.com/docs/components/ios/slider) | ✓ | ✓ | Pick a value from a range |
 | [Text Editor](https://swiftui.flexnative.com/docs/components/ios/text-editor) | ✓ | ✓ | Multi-line text input |
 | [Text Field](https://swiftui.flexnative.com/docs/components/ios/text-field) | ✓ | ✓ | Single-line text input |
@@ -92,6 +91,16 @@ struct SettingsView: View {
 | [Toggle](https://swiftui.flexnative.com/docs/components/ios/toggle) | ✓ | ✓ | Switch on iOS, checkbox on macOS |
 
 On macOS, Menu and Picker use SwiftUI's native versions, which the Mac always draws itself.
+
+### Native guides
+
+For views Apple already gets right, the docs show how to use them with your theme instead of wrapping them.
+
+| Guide | iOS & iPadOS | macOS | |
+| --- | :---: | :---: | --- |
+| [Form](https://swiftui.flexnative.com/docs/components/ios/form) | ✓ | ✓ | Settings and data-entry screens |
+| [List](https://swiftui.flexnative.com/docs/components/ios/list) | ✓ | — | Collections of rows, with swipe actions and selection |
+| [Sheet](https://swiftui.flexnative.com/docs/components/ios/sheet) | ✓ | ✓ | Content presented over the current view |
 
 ## Requirements
 

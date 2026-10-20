@@ -1,0 +1,108 @@
+<DocsHeader>
+
+# Form
+
+<DocsPageActions />
+
+</DocsHeader>
+
+<DocsAvailability />
+
+Builds settings and data-entry screens with SwiftUI's native Form.
+
+<ComponentPreviewCode
+  alt="Native settings form"
+  image={{ light: "/images/components/ios/form/form-usage.webp", dark: "/images/components/ios/form/form-usage-dark.webp" }}
+  filePath="registry/components/form/form-usage-example.swift"
+  collapsible
+/>
+
+## Usage
+
+Inside a native `Form`, each control becomes a settings row, with the label on the leading side and the value on the trailing side. Use it directly.
+
+```swift
+Form {
+    Section("Preferences") {
+        Toggle("Notifications", isOn: $notifications)
+        Picker("Appearance", selection: $appearance) {
+            ForEach(appearances, id: \.self) { Text($0) }
+        }
+    }
+}
+```
+
+Use a form for settings and data entry. To show a collection of items, use a [List](/docs/components/ios/list).
+
+## Examples
+
+### Controls
+
+Native controls lay themselves out as rows. No extra layout code is needed.
+
+<ComponentPreviewCode
+  alt="Form with a text field, secure field, toggle, date picker, stepper, and slider"
+  image={{ light: "/images/components/ios/form/form-controls.webp", dark: "/images/components/ios/form/form-controls-dark.webp" }}
+  filePath="registry/components/form/form-controls-example.swift"
+  collapsible
+/>
+
+### Pickers
+
+A picker in a form opens a menu by default. `.navigationLink` pushes a list of options, `.inline` shows them as rows, and `.segmented` fits a few short options in one row.
+
+<ComponentPreviewCode
+  alt="Form with menu, navigation link, inline, and segmented pickers"
+  image={{ light: "/images/components/ios/form/form-pickers.webp", dark: "/images/components/ios/form/form-pickers-dark.webp" }}
+  filePath="registry/components/form/form-pickers-example.swift"
+  collapsible
+/>
+
+### Values and actions
+
+`LabeledContent` shows a read-only value. A `Button` becomes a tappable row, and a `.destructive` role paints it red.
+
+<ComponentPreviewCode
+  alt="Form with read-only values, buttons, and a destructive button"
+  image={{ light: "/images/components/ios/form/form-actions.webp", dark: "/images/components/ios/form/form-actions-dark.webp" }}
+  filePath="registry/components/form/form-actions-example.swift"
+  collapsible
+/>
+
+### Validation
+
+Show the error in the section footer, in the theme's destructive color, and disable the action until the value is valid.
+
+<ComponentPreviewCode
+  alt="Form with an error in the section footer and a disabled button"
+  image={{ light: "/images/components/ios/form/form-validation.webp", dark: "/images/components/ios/form/form-validation-dark.webp" }}
+  filePath="registry/components/form/form-validation-example.swift"
+  collapsible
+/>
+
+## Form or Form Field
+
+Inside a form, use native controls. FLX fields draw their own box, so inside a form row they show a box inside a box.
+
+Use [Form Field](/docs/components/ios/form-field) and the other FLX fields on screens outside a form, such as sign-in or onboarding.
+
+## Theming
+
+Apply the theme at the root of your app. `.flxTheme(_:)` also sets the theme's `tint`, so switches, selection marks, swipe actions, and row buttons follow the theme in light and dark mode:
+
+```swift
+ContentView()
+    .flxTheme(.default)
+```
+
+To use theme surfaces, hide the system background and set the row background and separator color. Rows stand apart from the background only by contrast, so pick colors that stay apart:
+
+```swift
+Form { ... }
+    .scrollContentBackground(.hidden)
+    .background(theme.colors.background)
+    .listRowBackground(theme.colors.card)
+    .listRowSeparatorTint(theme.colors.border)
+```
+
+For more information about `Form`, see the [Apple documentation](https://developer.apple.com/documentation/swiftui/form).

@@ -50,6 +50,7 @@ Match the colors your app already has to the theme's tokens. Leave the rest as t
 | Brand color, used on primary buttons and links | `primary` |
 | Focus ring on text fields, usually the brand color | `ring` |
 | Text and icons on the brand color | `primaryForeground` |
+| Native controls: switches, selection marks, swipe actions, row buttons. A mid-tone of your brand that reads on the dark background and under white text | `tint` |
 | Screen background | `background` |
 | Main text | `foreground`, `cardForeground`, `popoverForeground` |
 | Cards and surfaces | `card` |
@@ -74,6 +75,7 @@ extension FLXTheme {
         theme.colors.primary = Color("BrandPrimary")
         theme.colors.primaryForeground = .white
         theme.colors.ring = Color("BrandPrimary")
+        theme.colors.tint = Color("BrandPrimary")
         theme.colors.background = Color("Background")
         theme.colors.card = Color("Surface")
         theme.colors.mutedForeground = Color("TextSecondary")

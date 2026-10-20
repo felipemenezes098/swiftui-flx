@@ -91,6 +91,14 @@ const componentCatalog: ComponentCatalogEntry[] = [
     },
   },
   {
+    slug: "form",
+    name: "Form",
+    descriptions: {
+      ios: "Builds settings and data-entry screens with SwiftUI's native Form.",
+      mac: "Builds settings and data-entry screens with SwiftUI's native Form.",
+    },
+  },
+  {
     slug: "form-field",
     name: "Form Field",
     descriptions: {
@@ -104,6 +112,13 @@ const componentCatalog: ComponentCatalogEntry[] = [
     descriptions: {
       ios: "Displays a row of content, such as a list entry, notification, or settings row.",
       mac: "Displays a row of content, such as a list entry, notification, or settings row.",
+    },
+  },
+  {
+    slug: "list",
+    name: "List",
+    descriptions: {
+      ios: "Displays a collection of rows with SwiftUI's native List.",
     },
   },
   {
@@ -275,6 +290,7 @@ export function getDocsNav(platform: Platform): DocsNavGroup[] {
         { title: "Existing Projects", href: "/docs/existing-projects" },
         { title: "Swift Packages", href: "/docs/swift-packages" },
         { title: "Presets", href: "/docs/presets" },
+        { title: "Changelog", href: "/docs/changelog" },
         { title: "Components", href: componentsHref(platform) },
       ],
     },

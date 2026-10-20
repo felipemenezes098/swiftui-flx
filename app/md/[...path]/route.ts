@@ -1,6 +1,11 @@
 import { isPlatform } from "@/lib/docs"
 import { getMarkdownPaths } from "@/lib/llms"
-import { getComponentsIndexMarkdown, getDocMarkdown } from "@/lib/markdown"
+import {
+  getChangelogIndexMarkdown,
+  getChangelogMarkdown,
+  getComponentsIndexMarkdown,
+  getDocMarkdown,
+} from "@/lib/markdown"
 
 export const dynamicParams = false
 
@@ -18,12 +23,17 @@ export async function GET(
   )
   if (!known) return new Response("Not found", { status: 404 })
 
-  let markdown: string
+  let markdown: string | undefined
   if (path.length === 2 && path[0] === "components" && isPlatform(path[1])) {
     markdown = getComponentsIndexMarkdown(path[1])
+  } else if (path.length === 1 && path[0] === "changelog") {
+    markdown = getChangelogIndexMarkdown()
+  } else if (path.length === 2 && path[0] === "changelog") {
+    markdown = await getChangelogMarkdown(path[1])
   } else {
     markdown = await getDocMarkdown(path.join("/"))
   }
+  if (!markdown) return new Response("Not found", { status: 404 })
 
   return new Response(markdown, {
     headers: { "Content-Type": "text/markdown; charset=utf-8" },

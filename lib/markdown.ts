@@ -2,10 +2,18 @@ import fs from "node:fs/promises"
 import path from "node:path"
 
 import { siteConfig } from "@/config/site"
+import {
+  changelogEntryTitle,
+  changelogHref,
+  getChangelogEntries,
+  getChangelogEntry,
+  getComponentChangelog,
+} from "@/lib/changelog"
 import { extractCodeFromFilePath } from "@/lib/code"
 import {
   getExistingProjectPrompt,
   getInstallPrompt,
+  getUpdatePrompt,
   getMarkdownPaths,
   markdownUrl,
 } from "@/lib/llms"
@@ -71,6 +79,9 @@ function renderTag(name: string, props: string) {
   }
 
   if (name === "AiInstall") {
+    if (readProp(props, "variant") === "update") {
+      return `\n**Update with AI.** Paste this prompt into your AI agent:\n${fence(getUpdatePrompt(readProp(props, "changelog") ?? ""), "text")}`
+    }
     if (readProp(props, "variant") === "existing") {
       return `\n**Add to your app with AI.** Paste this prompt into your AI agent:\n${fence(getExistingProjectPrompt(), "text")}`
     }
@@ -132,10 +143,28 @@ function withAvailability(source: string, contentPath: string) {
   )
 }
 
+function withChangelog(source: string, contentPath: string) {
+  const match = COMPONENT_CONTENT_PATH.exec(contentPath)
+  if (!match || !isPlatform(match[1])) return source
+  const items = getComponentChangelog(match[1], match[2])
+  if (items.length === 0) return source
+  return [
+    source.trimEnd(),
+    "",
+    "## Changelog",
+    "",
+    ...items.map(
+      ({ entry, summary }) =>
+        `- [${changelogEntryTitle(entry)}](${changelogHref(entry.slug)}): ${summary}`
+    ),
+    "",
+  ].join("\n")
+}
+
 export async function getDocMarkdown(contentPath: string) {
   const filePath = path.join(process.cwd(), "app/content", `${contentPath}.mdx`)
-  const source = withAvailability(
-    await fs.readFile(filePath, "utf8"),
+  const source = withChangelog(
+    withAvailability(await fs.readFile(filePath, "utf8"), contentPath),
     contentPath
   )
   const tabLabels = new Map<string, string>()
@@ -165,6 +194,27 @@ export function getComponentsIndexMarkdown(platform: Platform) {
     ...getComponentDocs(platform).map(
       (doc) =>
         `- [${doc.name}](${markdownUrl(componentHref(platform, doc.slug))}): ${doc.description}`
+    ),
+    "",
+  ].join("\n")
+}
+
+export async function getChangelogMarkdown(slug: string) {
+  const entry = getChangelogEntry(slug)
+  if (!entry) return undefined
+  const body = await getDocMarkdown(`changelog/${slug}`)
+  return `# ${changelogEntryTitle(entry)}\n\n${body}`
+}
+
+export function getChangelogIndexMarkdown() {
+  return [
+    "# Changelog",
+    "",
+    "Latest updates and announcements.",
+    "",
+    ...getChangelogEntries().map(
+      (entry) =>
+        `- [${changelogEntryTitle(entry)}](${markdownUrl(changelogHref(entry.slug))}): ${entry.description}`
     ),
     "",
   ].join("\n")

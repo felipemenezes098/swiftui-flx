@@ -29,6 +29,8 @@ public struct FLXColorTokens: Sendable {
     public var input: Color
     public var ring: Color
 
+    public var tint: Color
+
     public init(
         background: Color,
         foreground: Color,
@@ -48,7 +50,8 @@ public struct FLXColorTokens: Sendable {
         destructiveForeground: Color,
         border: Color,
         input: Color,
-        ring: Color
+        ring: Color,
+        tint: Color
     ) {
         self.background = background
         self.foreground = foreground
@@ -69,5 +72,6 @@ public struct FLXColorTokens: Sendable {
         self.border = border
         self.input = input
         self.ring = ring
+        self.tint = tint
     }
 }

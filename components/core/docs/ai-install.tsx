@@ -1,33 +1,54 @@
 import { Sparkles } from "lucide-react"
 
 import { CopyButton } from "@/components/core/copy-button"
-import { getExistingProjectPrompt, getInstallPrompt } from "@/lib/llms"
+import {
+  getExistingProjectPrompt,
+  getInstallPrompt,
+  getUpdatePrompt,
+} from "@/lib/llms"
 import { cn } from "@/lib/utils"
 
-const variants = {
+type AiInstallVariant = "new" | "existing" | "update"
+
+const variants: Record<
+  AiInstallVariant,
+  {
+    title: string
+    description: string
+    prompt: (changelog: string) => string
+  }
+> = {
   new: {
     title: "Install with AI",
     description:
       "Paste this into Claude Code, Cursor, Codex or your agent of choice. It reads the docs, checks your project and sets up the design system for you.",
-    prompt: getInstallPrompt,
+    prompt: () => getInstallPrompt(),
   },
   existing: {
     title: "Add to your app with AI",
     description:
       "Paste this into Claude Code, Cursor, Codex or your agent of choice. It studies your app and shows you a plan before changing anything.",
-    prompt: getExistingProjectPrompt,
+    prompt: () => getExistingProjectPrompt(),
   },
-} as const
+  update: {
+    title: "Update with AI",
+    description:
+      "Paste this into Claude Code, Cursor, Codex or your agent of choice. It applies this update and keeps your own changes.",
+    prompt: getUpdatePrompt,
+  },
+}
 
 function AiInstall({
   variant = "new",
+  changelog = "",
   className,
 }: {
-  variant?: keyof typeof variants
+  variant?: AiInstallVariant
+  changelog?: string
   className?: string
 }) {
   const { title, description, prompt: getPrompt } = variants[variant]
-  const prompt = getPrompt()
+  const prompt = getPrompt(changelog)
 
   return (
     <div

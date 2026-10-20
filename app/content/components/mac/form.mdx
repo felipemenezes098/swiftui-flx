@@ -1,0 +1,126 @@
+<DocsHeader>
+
+# Form
+
+<DocsPageActions />
+
+</DocsHeader>
+
+<DocsAvailability />
+
+Builds settings and data-entry screens with SwiftUI's native Form.
+
+<ComponentPreviewCode
+  alt="Native grouped form"
+  image={{ light: "/images/components/mac/form/form-usage.webp", dark: "/images/components/mac/form/form-usage-dark.webp" }}
+  filePath="registry/components/form/form-usage-example+macOS.swift"
+  collapsible
+/>
+
+## Usage
+
+Inside a native `Form`, controls lay themselves out with their labels aligned. Use it directly.
+
+```swift
+Form {
+    Toggle("Notifications", isOn: $notifications)
+    Picker("Appearance", selection: $appearance) {
+        ForEach(appearances, id: \.self) { Text($0) }
+    }
+}
+.formStyle(.grouped)
+```
+
+Use a form for settings and data entry.
+
+## Examples
+
+### Columns
+
+The default style on macOS. Labels sit trailing-aligned in one column and controls in the other, like classic preference windows.
+
+<ComponentPreviewCode
+  alt="Form in two columns"
+  image={{ light: "/images/components/mac/form/form-columns.webp", dark: "/images/components/mac/form/form-columns-dark.webp" }}
+  code={`Form {
+    TextField("Name:", text: $name)
+    Toggle("Send notifications", isOn: $notifications)
+    Picker("Appearance:", selection: $appearance) {
+        ForEach(appearances, id: \\.self) { Text($0) }
+    }
+}
+`}
+/>
+
+### Controls
+
+With `.grouped`, controls become rows in rounded sections, like System Settings.
+
+<ComponentPreviewCode
+  alt="Grouped form with a text field, toggle, date picker, stepper, and slider"
+  image={{ light: "/images/components/mac/form/form-controls.webp", dark: "/images/components/mac/form/form-controls-dark.webp" }}
+  code={`Form {
+    TextField("Name", text: $name)
+    Toggle("Notifications", isOn: $notifications)
+    DatePicker("Birthday", selection: $birthday, displayedComponents: .date)
+    Stepper("Guests: \\(guests)", value: $guests, in: 1...10)
+    Slider(value: $volume) {
+        Text("Volume")
+    }
+}
+.formStyle(.grouped)
+`}
+  collapsible
+/>
+
+### Pickers
+
+A picker opens a pop-up menu by default. `.radioGroup` shows every option, and `.segmented` fits a few short options in one row.
+
+<ComponentPreviewCode
+  alt="Grouped form with menu, radio group, and segmented pickers"
+  image={{ light: "/images/components/mac/form/form-pickers.webp", dark: "/images/components/mac/form/form-pickers-dark.webp" }}
+  code={`Form {
+    Picker("Appearance", selection: $appearance) {
+        ForEach(appearances, id: \\.self) { Text($0) }
+    }
+    Picker("Sort by", selection: $sort) {
+        ForEach(sortOptions, id: \\.self) { Text($0) }
+    }
+    .pickerStyle(.radioGroup)
+    Picker("Size", selection: $size) {
+        ForEach(sizes, id: \\.self) { Text($0) }
+    }
+    .pickerStyle(.segmented)
+}
+.formStyle(.grouped)
+`}
+  collapsible
+/>
+
+## Form or Form Field
+
+Inside a form, use native controls. FLX fields draw their own box and label, so inside a form they repeat what the form already draws.
+
+Use [Form Field](/docs/components/mac/form-field) and the other FLX fields in views outside a form.
+
+## Theming
+
+Apply the theme at the root of your app. `.flxTheme(_:)` also sets the theme's `tint`, so switches, selection marks and row buttons follow the theme in light and dark mode:
+
+```swift
+ContentView()
+    .flxTheme(.default)
+```
+
+To use theme surfaces in a grouped form, hide the system background and set the row background:
+
+```swift
+Form { ... }
+    .formStyle(.grouped)
+    .scrollContentBackground(.hidden)
+    .background(theme.colors.background)
+    .listRowBackground(theme.colors.card)
+```
+
+For more information about `Form`, see the [Apple documentation](https://developer.apple.com/documentation/swiftui/form).

@@ -1,0 +1,146 @@
+<DocsHeader>
+
+# List
+
+<DocsPageActions />
+
+</DocsHeader>
+
+<DocsAvailability />
+
+Displays a collection of rows with SwiftUI's native List.
+
+<ComponentPreviewCode
+  alt="Native list with FLX avatars"
+  image={{ light: "/images/components/ios/list/list-usage.webp", dark: "/images/components/ios/list/list-usage-dark.webp" }}
+  filePath="registry/components/list/list-usage-example.swift"
+  collapsible
+/>
+
+## Usage
+
+The native `List` already brings rows, separators, selection, swipe actions, and accessibility. Use it directly and put FLX components inside the rows.
+
+```swift
+List(contacts) { contact in
+    HStack(spacing: FLXSpacing.md) {
+        FLXAvatar(size: .small) {
+            FLXAvatarFallback(contact.initials)
+        }
+        Text(contact.name)
+    }
+}
+```
+
+Use a list to show a collection of items, such as messages, contacts, or tasks. For settings and data entry, use a [Form](/docs/components/ios/form).
+
+## Examples
+
+### Plain
+
+Rows run edge to edge, like Mail.
+
+<ComponentPreviewCode
+  alt="Plain list of messages"
+  image={{ light: "/images/components/ios/list/list-plain.webp", dark: "/images/components/ios/list/list-plain-dark.webp" }}
+  filePath="registry/components/list/list-plain-example.swift"
+  collapsible
+/>
+
+### Sections
+
+Group rows with a header and an optional footer.
+
+<ComponentPreviewCode
+  alt="List with section headers and a footer"
+  image={{ light: "/images/components/ios/list/list-sections.webp", dark: "/images/components/ios/list/list-sections-dark.webp" }}
+  filePath="registry/components/list/list-sections-example.swift"
+  collapsible
+/>
+
+### Navigation
+
+A `NavigationLink` row gets a chevron. `.badge(_:)` shows a count on the trailing side, and a count of zero hides it.
+
+<ComponentPreviewCode
+  alt="List of mailboxes with icons, badges, and chevrons"
+  image={{ light: "/images/components/ios/list/list-navigation.webp", dark: "/images/components/ios/list/list-navigation-dark.webp" }}
+  filePath="registry/components/list/list-navigation-example.swift"
+  collapsible
+/>
+
+### Selection
+
+Pass a selection binding. In edit mode, each row shows a selection mark, and `EditButton` turns edit mode on and off.
+
+<ComponentPreviewCode
+  alt="List in edit mode with two selected rows"
+  image={{ light: "/images/components/ios/list/list-selection.webp", dark: "/images/components/ios/list/list-selection-dark.webp" }}
+  filePath="registry/components/list/list-selection-example.swift"
+  collapsible
+/>
+
+### Empty state
+
+Overlay an [Empty](/docs/components/ios/empty) when the list has no rows.
+
+<ComponentPreviewCode
+  alt="Empty list with an FLX empty state"
+  image={{ light: "/images/components/ios/list/list-empty.webp", dark: "/images/components/ios/list/list-empty-dark.webp" }}
+  filePath="registry/components/list/list-empty-example.swift"
+  collapsible
+/>
+
+### Swipe actions
+
+Swipe a row to reveal actions. Actions without their own `.tint(_:)` take the theme's tint, including a destructive one, so give it the theme's destructive color.
+
+<ComponentPreviewCode
+  alt="List row swiped to show Archive and Delete actions"
+  image={{ light: "/images/components/ios/list/list-swipe.webp", dark: "/images/components/ios/list/list-swipe-dark.webp" }}
+  filePath="registry/components/list/list-swipe-example.swift"
+  collapsible
+/>
+
+### Context menu
+
+Touch and hold a row to open a menu.
+
+<ComponentPreviewCode
+  alt="List row with an open context menu"
+  image={{ light: "/images/components/ios/list/list-context-menu.webp", dark: "/images/components/ios/list/list-context-menu-dark.webp" }}
+  filePath="registry/components/list/list-context-menu-example.swift"
+  collapsible
+/>
+
+### Pull to refresh
+
+Pull the list down to run an async action. The indicator stays until the action finishes.
+
+<ComponentPreviewCode
+  alt="List refreshing"
+  image={{ light: "/images/components/ios/list/list-refresh.webp", dark: "/images/components/ios/list/list-refresh-dark.webp" }}
+  filePath="registry/components/list/list-refresh-example.swift"
+  collapsible
+/>
+
+## Theming
+
+Apply the theme at the root of your app. `.flxTheme(_:)` also sets the theme's `tint`, so switches, selection marks, swipe actions, and row buttons follow the theme in light and dark mode:
+
+```swift
+ContentView()
+    .flxTheme(.default)
+```
+
+To use theme surfaces, hide the system background and set the row background and separator color. Rows stand apart from the background only by contrast, so pick colors that stay apart:
+
+```swift
+List { ... }
+    .scrollContentBackground(.hidden)
+    .background(theme.colors.background)
+    .listRowBackground(theme.colors.card)
+    .listRowSeparatorTint(theme.colors.border)
+```
+
+For more information about `List`, see the [Apple documentation](https://developer.apple.com/documentation/swiftui/list).

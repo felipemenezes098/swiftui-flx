@@ -15,7 +15,7 @@
     },
     {
       "path": "registry/components/toggle/FLXToggleStyle+iOS.swift",
-      "content": "#if os(iOS)\nimport SwiftUI\nimport UIKit\n\nstruct FLXToggleStyleBody: View {\n    @Environment(\\.flxTheme) private var theme\n\n    let configuration: FLXToggleStyle.Configuration\n\n    var body: some View {\n        Toggle(configuration)\n            .toggleStyle(.switch)\n            .tint(trackTint)\n            .flxFont(.body)\n            .foregroundStyle(theme.colors.foreground)\n    }\n\n    /// The native switch's thumb is always white, so a light dark-mode `primary`\n    /// (shadcn's near-white) would hide it. The track keeps the light-mode\n    /// `primary` in both appearances instead.\n    private var trackTint: Color {\n        let light = UITraitCollection(userInterfaceStyle: .light)\n        return Color(uiColor: UIColor(theme.colors.primary).resolvedColor(with: light))\n    }\n}\n#endif\n",
+      "content": "#if os(iOS)\nimport SwiftUI\n\nstruct FLXToggleStyleBody: View {\n    @Environment(\\.flxTheme) private var theme\n\n    let configuration: FLXToggleStyle.Configuration\n\n    var body: some View {\n        Toggle(configuration)\n            .toggleStyle(.switch)\n            .tint(theme.colors.tint)\n            .flxFont(.body)\n            .foregroundStyle(theme.colors.foreground)\n    }\n}\n#endif\n",
       "type": "registry:file",
       "target": "~/DesignSystem/Components/FLXToggle/FLXToggleStyle+iOS.swift"
     },
