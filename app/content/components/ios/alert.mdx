@@ -1,0 +1,85 @@
+<DocsHeader>
+
+# Alert
+
+<DocsPageActions />
+
+</DocsHeader>
+
+<DocsAvailability />
+
+Asks people to confirm an action or acknowledge important information with SwiftUI's native alert.
+
+<ComponentPreviewCode
+  alt="Native alert asking to delete a project"
+  image={{ light: "/images/components/ios/alert/alert-usage.webp", dark: "/images/components/ios/alert/alert-usage-dark.webp" }}
+  filePath="registry/components/alert/alert-usage-example.swift"
+  collapsible
+/>
+
+## Usage
+
+The system draws alerts, with their own material, layout, and accessibility, so use `.alert` directly and open it from FLX components:
+
+```swift
+FLXButton("Delete project", role: .destructive) {
+    isPresented = true
+}
+.alert("Delete Q3 roadmap?", isPresented: $isPresented) {
+    Button("Delete", role: .destructive) {}
+    Button("Cancel", role: .cancel) {}
+} message: {
+    Text("This permanently deletes the project and its 12 files.")
+}
+```
+
+Inside an alert, use `Button`, not `FLXButton`. The system draws the buttons from their titles and roles and ignores button styles.
+
+## Buttons
+
+A `.destructive` role paints the button red. A `.cancel` role marks the button that dismisses without acting, and the system places it for you. Every button dismisses the alert after its action runs.
+
+Use `.keyboardShortcut(.defaultAction)` to mark the button people most likely want. On iOS 26 and later, the alert fills it with the app's `AccentColor` from the asset catalog, not with the theme, and picks a text color that reads on it. Set `AccentColor` to your theme's `tint`, as in [Installation](/docs/installation#set-the-accent-color). Without it, the button is system blue.
+
+## Examples
+
+### Text field
+
+Add a `TextField` before the buttons to ask for a short value, such as a name.
+
+<ComponentPreviewCode
+  alt="Native alert with a text field to rename a project"
+  image={{ light: "/images/components/ios/alert/alert-text-field.webp", dark: "/images/components/ios/alert/alert-text-field-dark.webp" }}
+  filePath="registry/components/alert/alert-text-field-example.swift"
+  collapsible
+/>
+
+### Error
+
+Pass a `LocalizedError` and the alert uses its `errorDescription` as the title.
+
+<ComponentPreviewCode
+  alt="Native alert showing an upload error"
+  image={{ light: "/images/components/ios/alert/alert-error.webp", dark: "/images/components/ios/alert/alert-error-dark.webp" }}
+  filePath="registry/components/alert/alert-error-example.swift"
+  collapsible
+/>
+
+### Confirmation dialog
+
+Use `.confirmationDialog` to offer a few choices about an action someone started. On iPhone, a confirmation dialog appears next to the button that opened it. On iPad, it appears in a popover.
+
+<ComponentPreviewCode
+  alt="Native confirmation dialog with sign-out choices"
+  image={{ light: "/images/components/ios/alert/alert-confirmation-dialog.webp", dark: "/images/components/ios/alert/alert-confirmation-dialog-dark.webp" }}
+  filePath="registry/components/alert/alert-confirmation-dialog-example.swift"
+  collapsible
+/>
+
+## Alert, dialog, or sheet
+
+- Use an alert for important information that needs a response, such as confirming a destructive action or reporting an error.
+- Use a confirmation dialog when an action has a few possible outcomes.
+- Use a [Sheet](/docs/components/ios/sheet) when you need more than a short message and a text field.
+
+For more information about alerts and confirmation dialogs, see the [Apple documentation](https://developer.apple.com/documentation/swiftui/modal-presentations).

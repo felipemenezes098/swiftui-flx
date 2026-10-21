@@ -18,6 +18,14 @@ export const changelogFeaturedCount = 5
 
 const changelog: ChangelogEntry[] = [
   {
+    slug: "2026-10-alert-and-segmented-control",
+    title: "Alert and Segmented Control",
+    date: "2026-10-20",
+    description:
+      "New Alert and Segmented Control guides, and an accent color step so system-drawn views follow the theme.",
+    actions: [],
+  },
+  {
     slug: "2026-10-native-guides-and-tint",
     title: "Native Guides and Tint",
     date: "2026-10-19",

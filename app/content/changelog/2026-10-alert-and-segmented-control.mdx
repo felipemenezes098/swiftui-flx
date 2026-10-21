@@ -1,0 +1,25 @@
+**New [Alert](/docs/components/ios/alert) and [Segmented Control](/docs/components/ios/segmented-control) guides, and an accent color step in setup.**
+
+### Alert
+
+Confirmations, errors, text fields, and confirmation dialogs, with Apple's own `.alert` opened from FLX components.
+
+<ComponentPreview
+  platform="ios"
+  alt="Native alert asking to delete a project"
+  image={{ light: "/images/components/ios/alert/alert-usage.webp", dark: "/images/components/ios/alert/alert-usage-dark.webp" }}
+/>
+
+### Segmented Control
+
+A few closely related options side by side. On iOS it also switches between related views, like tabs. On macOS, it picks options, and `TabView` switches the content of a window.
+
+<ComponentPreview
+  platform="ios"
+  alt="Segmented control switching between overview and analytics"
+  image={{ light: "/images/components/ios/segmented-control/segmented-control-usage.webp", dark: "/images/components/ios/segmented-control/segmented-control-usage-dark.webp" }}
+/>
+
+### Accent color
+
+Views the system draws, such as an alert's default button and the selected segment on macOS, use the app's `AccentColor` from the asset catalog, not the theme. Set it to your preset's `tint`, as in [Installation](/docs/installation#set-the-accent-color). No component code changed.

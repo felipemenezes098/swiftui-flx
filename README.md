@@ -45,6 +45,8 @@ npx shadcn@latest add @swiftui-flx/ios-button --cwd MyApp
 
 Use `@swiftui-flx/mac-button` for macOS. Prefer not to use the CLI? Every component page has the source to [copy by hand](https://swiftui.flexnative.com/docs/installation).
 
+Then set `AccentColor` in your asset catalog to the preset's `tint`, so alerts and other views the system draws match your theme ([details](https://swiftui.flexnative.com/docs/installation#set-the-accent-color)).
+
 ```swift
 import SwiftUI
 
@@ -98,8 +100,10 @@ For views Apple already gets right, the docs show how to use them with your them
 
 | Guide | iOS & iPadOS | macOS | |
 | --- | :---: | :---: | --- |
+| [Alert](https://swiftui.flexnative.com/docs/components/ios/alert) | ✓ | ✓ | Confirmations, errors, and confirmation dialogs |
 | [Form](https://swiftui.flexnative.com/docs/components/ios/form) | ✓ | ✓ | Settings and data-entry screens |
 | [List](https://swiftui.flexnative.com/docs/components/ios/list) | ✓ | — | Collections of rows, with swipe actions and selection |
+| [Segmented Control](https://swiftui.flexnative.com/docs/components/ios/segmented-control) | ✓ | ✓ | A few related options side by side, or tabs between views on iOS |
 | [Sheet](https://swiftui.flexnative.com/docs/components/ios/sheet) | ✓ | ✓ | Content presented over the current view |
 
 ## Requirements

@@ -1,0 +1,69 @@
+<DocsHeader>
+
+# Segmented Control
+
+<DocsPageActions />
+
+</DocsHeader>
+
+<DocsAvailability />
+
+Picks one of a few closely related options with SwiftUI's native segmented picker.
+
+<ComponentPreviewCode
+  alt="Native segmented control with day, week, and month, and its label"
+  image={{ light: "/images/components/mac/segmented-control/segmented-control-options.webp", dark: "/images/components/mac/segmented-control/segmented-control-options-dark.webp" }}
+  filePath="registry/components/segmented-control/segmented-control-options-example+macOS.swift"
+  collapsible
+/>
+
+## Usage
+
+A `Picker` with the `.segmented` style already brings selection, keyboard and VoiceOver support, and its system appearance, so use it directly:
+
+```swift
+Picker("Range", selection: $range) {
+    ForEach(ranges, id: \.self) { range in
+        Text(range)
+    }
+}
+.pickerStyle(.segmented)
+```
+
+macOS shows the title before the control, which tells people what it's for. To hide it, add `.labelsHidden()`. VoiceOver reads it either way.
+
+Use a segmented control for a few short options, such as in a toolbar, an inspector, or a settings pane. For more options, use a `Picker` with the `.menu` style.
+
+## Switching views
+
+To switch the content in the main area of a window, use a `TabView`, not a segmented control. A segmented control can switch views in a toolbar or an inspector.
+
+## Examples
+
+### Icons
+
+Use either text or icons in one control, not both. Give each icon an accessibility label.
+
+<ComponentPreviewCode
+  alt="Segmented control with list, grid, and gallery icons"
+  image={{ light: "/images/components/mac/segmented-control/segmented-control-icons.webp", dark: "/images/components/mac/segmented-control/segmented-control-icons-dark.webp" }}
+  filePath="registry/components/segmented-control/segmented-control-icons-example.swift"
+  collapsible
+/>
+
+### Sizes
+
+`.controlSize(_:)` changes the height.
+
+<ComponentPreviewCode
+  alt="Small, regular, and large segmented controls"
+  image={{ light: "/images/components/mac/segmented-control/segmented-control-sizes.webp", dark: "/images/components/mac/segmented-control/segmented-control-sizes-dark.webp" }}
+  filePath="registry/components/segmented-control/segmented-control-sizes-example.swift"
+  collapsible
+/>
+
+## Color
+
+The selected segment uses the theme's `tint`, which `.flxTheme(_:)` applies. Without it, the control follows the app's `AccentColor`, so set that too, as in [Installation](/docs/installation#set-the-accent-color).
+
+For more information, see the Human Interface Guidelines for [segmented controls](https://developer.apple.com/design/human-interface-guidelines/segmented-controls) and [tab views](https://developer.apple.com/design/human-interface-guidelines/tab-views).

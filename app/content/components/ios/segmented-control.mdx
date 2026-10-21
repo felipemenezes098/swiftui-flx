@@ -1,0 +1,87 @@
+<DocsHeader>
+
+# Segmented Control
+
+<DocsPageActions />
+
+</DocsHeader>
+
+<DocsAvailability />
+
+Switches between a few options or views, like tabs, with SwiftUI's native segmented picker.
+
+<ComponentPreviewCode
+  alt="Segmented control switching between overview and analytics"
+  image={{ light: "/images/components/ios/segmented-control/segmented-control-usage.webp", dark: "/images/components/ios/segmented-control/segmented-control-usage-dark.webp" }}
+  filePath="registry/components/segmented-control/segmented-control-usage-example.swift"
+  collapsible
+/>
+
+## Usage
+
+A `Picker` with the `.segmented` style already brings selection, animation, keyboard and VoiceOver support, and its system appearance, so use it directly:
+
+```swift
+Picker("Section", selection: $tab) {
+    Text("Overview").tag(Tab.overview)
+    Text("Analytics").tag(Tab.analytics)
+}
+.pickerStyle(.segmented)
+.labelsHidden()
+
+switch tab {
+case .overview: OverviewCard()
+case .analytics: AnalyticsCard()
+}
+```
+
+On iPhone and iPad, the control fills the available width. `.labelsHidden()` hides the title from the screen, and VoiceOver still reads it.
+
+Use a segmented control for two to five short options. For more options, use a [Picker](/docs/components/ios/picker).
+
+## Examples
+
+### Options
+
+A segmented control can also pick a value, such as a date range, without changing the view around it.
+
+<ComponentPreviewCode
+  alt="Native segmented control with day, week, and month"
+  image={{ light: "/images/components/ios/segmented-control/segmented-control-options.webp", dark: "/images/components/ios/segmented-control/segmented-control-options-dark.webp" }}
+  filePath="registry/components/segmented-control/segmented-control-options-example.swift"
+  collapsible
+/>
+
+### Icons
+
+Use either text or icons in one control, not both. Give each icon an accessibility label.
+
+<ComponentPreviewCode
+  alt="Segmented control with list, grid, and gallery icons"
+  image={{ light: "/images/components/ios/segmented-control/segmented-control-icons.webp", dark: "/images/components/ios/segmented-control/segmented-control-icons-dark.webp" }}
+  filePath="registry/components/segmented-control/segmented-control-icons-example.swift"
+  collapsible
+/>
+
+### Sizes
+
+`.controlSize(_:)` changes the height.
+
+<ComponentPreviewCode
+  alt="Small, regular, and large segmented controls"
+  image={{ light: "/images/components/ios/segmented-control/segmented-control-sizes.webp", dark: "/images/components/ios/segmented-control/segmented-control-sizes-dark.webp" }}
+  filePath="registry/components/segmented-control/segmented-control-sizes-example.swift"
+  collapsible
+/>
+
+## Color
+
+On iOS 26 and later, the system draws the selected segment with Liquid Glass and keeps it neutral, as in Apple's own apps. It doesn't take the theme's `tint`.
+
+UIKit's `UISegmentedControl.appearance()` can color it, but the change applies to every segmented control in the app, so leave it to the system unless your design needs it.
+
+## Text size
+
+The segment titles stay at a fixed size and don't grow with Dynamic Type. Keep them to one or two short words.
+
+For more information about the segmented style, see the [Apple documentation](https://developer.apple.com/documentation/swiftui/pickerstyle/segmented).

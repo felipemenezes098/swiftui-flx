@@ -35,6 +35,14 @@ interface ComponentCatalogEntry {
 
 const componentCatalog: ComponentCatalogEntry[] = [
   {
+    slug: "alert",
+    name: "Alert",
+    descriptions: {
+      ios: "Asks people to confirm an action or acknowledge important information with SwiftUI's native alert.",
+      mac: "Asks people to confirm an action or acknowledge important information with SwiftUI's native alert.",
+    },
+  },
+  {
     slug: "avatar",
     name: "Avatar",
     descriptions: {
@@ -149,6 +157,14 @@ const componentCatalog: ComponentCatalogEntry[] = [
     descriptions: {
       ios: "Displays an obscured text input for passwords and other sensitive text.",
       mac: "Displays an obscured text input for passwords and other sensitive text.",
+    },
+  },
+  {
+    slug: "segmented-control",
+    name: "Segmented Control",
+    descriptions: {
+      ios: "Switches between a few options or views, like tabs, with SwiftUI's native segmented picker.",
+      mac: "Picks one of a few closely related options with SwiftUI's native segmented picker.",
     },
   },
   {
