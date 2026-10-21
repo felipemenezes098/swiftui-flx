@@ -25,25 +25,19 @@ export function Footer() {
       className={cn(
         shellContainerClass(shellWidth),
         shellWidth !== "wide" && "container-page-inner",
-        "flex items-center justify-center gap-5 pt-10! pb-5! text-sm text-muted-foreground"
+        "flex items-center justify-center gap-4 pt-10! pb-6! text-sm text-muted-foreground"
       )}
     >
       <Link
         href={siteConfig.links.twitter}
         target="_blank"
         rel="noopener noreferrer"
-        className="group flex items-center gap-2 transition-colors hover:text-foreground"
+        className="transition-colors hover:text-foreground"
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={siteConfig.authorImage}
-          alt=""
-          className="size-5 rounded-full object-cover opacity-80 grayscale transition-[filter,opacity] duration-300 group-hover:opacity-100 group-hover:grayscale-0"
-        />
         Built by {siteConfig.author}
       </Link>
 
-      <span aria-hidden className="h-4 w-px bg-border" />
+      <span aria-hidden className="h-3.5 w-px bg-border" />
 
       <div className="flex items-center gap-4">
         {socials.map((social) => (

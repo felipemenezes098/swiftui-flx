@@ -17,7 +17,7 @@ export function DocsChangelog({
     <section>
       <h2
         id="changelog"
-        className="mt-12 scroll-m-20 text-xl font-medium tracking-tight"
+        className="mt-12 scroll-m-20 text-lg font-medium tracking-tight"
       >
         Changelog
       </h2>

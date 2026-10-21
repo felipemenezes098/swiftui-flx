@@ -26,12 +26,8 @@ export function ShowcaseCard({
     <div className={cn("flex min-w-0 flex-col gap-4", className)}>
       <FlxThemeScope
         theme={theme}
-        className="relative flex items-center justify-center overflow-hidden rounded-3xl bg-muted/50 px-6 py-10 ring-1 ring-border/60 lg:h-[38rem] lg:px-10"
+        className="relative flex items-center justify-center overflow-hidden rounded-3xl bg-muted/50 px-6 py-10 ring-1 ring-border/60 lg:h-[35rem] lg:px-10"
       >
-        <div
-          aria-hidden
-          className="pointer-events-none absolute top-1/2 left-1/2 size-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary opacity-[0.08] blur-[90px] transition-colors duration-700"
-        />
         <div className="relative flex w-full justify-center">{children}</div>
       </FlxThemeScope>
 

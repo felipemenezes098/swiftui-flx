@@ -55,7 +55,7 @@ export default async function ChangelogPage() {
     <div className="flex w-full gap-10">
       <article className="mx-auto max-w-[50rem] min-w-0 flex-1">
         <div className="mt-2 flex flex-wrap items-center justify-between gap-x-4 gap-y-3">
-          <h1 className="scroll-m-20 text-3xl font-bold tracking-tight">
+          <h1 className="scroll-m-20 text-2xl font-medium tracking-tight">
             Changelog
           </h1>
           <DocsPageActions
@@ -74,7 +74,7 @@ export default async function ChangelogPage() {
             >
               <h2
                 id={entry.slug}
-                className="scroll-m-20 text-xl font-medium tracking-tight"
+                className="scroll-m-20 text-lg font-medium tracking-tight"
               >
                 <HoverPrefetchLink
                   href={changelogHref(entry.slug)}
@@ -93,7 +93,7 @@ export default async function ChangelogPage() {
           <section className="mt-12 border-t pt-12">
             <h2
               id="more-updates"
-              className="scroll-m-20 text-xl font-medium tracking-tight"
+              className="scroll-m-20 text-lg font-medium tracking-tight"
             >
               More Updates
             </h2>

@@ -61,7 +61,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     h1: ({ children, ...props }: React.HTMLProps<HTMLHeadingElement>) => (
       <h1
         {...props}
-        className="mt-2 scroll-m-20 text-3xl font-bold tracking-tight"
+        className="mt-2 scroll-m-20 text-2xl font-medium tracking-tight"
       >
         {children}
       </h1>
@@ -70,7 +70,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       <h2
         id={headingId(children)}
         {...props}
-        className="mt-12 scroll-m-20 text-xl font-medium tracking-tight first:mt-0"
+        className="mt-12 scroll-m-20 text-lg font-medium tracking-tight first:mt-0"
       >
         {children}
       </h2>

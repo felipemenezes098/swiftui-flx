@@ -17,7 +17,7 @@ const ease = [0.32, 0.72, 0, 1] as const
 
 const width = 288
 const height = 624
-const scale = 0.85
+const scale = 0.8
 
 export function ShowcaseIPhone({
   id,

@@ -58,7 +58,7 @@ export default async function ComponentsIndexPage({ params }: Readonly<Props>) {
     <div className="mx-auto flex w-full max-w-[50rem] flex-col gap-8">
       <div className="flex flex-col gap-2">
         <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-3">
-          <h1 className="text-3xl font-bold tracking-tight">
+          <h1 className="text-2xl font-medium tracking-tight">
             {name} Components
           </h1>
           <DocsPageActions
