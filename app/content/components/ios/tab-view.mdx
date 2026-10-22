@@ -1,0 +1,99 @@
+<DocsHeader>
+
+# Tab View
+
+<DocsPageActions />
+
+</DocsHeader>
+
+<DocsAvailability />
+
+Switches between the main sections of an app with SwiftUI's native tab bar.
+
+<ComponentPreviewCode
+  alt="Native tab bar with inbox, contacts, and settings tabs"
+  image={{ light: "/images/components/ios/tab-view/tab-view-usage.webp", dark: "/images/components/ios/tab-view/tab-view-usage-dark.webp" }}
+  filePath="registry/components/tab-view/tab-view-usage-example.swift"
+  collapsible
+/>
+
+## Usage
+
+The native `TabView` already brings the Liquid Glass tab bar, its layout on iPhone and iPad, and accessibility, so use it directly and put your screens inside:
+
+```swift
+TabView {
+    Tab("Inbox", systemImage: "tray.fill") {
+        NavigationStack {
+            InboxView()
+        }
+    }
+    Tab("Settings", systemImage: "gearshape.fill") {
+        NavigationStack {
+            SettingsView()
+        }
+    }
+}
+```
+
+Give each tab its own `NavigationStack`, so each section keeps its place when people switch tabs.
+
+Use tabs to move between the main sections of your app, not to perform actions. For actions on the current screen, use a toolbar. Give every tab a short label and an SF Symbol, preferably a filled one.
+
+## Examples
+
+### Badge
+
+`.badge(_:)` shows a count or a short label on a tab. Keep badges for information that needs attention.
+
+<ComponentPreviewCode
+  alt="Tab bar with a badge on the inbox tab"
+  image={{ light: "/images/components/ios/tab-view/tab-view-badge.webp", dark: "/images/components/ios/tab-view/tab-view-badge-dark.webp" }}
+  filePath="registry/components/tab-view/tab-view-badge-example.swift"
+  collapsible
+/>
+
+### Search
+
+`Tab(role: .search)` adds a search tab, which the system places at the trailing end of the tab bar. This example also gives each tab a value and binds the selection, so you can change tabs in code.
+
+<ComponentPreviewCode
+  alt="Search tab with recent searches and a search field"
+  image={{ light: "/images/components/ios/tab-view/tab-view-search.webp", dark: "/images/components/ios/tab-view/tab-view-search-dark.webp" }}
+  filePath="registry/components/tab-view/tab-view-search-example.swift"
+  collapsible
+/>
+
+### iOS 16 and 17
+
+`Tab` needs iOS 18. On earlier versions, put `.tabItem(_:)` on each screen. It looks the same.
+
+<ComponentPreviewCode
+  alt="Tab bar built with tabItem"
+  image={{ light: "/images/components/ios/tab-view/tab-view-tab-item.webp", dark: "/images/components/ios/tab-view/tab-view-tab-item-dark.webp" }}
+  filePath="registry/components/tab-view/tab-view-tab-item-example.swift"
+  collapsible
+/>
+
+## Minimize on scroll
+
+On iOS 26 and later, `.tabBarMinimizeBehavior(.onScrollDown)` shrinks the tab bar while people scroll down, so content gets more room:
+
+```swift
+TabView { ... }
+    .tabBarMinimizeBehavior(.onScrollDown)
+```
+
+## iPad
+
+On iPad, the tab bar appears near the top of the screen. `.tabViewStyle(.sidebarAdaptable)` adds a button that turns it into a sidebar, for apps with more sections.
+
+## Color
+
+The selected tab uses the theme's `tint`, which `.flxTheme(_:)` applies at the root of your app.
+
+## Tab View or Segmented Control
+
+Use a tab view for the main sections of your app. To switch between closely related views inside one screen, use a [Segmented Control](/docs/components/ios/segmented-control).
+
+For more information, see the Human Interface Guidelines for [tab bars](https://developer.apple.com/design/human-interface-guidelines/tab-bars) and the [Apple documentation](https://developer.apple.com/documentation/swiftui/tabview).

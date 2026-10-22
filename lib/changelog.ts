@@ -18,6 +18,14 @@ export const changelogFeaturedCount = 5
 
 const changelog: ChangelogEntry[] = [
   {
+    slug: "2026-10-tab-view",
+    title: "Tab View",
+    date: "2026-10-21",
+    description:
+      "New Tab View guide: the tab bar for app sections on iOS, and tabbed panes and the Settings window on macOS.",
+    actions: [],
+  },
+  {
     slug: "2026-10-alert-and-segmented-control",
     title: "Alert and Segmented Control",
     date: "2026-10-20",

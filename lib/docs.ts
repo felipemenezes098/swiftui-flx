@@ -184,6 +184,14 @@ const componentCatalog: ComponentCatalogEntry[] = [
     },
   },
   {
+    slug: "tab-view",
+    name: "Tab View",
+    descriptions: {
+      ios: "Switches between the main sections of an app with SwiftUI's native tab bar.",
+      mac: "Switches between related panes of content in a window with SwiftUI's native tab view.",
+    },
+  },
+  {
     slug: "text-editor",
     name: "Text Editor",
     descriptions: {

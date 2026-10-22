@@ -105,6 +105,7 @@ For views Apple already gets right, the docs show how to use them with your them
 | [List](https://swiftui.flexnative.com/docs/components/ios/list) | ✓ | — | Collections of rows, with swipe actions and selection |
 | [Segmented Control](https://swiftui.flexnative.com/docs/components/ios/segmented-control) | ✓ | ✓ | A few related options side by side, or tabs between views on iOS |
 | [Sheet](https://swiftui.flexnative.com/docs/components/ios/sheet) | ✓ | ✓ | Content presented over the current view |
+| [Tab View](https://swiftui.flexnative.com/docs/components/ios/tab-view) | ✓ | ✓ | Tab bar for app sections on iOS, tabbed panes on macOS |
 
 ## Requirements
 

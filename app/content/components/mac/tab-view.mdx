@@ -1,0 +1,82 @@
+<DocsHeader>
+
+# Tab View
+
+<DocsPageActions />
+
+</DocsHeader>
+
+<DocsAvailability />
+
+Switches between related panes of content in a window with SwiftUI's native tab view.
+
+<ComponentPreviewCode
+  alt="Native tab view with general and updates panes"
+  image={{ light: "/images/components/mac/tab-view/tab-view-usage.webp", dark: "/images/components/mac/tab-view/tab-view-usage-dark.webp" }}
+  filePath="registry/components/tab-view/tab-view-usage-example+macOS.swift"
+  collapsible
+/>
+
+## Usage
+
+On macOS, a tab view groups related settings or details into panes, with the tabs on top. Mac apps use it in settings windows, inspectors, and dialogs, usually with a `Form` in each pane:
+
+```swift
+TabView {
+    Tab("General", systemImage: "gearshape") {
+        Form { ... }
+    }
+    Tab("Updates", systemImage: "arrow.down.circle") {
+        Form { ... }
+    }
+}
+.padding()
+```
+
+Keep the panes closely related, with up to six tabs, and keep the controls in each pane about that pane only. Leave a margin around the tab view, as in the example.
+
+The main sections of a Mac app don't use a tab view. For those, use a sidebar with `NavigationSplitView`.
+
+## Examples
+
+### Settings window
+
+Put a `TabView` in your app's `Settings` scene. In the settings window, macOS shows the tabs in the toolbar, with their symbols and titles.
+
+<ComponentPreviewCode
+  alt="Settings window with general and updates tabs in the toolbar"
+  image={{ light: "/images/components/mac/tab-view/tab-view-settings.webp", dark: "/images/components/mac/tab-view/tab-view-settings-dark.webp" }}
+  filePath="registry/components/tab-view/tab-view-settings-example+macOS.swift"
+  collapsible
+/>
+
+```swift
+@main
+struct MyApp: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+        Settings {
+            SettingsView()
+        }
+    }
+}
+```
+
+### macOS 13 and 14
+
+`Tab` needs macOS 15. On earlier versions, put `.tabItem(_:)` on each pane. It looks the same.
+
+<ComponentPreviewCode
+  alt="Tab view built with tabItem"
+  image={{ light: "/images/components/mac/tab-view/tab-view-tab-item.webp", dark: "/images/components/mac/tab-view/tab-view-tab-item-dark.webp" }}
+  filePath="registry/components/tab-view/tab-view-tab-item-example+macOS.swift"
+  collapsible
+/>
+
+## Color
+
+The selected tab uses the theme's `tint`, which `.flxTheme(_:)` applies at the root of your app.
+
+For more information, see the Human Interface Guidelines for [tab views](https://developer.apple.com/design/human-interface-guidelines/tab-views) and the [Apple documentation](https://developer.apple.com/documentation/swiftui/tabview).
