@@ -145,6 +145,14 @@ const componentCatalog: ComponentCatalogEntry[] = [
     },
   },
   {
+    slug: "navigation",
+    name: "Navigation",
+    descriptions: {
+      ios: "Moves through a hierarchy of screens with SwiftUI's native navigation stack.",
+      mac: "Organizes a window into a sidebar and a detail view with SwiftUI's native split view.",
+    },
+  },
+  {
     slug: "picker",
     name: "Picker",
     descriptions: {

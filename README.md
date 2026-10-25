@@ -104,6 +104,7 @@ For views Apple already gets right, the docs show how to use them with your them
 | [Date Picker](https://swiftui.flexnative.com/docs/components/ios/date-picker) | ✓ | ✓ | Dates and times, in a field, calendar, or wheels |
 | [Form](https://swiftui.flexnative.com/docs/components/ios/form) | ✓ | ✓ | Settings and data-entry screens |
 | [List](https://swiftui.flexnative.com/docs/components/ios/list) | ✓ | — | Collections of rows, with swipe actions and selection |
+| [Navigation](https://swiftui.flexnative.com/docs/components/ios/navigation) | ✓ | ✓ | Navigation stack on iOS, sidebar split view on macOS |
 | [Segmented Control](https://swiftui.flexnative.com/docs/components/ios/segmented-control) | ✓ | ✓ | A few related options side by side, or tabs between views on iOS |
 | [Sheet](https://swiftui.flexnative.com/docs/components/ios/sheet) | ✓ | ✓ | Content presented over the current view |
 | [Tab View](https://swiftui.flexnative.com/docs/components/ios/tab-view) | ✓ | ✓ | Tab bar for app sections on iOS, tabbed panes on macOS |

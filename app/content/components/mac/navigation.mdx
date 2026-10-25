@@ -1,0 +1,75 @@
+<DocsHeader>
+
+# Navigation
+
+<DocsPageActions />
+
+</DocsHeader>
+
+<DocsAvailability />
+
+Organizes a window into a sidebar and a detail view with SwiftUI's native split view.
+
+<ComponentPreviewCode
+  alt="Split view with a sidebar of projects and the selected project's details"
+  image={{ light: "/images/components/mac/navigation/navigation-usage.webp", dark: "/images/components/mac/navigation/navigation-usage-dark.webp" }}
+  filePath="registry/components/navigation/navigation-usage-example+macOS.swift"
+  collapsible
+/>
+
+## Usage
+
+Mac apps show their main sections in a sidebar. `NavigationSplitView` brings the Liquid Glass sidebar, its resizing and collapsing, and the window toolbar, so use it directly:
+
+```swift
+NavigationSplitView {
+    List(projects, selection: $selection) { project in
+        Label(project.name, systemImage: project.systemImage)
+    }
+    .navigationTitle("Projects")
+} detail: {
+    ProjectView(project: selectedProject)
+}
+```
+
+Bind the list's selection, and the detail shows the selected row. When nothing is selected, show a short message in the detail, as in the example. The title of the detail view appears in the window toolbar, and `.navigationSubtitle(_:)` adds a line under it.
+
+For a third column, pass a `content:` view between the sidebar and the detail.
+
+`NavigationView` is deprecated. Use `NavigationSplitView` instead, or `NavigationStack` for a single column.
+
+Keep titles under 15 characters, so they leave room for the toolbar items.
+
+## Examples
+
+### Navigation stack
+
+To go deeper from a view, put it in a `NavigationStack`. Pushed views get a back button in the toolbar.
+
+<ComponentPreviewCode
+  alt="Pushed build view with a back button and its title in the toolbar"
+  image={{ light: "/images/components/mac/navigation/navigation-stack.webp", dark: "/images/components/mac/navigation/navigation-stack-dark.webp" }}
+  filePath="registry/components/navigation/navigation-stack-example+macOS.swift"
+  collapsible
+/>
+
+`NavigationStack(path:)` lets you push and go back in code, as on [iOS](/docs/components/ios/navigation#navigate-in-code).
+
+## Toolbar
+
+To add actions to the window toolbar, use `.toolbar(content:)` with a plain `Button`, with no style. Put the toolbar on the detail view, and its items appear on the trailing side of the window, next to the title. Items in the same `ToolbarItemGroup` share one background.
+
+<ComponentPreviewCode
+  alt="Window toolbar with share and new project buttons next to the detail title"
+  image={{ light: "/images/components/mac/navigation/navigation-toolbar.webp", dark: "/images/components/mac/navigation/navigation-toolbar-dark.webp" }}
+  filePath="registry/components/navigation/navigation-toolbar-example+macOS.swift"
+  collapsible
+/>
+
+Make every toolbar action also available as a command in the menu bar, since people can hide or customize the toolbar. For more on toolbar buttons, see [Button](/docs/components/mac/button#toolbar). For every placement and toolbar customization, see the [Apple documentation](https://developer.apple.com/documentation/swiftui/toolbars).
+
+## Color
+
+The toolbar title, the subtitle, and the back button use system colors, so FLX leaves them as they are. The selected row in the sidebar is gray while the sidebar doesn't have keyboard focus. With focus, macOS highlights it with the accent color, which is the app's `AccentColor` when people keep the system's multicolor accent, so set it to the theme's `tint`, as in [Installation](/docs/installation#set-the-accent-color).
+
+For more information, see the Human Interface Guidelines for [sidebars](https://developer.apple.com/design/human-interface-guidelines/sidebars) and [split views](https://developer.apple.com/design/human-interface-guidelines/split-views), and the [Apple documentation](https://developer.apple.com/documentation/swiftui/navigationsplitview).

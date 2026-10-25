@@ -18,6 +18,14 @@ export const changelogFeaturedCount = 5
 
 const changelog: ChangelogEntry[] = [
   {
+    slug: "2026-10-navigation",
+    title: "Navigation",
+    date: "2026-10-25",
+    description:
+      "New Navigation guide: the navigation stack with titles and subtitles on iOS, and the sidebar split view on macOS.",
+    actions: [],
+  },
+  {
     slug: "2026-10-date-picker",
     title: "Date Picker",
     date: "2026-10-25",
