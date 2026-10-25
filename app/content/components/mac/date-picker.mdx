@@ -1,0 +1,103 @@
+<DocsHeader>
+
+# Date Picker
+
+<DocsPageActions />
+
+</DocsHeader>
+
+<DocsAvailability />
+
+Picks a date, a time, or both with SwiftUI's native date picker.
+
+<ComponentPreviewCode
+  alt="Date picker showing a due date, with its label"
+  image={{ light: "/images/components/mac/date-picker/date-picker-usage.webp", dark: "/images/components/mac/date-picker/date-picker-usage-dark.webp" }}
+  filePath="registry/components/date-picker/date-picker-usage-example.swift"
+  collapsible
+/>
+
+## Usage
+
+`DatePicker` already brings keyboard and VoiceOver support and the formats for every language and region, so use it directly:
+
+```swift
+DatePicker("Due date", selection: $dueDate, displayedComponents: .date)
+```
+
+macOS shows the title before a text field with a stepper. People type each part of the date or change it with the arrow keys. To hide the title, add `.labelsHidden()`. VoiceOver reads it either way.
+
+## Examples
+
+### Date and time
+
+`displayedComponents` picks what people can change: `.date`, `.hourAndMinute`, or both, which is the default.
+
+<ComponentPreviewCode
+  alt="Date pickers for a date, a time, and both"
+  image={{ light: "/images/components/mac/date-picker/date-picker-components.webp", dark: "/images/components/mac/date-picker/date-picker-components-dark.webp" }}
+  filePath="registry/components/date-picker/date-picker-components-example.swift"
+  collapsible
+/>
+
+### Graphical
+
+`.graphical` shows a calendar. With `.hourAndMinute`, it also shows a clock.
+
+<ComponentPreviewCode
+  alt="Calendar with a selected date"
+  image={{ light: "/images/components/mac/date-picker/date-picker-graphical.webp", dark: "/images/components/mac/date-picker/date-picker-graphical-dark.webp" }}
+  filePath="registry/components/date-picker/date-picker-graphical-example.swift"
+  collapsible
+/>
+
+### Field
+
+`.field` shows the text field without the stepper.
+
+<ComponentPreviewCode
+  alt="Date field without a stepper"
+  image={{ light: "/images/components/mac/date-picker/date-picker-field.webp", dark: "/images/components/mac/date-picker/date-picker-field-dark.webp" }}
+  filePath="registry/components/date-picker/date-picker-field-example+macOS.swift"
+  collapsible
+/>
+
+### Range
+
+Pass a range to `in:` to limit the dates people can pick.
+
+```swift
+DatePicker("Check-in", selection: $checkIn, in: Date.now..., displayedComponents: .date)
+```
+
+### In a form
+
+Inside a [Form](/docs/components/mac/form), date pickers line up with the other controls.
+
+<ComponentPreviewCode
+  alt="Grouped form with a title, an all-day toggle, a date, and a time"
+  image={{ light: "/images/components/mac/date-picker/date-picker-form.webp", dark: "/images/components/mac/date-picker/date-picker-form-dark.webp" }}
+  filePath="registry/components/date-picker/date-picker-form-example+macOS.swift"
+  collapsible
+/>
+
+### With Form Field
+
+Inside a [Form Field](/docs/components/mac/form-field), hide the date picker's title with `.labelsHidden()` and let `FLXFieldLabel` show it above, with a description below.
+
+<ComponentPreviewCode
+  alt="Due date picker with a label and a description"
+  image={{ light: "/images/components/mac/date-picker/date-picker-form-field.webp", dark: "/images/components/mac/date-picker/date-picker-form-field-dark.webp" }}
+  filePath="registry/components/date-picker/date-picker-form-field-example.swift"
+  collapsible
+/>
+
+## Color
+
+The system draws every date picker style in its own colors. None of them take the theme's `tint` or the app's `AccentColor`.
+
+## Size
+
+`.controlSize(_:)` changes the height of the field, from 20 points with `.small` to 26 with `.large`. The default, 22, is a little shorter than FLX's text fields.
+
+For more information about date pickers, see the [Apple documentation](https://developer.apple.com/documentation/swiftui/datepicker).

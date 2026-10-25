@@ -101,6 +101,7 @@ For views Apple already gets right, the docs show how to use them with your them
 | Guide | iOS & iPadOS | macOS | |
 | --- | :---: | :---: | --- |
 | [Alert](https://swiftui.flexnative.com/docs/components/ios/alert) | ✓ | ✓ | Confirmations, errors, and confirmation dialogs |
+| [Date Picker](https://swiftui.flexnative.com/docs/components/ios/date-picker) | ✓ | ✓ | Dates and times, in a field, calendar, or wheels |
 | [Form](https://swiftui.flexnative.com/docs/components/ios/form) | ✓ | ✓ | Settings and data-entry screens |
 | [List](https://swiftui.flexnative.com/docs/components/ios/list) | ✓ | — | Collections of rows, with swipe actions and selection |
 | [Segmented Control](https://swiftui.flexnative.com/docs/components/ios/segmented-control) | ✓ | ✓ | A few related options side by side, or tabs between views on iOS |

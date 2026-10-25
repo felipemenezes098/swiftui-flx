@@ -83,6 +83,14 @@ const componentCatalog: ComponentCatalogEntry[] = [
     },
   },
   {
+    slug: "date-picker",
+    name: "Date Picker",
+    descriptions: {
+      ios: "Picks a date, a time, or both with SwiftUI's native date picker.",
+      mac: "Picks a date, a time, or both with SwiftUI's native date picker.",
+    },
+  },
+  {
     slug: "empty",
     name: "Empty",
     descriptions: {

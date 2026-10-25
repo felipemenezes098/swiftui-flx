@@ -1,0 +1,109 @@
+<DocsHeader>
+
+# Date Picker
+
+<DocsPageActions />
+
+</DocsHeader>
+
+<DocsAvailability />
+
+Picks a date, a time, or both with SwiftUI's native date picker.
+
+<ComponentPreviewCode
+  alt="Date picker showing a due date"
+  image={{ light: "/images/components/ios/date-picker/date-picker-usage.webp", dark: "/images/components/ios/date-picker/date-picker-usage-dark.webp" }}
+  filePath="registry/components/date-picker/date-picker-usage-example.swift"
+  collapsible
+/>
+
+## Usage
+
+`DatePicker` already brings the calendar, keyboard and VoiceOver support, and the formats for every language and region, so use it directly:
+
+```swift
+DatePicker("Due date", selection: $dueDate, displayedComponents: .date)
+```
+
+By default, iOS shows the title on the leading side and the date in a compact field on the trailing side. Tapping the field opens a calendar. The field is as tall as FLX's text fields and pickers, so they line up in the same screen.
+
+To hide the title, add `.labelsHidden()`. VoiceOver still reads it.
+
+## Examples
+
+### Date and time
+
+`displayedComponents` picks what people can change: `.date`, `.hourAndMinute`, or both, which is the default.
+
+<ComponentPreviewCode
+  alt="Date pickers for a date, a time, and both"
+  image={{ light: "/images/components/ios/date-picker/date-picker-components.webp", dark: "/images/components/ios/date-picker/date-picker-components-dark.webp" }}
+  filePath="registry/components/date-picker/date-picker-components-example.swift"
+  collapsible
+/>
+
+### Graphical
+
+`.graphical` shows the calendar inline. Use it when picking the date is the main task of a screen, such as booking.
+
+<ComponentPreviewCode
+  alt="Inline calendar with a selected date"
+  image={{ light: "/images/components/ios/date-picker/date-picker-graphical.webp", dark: "/images/components/ios/date-picker/date-picker-graphical-dark.webp" }}
+  filePath="registry/components/date-picker/date-picker-graphical-example.swift"
+  collapsible
+/>
+
+### Wheel
+
+`.wheel` shows scrolling wheels. It fits a time that people set often, such as an alarm.
+
+<ComponentPreviewCode
+  alt="Wheels for hour and minute"
+  image={{ light: "/images/components/ios/date-picker/date-picker-wheel.webp", dark: "/images/components/ios/date-picker/date-picker-wheel-dark.webp" }}
+  filePath="registry/components/date-picker/date-picker-wheel-example.swift"
+  collapsible
+/>
+
+### Range
+
+Pass a range to `in:` to limit the dates people can pick. Dates outside it appear dimmed in the calendar.
+
+```swift
+DatePicker("Check-in", selection: $checkIn, in: Date.now..., displayedComponents: .date)
+```
+
+### In a form
+
+Inside a [Form](/docs/components/ios/form), each date picker becomes a row, with the title on the leading side.
+
+<ComponentPreviewCode
+  alt="Form with a title, an all-day toggle, a date, and a time"
+  image={{ light: "/images/components/ios/date-picker/date-picker-form.webp", dark: "/images/components/ios/date-picker/date-picker-form-dark.webp" }}
+  filePath="registry/components/date-picker/date-picker-form-example.swift"
+  collapsible
+/>
+
+### With Form Field
+
+Inside a [Form Field](/docs/components/ios/form-field), hide the date picker's title with `.labelsHidden()` and let `FLXFieldLabel` show it above, with a description below.
+
+<ComponentPreviewCode
+  alt="Due date picker with a label and a description"
+  image={{ light: "/images/components/ios/date-picker/date-picker-form-field.webp", dark: "/images/components/ios/date-picker/date-picker-form-field-dark.webp" }}
+  filePath="registry/components/date-picker/date-picker-form-field-example.swift"
+  collapsible
+/>
+
+## Color
+
+The `.graphical` calendar uses the theme's `tint`, which `.flxTheme` applies at the root of your app, for today and the selected date. Without a tint, it uses the app's `AccentColor`.
+
+The compact field and the wheels stay neutral and don't take the tint.
+
+## Text size
+
+The compact field grows with Dynamic Type. At the largest accessibility sizes, a picker with a date and a time shows them on two lines.
+
+`.controlSize(_:)` doesn't change the date picker on iOS.
+
+For more information about date pickers, see the [Apple documentation](https://developer.apple.com/documentation/swiftui/datepicker).

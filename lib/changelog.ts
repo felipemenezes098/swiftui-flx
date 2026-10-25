@@ -18,6 +18,14 @@ export const changelogFeaturedCount = 5
 
 const changelog: ChangelogEntry[] = [
   {
+    slug: "2026-10-date-picker",
+    title: "Date Picker",
+    date: "2026-10-25",
+    description:
+      "New Date Picker guide: the compact field, calendar, and wheels on iOS, and the date field and calendar on macOS.",
+    actions: [],
+  },
+  {
     slug: "2026-10-tab-view",
     title: "Tab View",
     date: "2026-10-21",
