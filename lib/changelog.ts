@@ -14,23 +14,15 @@ export interface ChangelogEntry {
   actions: ChangelogAction[]
 }
 
-export const changelogFeaturedCount = 5
+export const changelogFeaturedCount = 3
 
 const changelog: ChangelogEntry[] = [
   {
-    slug: "2026-10-navigation",
-    title: "Navigation",
+    slug: "2026-10-date-picker-and-navigation",
+    title: "Date Picker and Navigation",
     date: "2026-10-25",
     description:
-      "New Navigation guide: the navigation stack with titles and subtitles on iOS, and the sidebar split view on macOS.",
-    actions: [],
-  },
-  {
-    slug: "2026-10-date-picker",
-    title: "Date Picker",
-    date: "2026-10-25",
-    description:
-      "New Date Picker guide: the compact field, calendar, and wheels on iOS, and the date field and calendar on macOS.",
+      "New Date Picker and Navigation guides: dates and times in a field, calendar, or wheels, and the navigation stack on iOS and the sidebar split view on macOS.",
     actions: [],
   },
   {

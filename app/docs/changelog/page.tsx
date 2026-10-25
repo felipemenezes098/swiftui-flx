@@ -4,12 +4,17 @@ import { DocsPageActions } from "@/components/core/docs/docs-page-actions"
 import { DocsToc } from "@/components/core/docs/docs-toc"
 import { HoverPrefetchLink } from "@/components/core/hover-prefetch-link"
 import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import {
   changelogEntryTitle,
   changelogFeaturedCount,
   changelogHref,
   formatChangelogMonth,
   getChangelogEntries,
-  type ChangelogEntry,
 } from "@/lib/changelog"
 import { getDocsPager } from "@/lib/docs"
 import { getChangelogIndexMarkdown } from "@/lib/markdown"
@@ -25,19 +30,10 @@ export const metadata: Metadata = createPageMetadata({
   path: changelogHref(),
 })
 
-function groupByMonth(entries: ChangelogEntry[]) {
-  const groups = new Map<string, ChangelogEntry[]>()
-  for (const entry of entries) {
-    const month = formatChangelogMonth(entry.date)
-    groups.set(month, [...(groups.get(month) ?? []), entry])
-  }
-  return [...groups.entries()]
-}
-
 export default async function ChangelogPage() {
   const entries = getChangelogEntries()
   const featured = entries.slice(0, changelogFeaturedCount)
-  const older = groupByMonth(entries.slice(changelogFeaturedCount))
+  const older = entries.slice(changelogFeaturedCount)
   const contents = await Promise.all(
     featured.map((entry) => import(`@/app/content/changelog/${entry.slug}.mdx`))
   )
@@ -48,7 +44,7 @@ export default async function ChangelogPage() {
     url: `#${entry.slug}`,
   }))
   if (older.length > 0) {
-    toc.push({ title: "More Updates", url: "#more-updates" })
+    toc.push({ title: "Other Updates", url: "#other-updates" })
   }
 
   return (
@@ -92,30 +88,28 @@ export default async function ChangelogPage() {
         {older.length > 0 && (
           <section className="mt-12 border-t pt-12">
             <h2
-              id="more-updates"
+              id="other-updates"
               className="scroll-m-20 text-lg font-medium tracking-tight"
             >
-              More Updates
+              Other Updates
             </h2>
-            {older.map(([month, items]) => (
-              <div key={month} className="mt-8">
-                <h3 className="text-sm font-medium text-muted-foreground">
-                  {month}
-                </h3>
-                <ul className="mt-3 flex flex-col gap-2">
-                  {items.map((entry) => (
-                    <li key={entry.slug}>
-                      <HoverPrefetchLink
-                        href={changelogHref(entry.slug)}
-                        className="font-medium underline-offset-4 hover:underline"
-                      >
-                        {entry.title}
-                      </HoverPrefetchLink>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+            <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+              {older.map((entry) => (
+                <HoverPrefetchLink
+                  key={entry.slug}
+                  href={changelogHref(entry.slug)}
+                >
+                  <Card className="h-full transition-none hover:bg-muted/50">
+                    <CardHeader>
+                      <CardDescription>
+                        {formatChangelogMonth(entry.date)}
+                      </CardDescription>
+                      <CardTitle>{entry.title}</CardTitle>
+                    </CardHeader>
+                  </Card>
+                </HoverPrefetchLink>
+              ))}
+            </div>
           </section>
         )}
       </article>
