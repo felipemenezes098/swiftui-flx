@@ -9,6 +9,7 @@ import {
   componentsHref,
   getComponentDocs,
   getComponentsDescription,
+  getComponentsMetaDescription,
   getComponentsNote,
   getDocsPager,
   getPlatformInfo,
@@ -36,9 +37,9 @@ export async function generateMetadata({
   const name = getPlatformInfo(platform).name
 
   return createPageMetadata({
-    title: createDocTitle(`${name} Components`),
+    title: createDocTitle(`SwiftUI Components for ${name}`),
     imageTitle: `${name} Components`,
-    description: getComponentsDescription(platform),
+    description: getComponentsMetaDescription(platform),
     path: componentsHref(platform),
   })
 }

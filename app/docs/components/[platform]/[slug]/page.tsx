@@ -7,18 +7,21 @@ import { DocsAvailability } from "@/components/core/docs/docs-availability"
 import { DocsChangelog } from "@/components/core/docs/docs-changelog"
 import { DocsPageActions } from "@/components/core/docs/docs-page-actions"
 import { DocsToc } from "@/components/core/docs/docs-toc"
+import { JsonLd } from "@/components/core/json-ld"
 import {
   componentHref,
   getComponentDoc,
   getComponentDocs,
+  getComponentMetaDescription,
+  getComponentSeoTitle,
   getDocsPager,
-  getPlatformInfo,
   isPlatform,
   platforms,
 } from "@/lib/docs"
 import { getComponentChangelog } from "@/lib/changelog"
 import { getDocMarkdown } from "@/lib/markdown"
 import { createDocTitle, createPageMetadata } from "@/lib/metadata"
+import { getComponentStructuredData } from "@/lib/structured-data"
 import { getDocToc } from "@/lib/toc"
 import { cn } from "@/lib/utils"
 import { useMDXComponents as getMDXComponents } from "@/mdx-components"
@@ -47,9 +50,9 @@ export async function generateMetadata({
   if (!doc) return {}
 
   return createPageMetadata({
-    title: createDocTitle(`${doc.name} for ${getPlatformInfo(platform).name}`),
+    title: createDocTitle(getComponentSeoTitle(platform, doc)),
     imageTitle: doc.name,
-    description: doc.description,
+    description: getComponentMetaDescription(platform, doc),
     path: componentHref(platform, doc.slug),
   })
 }
@@ -105,6 +108,7 @@ export default async function ComponentDocPage({ params }: Readonly<Props>) {
 
   return (
     <div className="flex w-full gap-10">
+      <JsonLd data={getComponentStructuredData(platform, doc)} />
       <article className="mx-auto max-w-[50rem] min-w-0 flex-1">
         <Content components={components} />
         <DocsChangelog platform={platform} slug={slug} />

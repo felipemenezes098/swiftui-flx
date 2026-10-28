@@ -3,12 +3,18 @@ export type Platform = "ios" | "mac"
 export interface PlatformInfo {
   id: Platform
   name: string
+  devices: string
   releases: string[]
 }
 
 export const platforms: PlatformInfo[] = [
-  { id: "ios", name: "iOS", releases: ["iOS 16.4+", "iPadOS 16.4+"] },
-  { id: "mac", name: "macOS", releases: ["macOS 13.3+"] },
+  {
+    id: "ios",
+    name: "iOS",
+    devices: "iPhone and iPad",
+    releases: ["iOS 16.4+", "iPadOS 16.4+"],
+  },
+  { id: "mac", name: "macOS", devices: "Mac", releases: ["macOS 13.3+"] },
 ]
 
 export const defaultPlatform: Platform = "ios"
@@ -24,12 +30,14 @@ export function getPlatformInfo(platform: Platform) {
 export interface ComponentDoc {
   slug: string
   name: string
+  seoName: string
   description: string
 }
 
 interface ComponentCatalogEntry {
   slug: string
   name: string
+  seoNames: Partial<Record<Platform, string>>
   descriptions: Partial<Record<Platform, string>>
 }
 
@@ -37,6 +45,10 @@ const componentCatalog: ComponentCatalogEntry[] = [
   {
     slug: "alert",
     name: "Alert",
+    seoNames: {
+      ios: "Alert",
+      mac: "Alert",
+    },
     descriptions: {
       ios: "Asks people to confirm an action or acknowledge important information with SwiftUI's native alert.",
       mac: "Asks people to confirm an action or acknowledge important information with SwiftUI's native alert.",
@@ -45,6 +57,10 @@ const componentCatalog: ComponentCatalogEntry[] = [
   {
     slug: "avatar",
     name: "Avatar",
+    seoNames: {
+      ios: "Avatar View",
+      mac: "Avatar View",
+    },
     descriptions: {
       ios: "Displays a user's profile picture, with initials as a fallback.",
       mac: "Displays a user's profile picture, with initials as a fallback.",
@@ -53,6 +69,10 @@ const componentCatalog: ComponentCatalogEntry[] = [
   {
     slug: "badge",
     name: "Badge",
+    seoNames: {
+      ios: "Badge",
+      mac: "Badge",
+    },
     descriptions: {
       ios: "Displays a small label for status, category, or count.",
       mac: "Displays a small label for status, category, or count.",
@@ -61,6 +81,10 @@ const componentCatalog: ComponentCatalogEntry[] = [
   {
     slug: "button",
     name: "Button",
+    seoNames: {
+      ios: "Button Style",
+      mac: "Button Style",
+    },
     descriptions: {
       ios: "Triggers an action or event, such as submitting a form.",
       mac: "Triggers an action or event, such as submitting a form.",
@@ -69,6 +93,10 @@ const componentCatalog: ComponentCatalogEntry[] = [
   {
     slug: "card",
     name: "Card",
+    seoNames: {
+      ios: "Card View",
+      mac: "Card View",
+    },
     descriptions: {
       ios: "A card is a container that can be used to display content in a styled way.",
       mac: "A card is a container that can be used to display content in a styled way.",
@@ -77,6 +105,10 @@ const componentCatalog: ComponentCatalogEntry[] = [
   {
     slug: "collapsible",
     name: "Collapsible",
+    seoNames: {
+      ios: "Collapsible (DisclosureGroup)",
+      mac: "Collapsible (DisclosureGroup)",
+    },
     descriptions: {
       ios: "Displays content that can be expanded and collapsed.",
       mac: "Displays content that can be expanded and collapsed.",
@@ -85,6 +117,10 @@ const componentCatalog: ComponentCatalogEntry[] = [
   {
     slug: "date-picker",
     name: "Date Picker",
+    seoNames: {
+      ios: "DatePicker",
+      mac: "DatePicker",
+    },
     descriptions: {
       ios: "Picks a date, a time, or both with SwiftUI's native date picker.",
       mac: "Picks a date, a time, or both with SwiftUI's native date picker.",
@@ -93,6 +129,10 @@ const componentCatalog: ComponentCatalogEntry[] = [
   {
     slug: "empty",
     name: "Empty",
+    seoNames: {
+      ios: "Empty State View",
+      mac: "Empty State View",
+    },
     descriptions: {
       ios: "Displays an empty state, with an optional icon, title, description, and actions.",
       mac: "Displays an empty state, with an optional icon, title, description, and actions.",
@@ -101,6 +141,10 @@ const componentCatalog: ComponentCatalogEntry[] = [
   {
     slug: "field-label",
     name: "Field Label",
+    seoNames: {
+      ios: "Form Field Label",
+      mac: "Form Field Label",
+    },
     descriptions: {
       ios: "Pairs a caption with a form control.",
       mac: "Pairs a caption with a form control.",
@@ -109,6 +153,10 @@ const componentCatalog: ComponentCatalogEntry[] = [
   {
     slug: "form",
     name: "Form",
+    seoNames: {
+      ios: "Form",
+      mac: "Form",
+    },
     descriptions: {
       ios: "Builds settings and data-entry screens with SwiftUI's native Form.",
       mac: "Builds settings and data-entry screens with SwiftUI's native Form.",
@@ -117,6 +165,10 @@ const componentCatalog: ComponentCatalogEntry[] = [
   {
     slug: "form-field",
     name: "Form Field",
+    seoNames: {
+      ios: "Form Field with Error Message",
+      mac: "Form Field with Error Message",
+    },
     descriptions: {
       ios: "Groups a label, control, description, and error message for a form field.",
       mac: "Groups a label, control, description, and error message for a form field.",
@@ -125,6 +177,10 @@ const componentCatalog: ComponentCatalogEntry[] = [
   {
     slug: "item",
     name: "Item",
+    seoNames: {
+      ios: "List Row (Item)",
+      mac: "List Row (Item)",
+    },
     descriptions: {
       ios: "Displays a row of content, such as a list entry, notification, or settings row.",
       mac: "Displays a row of content, such as a list entry, notification, or settings row.",
@@ -133,6 +189,9 @@ const componentCatalog: ComponentCatalogEntry[] = [
   {
     slug: "list",
     name: "List",
+    seoNames: {
+      ios: "List",
+    },
     descriptions: {
       ios: "Displays a collection of rows with SwiftUI's native List.",
     },
@@ -140,6 +199,9 @@ const componentCatalog: ComponentCatalogEntry[] = [
   {
     slug: "menu",
     name: "Menu",
+    seoNames: {
+      ios: "Menu",
+    },
     descriptions: {
       ios: "Displays a list of actions or options revealed from a button or custom trigger.",
     },
@@ -147,6 +209,10 @@ const componentCatalog: ComponentCatalogEntry[] = [
   {
     slug: "navigation",
     name: "Navigation",
+    seoNames: {
+      ios: "NavigationStack",
+      mac: "NavigationSplitView",
+    },
     descriptions: {
       ios: "Moves through a hierarchy of screens with SwiftUI's native navigation stack.",
       mac: "Organizes a window into a sidebar and a detail view with SwiftUI's native split view.",
@@ -155,6 +221,9 @@ const componentCatalog: ComponentCatalogEntry[] = [
   {
     slug: "picker",
     name: "Picker",
+    seoNames: {
+      ios: "Picker",
+    },
     descriptions: {
       ios: "Displays a dropdown for selecting one value from a set of options.",
     },
@@ -162,6 +231,10 @@ const componentCatalog: ComponentCatalogEntry[] = [
   {
     slug: "progress-view",
     name: "Progress View",
+    seoNames: {
+      ios: "ProgressView",
+      mac: "ProgressView",
+    },
     descriptions: {
       ios: "Displays progress toward completion of a task, as a bar or a spinner.",
       mac: "Displays progress toward completion of a task, as a bar or a spinner.",
@@ -170,6 +243,10 @@ const componentCatalog: ComponentCatalogEntry[] = [
   {
     slug: "secure-field",
     name: "Secure Field",
+    seoNames: {
+      ios: "SecureField (Password Field)",
+      mac: "SecureField (Password Field)",
+    },
     descriptions: {
       ios: "Displays an obscured text input for passwords and other sensitive text.",
       mac: "Displays an obscured text input for passwords and other sensitive text.",
@@ -178,6 +255,10 @@ const componentCatalog: ComponentCatalogEntry[] = [
   {
     slug: "segmented-control",
     name: "Segmented Control",
+    seoNames: {
+      ios: "Segmented Control",
+      mac: "Segmented Control",
+    },
     descriptions: {
       ios: "Switches between a few options or views, like tabs, with SwiftUI's native segmented picker.",
       mac: "Picks one of a few closely related options with SwiftUI's native segmented picker.",
@@ -186,6 +267,10 @@ const componentCatalog: ComponentCatalogEntry[] = [
   {
     slug: "sheet",
     name: "Sheet",
+    seoNames: {
+      ios: "Sheet",
+      mac: "Sheet",
+    },
     descriptions: {
       ios: "Presents FLX components in SwiftUI's native sheet.",
       mac: "Presents FLX components in SwiftUI's native sheet.",
@@ -194,6 +279,10 @@ const componentCatalog: ComponentCatalogEntry[] = [
   {
     slug: "slider",
     name: "Slider",
+    seoNames: {
+      ios: "Slider",
+      mac: "Slider",
+    },
     descriptions: {
       ios: "Displays a control for selecting a value from a bounded range.",
       mac: "Displays a control for selecting a value from a bounded range.",
@@ -202,6 +291,10 @@ const componentCatalog: ComponentCatalogEntry[] = [
   {
     slug: "tab-view",
     name: "Tab View",
+    seoNames: {
+      ios: "TabView (Tab Bar)",
+      mac: "TabView",
+    },
     descriptions: {
       ios: "Switches between the main sections of an app with SwiftUI's native tab bar.",
       mac: "Switches between related panes of content in a window with SwiftUI's native tab view.",
@@ -210,6 +303,10 @@ const componentCatalog: ComponentCatalogEntry[] = [
   {
     slug: "text-editor",
     name: "Text Editor",
+    seoNames: {
+      ios: "TextEditor",
+      mac: "TextEditor",
+    },
     descriptions: {
       ios: "Displays a multi-line text input for long-form content.",
       mac: "Displays a multi-line text input for long-form content.",
@@ -218,6 +315,10 @@ const componentCatalog: ComponentCatalogEntry[] = [
   {
     slug: "text-field",
     name: "Text Field",
+    seoNames: {
+      ios: "TextField",
+      mac: "TextField",
+    },
     descriptions: {
       ios: "Displays a single-line text input.",
       mac: "Displays a single-line text input.",
@@ -226,6 +327,10 @@ const componentCatalog: ComponentCatalogEntry[] = [
   {
     slug: "text-field-group",
     name: "Text Field Group",
+    seoNames: {
+      ios: "TextField with Icon and Addons",
+      mac: "TextField with Icon and Addons",
+    },
     descriptions: {
       ios: "Wraps a text field in a shared box with optional leading and trailing addons.",
       mac: "Wraps a text field in a shared box with optional leading and trailing addons.",
@@ -234,6 +339,10 @@ const componentCatalog: ComponentCatalogEntry[] = [
   {
     slug: "toggle",
     name: "Toggle",
+    seoNames: {
+      ios: "Toggle Switch",
+      mac: "Toggle Checkbox",
+    },
     descriptions: {
       ios: "Displays a switch for an on/off value.",
       mac: "Displays a checkbox for an on/off value.",
@@ -244,8 +353,9 @@ const componentCatalog: ComponentCatalogEntry[] = [
 export function getComponentDocs(platform: Platform): ComponentDoc[] {
   return componentCatalog.flatMap((entry) => {
     const description = entry.descriptions[platform]
-    if (!description) return []
-    return [{ slug: entry.slug, name: entry.name, description }]
+    const seoName = entry.seoNames[platform]
+    if (!description || !seoName) return []
+    return [{ slug: entry.slug, name: entry.name, seoName, description }]
   })
 }
 
@@ -272,6 +382,21 @@ const componentsNotes: Partial<Record<Platform, string>> = {
 
 export function getComponentsDescription(platform: Platform) {
   return `Components you can copy and paste into your ${getPlatformInfo(platform).name} apps.`
+}
+
+export function getComponentsMetaDescription(platform: Platform) {
+  return `Copy-paste SwiftUI components for ${getPlatformInfo(platform).devices}, styled like shadcn/ui. Buttons, forms, lists, empty states and more, in code you own.`
+}
+
+export function getComponentSeoTitle(platform: Platform, doc: ComponentDoc) {
+  return `SwiftUI ${doc.seoName} for ${getPlatformInfo(platform).name}`
+}
+
+export function getComponentMetaDescription(
+  platform: Platform,
+  doc: ComponentDoc
+) {
+  return `${doc.description} Copy-paste SwiftUI code for ${getPlatformInfo(platform).devices}, styled like shadcn/ui.`
 }
 
 export function getComponentsNote(platform: Platform) {
