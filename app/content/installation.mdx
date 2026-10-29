@@ -151,11 +151,13 @@ Resolves light/dark mode and holds the default preset.
 
 </CodeTabs>
 
-That's all the setup. Components use `FLXTheme.default` automatically, so there's nothing to configure. Grab any component from the [components page](/docs/components) and it's ready to use.
+Components use `FLXTheme.default` automatically, so there's no theme to configure. Set the accent color below, and any component from the [components page](/docs/components) is ready to use.
 
 ## Set the accent color
 
-Views the system draws, such as an alert's default button, use the app's accent color, not the theme. In `Assets.xcassets`, set `AccentColor` to your preset's `tint`, with a dark appearance. For the Default preset:
+Views the system draws, such as an alert's default button, use the app's accent color, not the theme. Skip this step and they stay system blue while the rest of the app follows your theme.
+
+In `Assets.xcassets`, select `AccentColor`. In the Attributes inspector, set Appearances to Any, Dark, then set each color to your preset's `tint`. Choose 8-bit Hexadecimal as the input method to paste the values. For the Default preset:
 
 | Appearance | Color |
 | --- | --- |
