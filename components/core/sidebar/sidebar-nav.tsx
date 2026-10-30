@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation"
 import { usePlatform } from "@/hooks/use-platform"
 import { getActiveNavbarHref, getNavbarItems } from "@/lib/navbar"
 
+import { SidebarExternalLink } from "./sidebar-external-link"
 import { SidebarLink } from "./sidebar-link"
 
 export function SidebarNav() {
@@ -23,6 +24,9 @@ export function SidebarNav() {
           {item.name}
         </SidebarLink>
       ))}
+      <SidebarExternalLink href="https://ui.flexnative.com/">
+        Web
+      </SidebarExternalLink>
     </nav>
   )
 }
