@@ -135,7 +135,7 @@ function IPhoneScreen({
     <div
       data-slot="iphone-screen"
       className={cn(
-        "bg-background relative flex h-full w-full flex-col overflow-hidden",
+        "relative flex h-full w-full flex-col overflow-hidden bg-background",
         vs.screen,
         className
       )}
@@ -179,7 +179,7 @@ function IPhoneStatusBar({
     <div
       data-slot="iphone-status-bar"
       className={cn(
-        "text-foreground relative z-10 flex shrink-0 items-center justify-between font-semibold",
+        "relative z-10 flex shrink-0 items-center justify-between font-semibold text-foreground",
         vs.statusBar,
         className
       )}
@@ -204,10 +204,7 @@ function IPhoneContent({
   return (
     <div
       data-slot="iphone-content"
-      className={cn(
-        "no-scrollbar relative flex-1 overflow-y-auto",
-        className
-      )}
+      className={cn("relative no-scrollbar flex-1 overflow-y-auto", className)}
       {...props}
     />
   )
@@ -224,7 +221,7 @@ function IPhoneHomeIndicator({
     <div
       data-slot="iphone-home-indicator"
       className={cn(
-        "bg-foreground/80 absolute left-1/2 z-20 -translate-x-1/2 rounded-full",
+        "absolute left-1/2 z-20 -translate-x-1/2 rounded-full bg-foreground/80",
         vs.home,
         className
       )}

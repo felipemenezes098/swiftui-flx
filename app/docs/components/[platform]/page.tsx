@@ -3,7 +3,6 @@ import { notFound } from "next/navigation"
 
 import { HoverPrefetchLink } from "@/components/core/hover-prefetch-link"
 import { DocsPageActions } from "@/components/core/docs/docs-page-actions"
-import { Card, CardHeader, CardTitle } from "@/components/ui/card"
 import {
   componentHref,
   componentsHref,
@@ -59,30 +58,26 @@ export default async function ComponentsIndexPage({ params }: Readonly<Props>) {
     <div className="mx-auto flex w-full max-w-[50rem] flex-col gap-8">
       <div className="flex flex-col gap-2">
         <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-3">
-          <h1 className="text-2xl font-medium tracking-tight">
-            {name} Components
-          </h1>
+          <h1 className="text-base font-medium">{name} Components</h1>
           <DocsPageActions
             markdown={markdown}
             previous={previous}
             next={next}
           />
         </div>
-        <p className="text-muted-foreground">{description}</p>
+        <p className="text-sm text-muted-foreground">{description}</p>
         {note && <p className="text-sm text-muted-foreground">{note}</p>}
       </div>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
         {docs.map((doc) => (
           <HoverPrefetchLink
             key={doc.slug}
             href={componentHref(platform, doc.slug)}
           >
-            <Card className="h-full transition-none hover:bg-muted/50">
-              <CardHeader>
-                <CardTitle>{doc.name}</CardTitle>
-              </CardHeader>
-            </Card>
+            <span className="block rounded-lg border px-4 py-3 text-sm transition-colors hover:bg-muted/50">
+              {doc.name}
+            </span>
           </HoverPrefetchLink>
         ))}
       </div>

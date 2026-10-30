@@ -15,10 +15,7 @@ export function DocsChangelog({
 
   return (
     <section>
-      <h2
-        id="changelog"
-        className="mt-12 scroll-m-20 text-lg font-medium tracking-tight"
-      >
+      <h2 id="changelog" className="mt-14 scroll-m-20 text-base font-medium">
         Changelog
       </h2>
       <ul className="my-6 ml-6 list-disc">

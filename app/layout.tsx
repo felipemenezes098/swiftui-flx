@@ -5,8 +5,8 @@ import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { TooltipProvider } from "@/components/ui/tooltip"
-import { Footer } from "@/components/core/footer"
 import { Navbar } from "@/components/core/navbar"
+import { AppSidebar } from "@/components/core/sidebar/app-sidebar"
 import { siteConfig } from "@/config/site"
 import { UIProvider } from "@/contexts/ui-context"
 import { ConfigProvider } from "@/hooks/use-config"
@@ -78,8 +78,8 @@ export default function RootLayout({
             <ConfigProvider>
               <TooltipProvider>
                 <Navbar />
-                {children}
-                <Footer />
+                <AppSidebar />
+                <div className="md:pl-64">{children}</div>
               </TooltipProvider>
             </ConfigProvider>
           </UIProvider>

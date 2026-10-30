@@ -43,7 +43,7 @@ export function ThemeSwitcher() {
     <Button
       size="icon"
       variant="ghost"
-      className="h-8 w-8 transition-none"
+      className="h-8 w-8 text-muted-foreground transition-none hover:text-foreground"
       aria-label={active.label}
       title={active.label}
       onClick={() => setTheme(next.value)}

@@ -10,10 +10,10 @@ export function LatestChangelogLink() {
   return (
     <HoverPrefetchLink
       href={`${changelogHref()}#${latest.slug}`}
-      className="group inline-flex items-center gap-1.5 rounded-full bg-muted px-3 py-1 text-sm font-medium transition-colors hover:bg-muted/70"
+      className="group mb-3 inline-flex items-center gap-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground"
     >
       {latest.title}
-      <ArrowRight className="size-3.5 text-muted-foreground transition-transform group-hover:translate-x-0.5" />
+      <ArrowRight className="size-3 transition-transform group-hover:translate-x-0.5" />
     </HoverPrefetchLink>
   )
 }

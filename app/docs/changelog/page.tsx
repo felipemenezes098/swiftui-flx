@@ -51,16 +51,16 @@ export default async function ChangelogPage() {
     <div className="flex w-full gap-10">
       <article className="mx-auto max-w-[50rem] min-w-0 flex-1">
         <div className="mt-2 flex flex-wrap items-center justify-between gap-x-4 gap-y-3">
-          <h1 className="scroll-m-20 text-2xl font-medium tracking-tight">
-            Changelog
-          </h1>
+          <h1 className="scroll-m-20 text-base font-medium">Changelog</h1>
           <DocsPageActions
             markdown={getChangelogIndexMarkdown()}
             previous={previous}
             next={next}
           />
         </div>
-        <p className="mt-4 leading-7 text-muted-foreground">{description}</p>
+        <p className="mt-4 text-sm leading-7 text-muted-foreground">
+          {description}
+        </p>
         {featured.map((entry, index) => {
           const Content = contents[index].default
           return (
@@ -68,10 +68,7 @@ export default async function ChangelogPage() {
               key={entry.slug}
               className="mt-12 border-t pt-12 first-of-type:border-t-0 first-of-type:pt-0"
             >
-              <h2
-                id={entry.slug}
-                className="scroll-m-20 text-lg font-medium tracking-tight"
-              >
+              <h2 id={entry.slug} className="scroll-m-20 text-base font-medium">
                 <HoverPrefetchLink
                   href={changelogHref(entry.slug)}
                   className="hover:underline hover:underline-offset-4"
@@ -89,7 +86,7 @@ export default async function ChangelogPage() {
           <section className="mt-12 border-t pt-12">
             <h2
               id="other-updates"
-              className="scroll-m-20 text-lg font-medium tracking-tight"
+              className="scroll-m-20 text-base font-medium"
             >
               Other Updates
             </h2>

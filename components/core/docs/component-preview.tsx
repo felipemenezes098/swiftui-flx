@@ -32,7 +32,7 @@ function ComponentPreview({
   return (
     <Card
       className={cn(
-        "flex items-center justify-center rounded-xl border px-6 py-12 ring-0 dark:bg-background",
+        "flex items-center justify-center rounded-xl border border-border/60 bg-transparent px-6 py-12 shadow-none ring-0 dark:bg-transparent",
         className
       )}
     >

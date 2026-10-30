@@ -40,7 +40,7 @@ import {
 } from "@/lib/docs"
 import { cn } from "@/lib/utils"
 
-export function GlobalSearch() {
+export function GlobalSearch({ className }: Readonly<{ className?: string }>) {
   const router = useRouter()
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
@@ -93,6 +93,7 @@ export function GlobalSearch() {
         onClick={() => setOpen(true)}
         className={cn(
           "hidden h-8 w-48 justify-start gap-2 text-muted-foreground md:flex",
+          className,
           open && "pointer-events-none opacity-80"
         )}
       >

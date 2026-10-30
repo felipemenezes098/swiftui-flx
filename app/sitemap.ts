@@ -32,6 +32,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       path: changelogHref(entry.slug),
       lastModified: entry.date,
     })),
+    { path: "/blocks" },
     { path: "/me" },
     ...platforms.flatMap((platform) => [
       { path: componentsHref(platform.id), lastModified: latest },

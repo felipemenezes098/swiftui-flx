@@ -53,7 +53,7 @@ function AiInstall({
   return (
     <div
       className={cn(
-        "flex flex-col gap-4 rounded-xl bg-muted/30 p-5 ring-1 ring-border/60",
+        "flex flex-col gap-4 rounded-xl p-5 ring-1 ring-border/60",
         className
       )}
     >

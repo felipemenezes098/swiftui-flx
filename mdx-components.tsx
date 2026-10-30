@@ -59,10 +59,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
     ...components,
     h1: ({ children, ...props }: React.HTMLProps<HTMLHeadingElement>) => (
-      <h1
-        {...props}
-        className="mt-2 scroll-m-20 text-2xl font-medium tracking-tight"
-      >
+      <h1 {...props} className="mt-2 scroll-m-20 text-base font-medium">
         {children}
       </h1>
     ),
@@ -70,7 +67,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       <h2
         id={headingId(children)}
         {...props}
-        className="mt-12 scroll-m-20 text-lg font-medium tracking-tight first:mt-0"
+        className="mt-14 scroll-m-20 text-base font-medium first:mt-0"
       >
         {children}
       </h2>
@@ -79,37 +76,58 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       <h3
         id={headingId(children)}
         {...props}
-        className="mt-8 scroll-m-20 text-base font-medium tracking-tight"
+        className="mt-10 scroll-m-20 text-sm font-medium"
       >
         {children}
       </h3>
     ),
     p: ({ children, ...props }: React.HTMLProps<HTMLParagraphElement>) => (
-      <p {...props} className="leading-7 not-first:mt-4">
+      <p
+        {...props}
+        className="text-sm leading-7 text-pretty text-muted-foreground not-first:mt-4"
+      >
         {children}
       </p>
     ),
     a: ({ children, ...props }: React.ComponentProps<"a">) => (
       <a
         {...props}
-        className="font-medium text-primary underline underline-offset-4"
+        className="text-foreground underline decoration-foreground/25 underline-offset-4 transition-colors hover:decoration-foreground"
       >
         {children}
       </a>
     ),
     ul: ({ className, ...props }: React.HTMLAttributes<HTMLUListElement>) => (
-      <ul className={cn("my-6 ml-6 list-disc", className)} {...props} />
+      <ul
+        className={cn(
+          "my-4 ml-5 list-disc text-sm leading-7 text-muted-foreground",
+          className
+        )}
+        {...props}
+      />
     ),
     ol: ({ className, ...props }: React.HTMLAttributes<HTMLOListElement>) => (
-      <ol className={cn("my-6 ml-6 list-decimal", className)} {...props} />
+      <ol
+        className={cn(
+          "my-4 ml-5 list-decimal text-sm leading-7 text-muted-foreground",
+          className
+        )}
+        {...props}
+      />
     ),
     li: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
-      <li className={cn("mt-2", className)} {...props} />
+      <li className={cn("mt-1", className)} {...props} />
+    ),
+    strong: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
+      <strong
+        className={cn("font-medium text-foreground", className)}
+        {...props}
+      />
     ),
     code: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
       <code
         className={cn(
-          "relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm",
+          "relative rounded bg-muted px-1 py-0.5 font-mono text-[0.8125rem] text-foreground",
           className
         )}
         {...props}
@@ -151,14 +169,20 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     th: ({ className, ...props }: React.ComponentProps<"th">) => (
       <th
         className={cn(
-          "px-4 py-2 text-left align-middle font-medium",
+          "px-4 py-2 text-left align-middle font-medium text-foreground",
           className
         )}
         {...props}
       />
     ),
     td: ({ className, ...props }: React.ComponentProps<"td">) => (
-      <td className={cn("px-4 py-2 align-middle", className)} {...props} />
+      <td
+        className={cn(
+          "px-4 py-2 align-middle text-muted-foreground",
+          className
+        )}
+        {...props}
+      />
     ),
     hr: (props: React.HTMLAttributes<HTMLHRElement>) => (
       <hr className="mt-14" {...props} />
@@ -172,7 +196,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Step: ({ className, ...props }: React.ComponentProps<"h3">) => (
       <h3
         className={cn(
-          "step relative mt-8 scroll-m-20 text-base font-medium tracking-tight first:mt-4",
+          "step relative mt-8 scroll-m-20 text-sm font-medium first:mt-4",
           className
         )}
         {...props}
@@ -184,7 +208,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     }: React.HTMLAttributes<HTMLDivElement>) => (
       <div
         className={cn(
-          "mt-5 rounded-xl bg-muted/30 p-4 text-sm leading-relaxed [&>p]:m-0",
+          "mt-5 rounded-xl bg-muted/40 p-4 text-sm leading-relaxed [&>p]:m-0",
           className
         )}
         {...props}

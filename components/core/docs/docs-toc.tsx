@@ -75,19 +75,21 @@ export function DocsToc({
   items,
   className,
 }: Readonly<{ items: TocItem[]; className?: string }>) {
-  const activeId = useActiveHeading(React.useMemo(() => flattenIds(items), [items]))
+  const activeId = useActiveHeading(
+    React.useMemo(() => flattenIds(items), [items])
+  )
 
   if (items.length === 0) return null
 
   return (
     <div
       className={cn(
-        "sticky top-20 hidden h-[calc(100vh-8rem)] w-48 shrink-0",
+        "sticky top-16 hidden h-[calc(100vh-8rem)] w-48 shrink-0",
         className
       )}
     >
-      <p className="text-[0.8rem] font-medium">On This Page</p>
-      <nav className="scroll-fade-y mt-4 overflow-auto [--scroll-fade-reveal:24px]">
+      <p className="text-xs text-muted-foreground/60">On This Page</p>
+      <nav className="mt-4 scroll-fade-y overflow-auto [--scroll-fade-reveal:24px]">
         <ul>
           {items.map((item) => (
             <TocLink key={item.url} item={item} activeId={activeId} />

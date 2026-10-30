@@ -8,7 +8,7 @@ import { Logo } from "./logo"
 
 export function Contact() {
   return (
-    <div className="mt-10 flex flex-wrap items-center justify-between gap-3 rounded-lg border bg-card p-3">
+    <div className="mt-6 mb-10 flex flex-wrap items-center justify-between gap-3">
       <div className="flex items-center gap-3">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img

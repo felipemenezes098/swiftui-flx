@@ -79,7 +79,7 @@ function SettingsDialog() {
           <Button
             size="icon"
             variant="ghost"
-            className="h-8 w-8 transition-none"
+            className="h-8 w-8 text-muted-foreground transition-none hover:text-foreground"
             aria-label="Settings"
             title="Settings"
           />

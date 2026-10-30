@@ -16,7 +16,7 @@ function CodeBlock({
     <div
       data-slot="code-block"
       className={cn(
-        "relative w-full overflow-hidden rounded-xl border bg-card",
+        "relative w-full overflow-hidden rounded-xl border border-border/60 bg-transparent",
         className
       )}
       {...props}
@@ -169,7 +169,7 @@ function CodeBlockCollapsiblePanel({
             type="button"
             variant="outline"
             size="sm"
-            className="bg-card text-muted-foreground hover:bg-muted"
+            className="bg-background text-muted-foreground hover:bg-muted"
             onClick={() => setOpen(true)}
           >
             Show more
@@ -194,7 +194,7 @@ function CodeBlockCollapsibleTrigger({
       aria-expanded={open}
       onClick={() => setOpen(!open)}
       className={cn(
-        "inline-flex h-7 shrink-0 items-center gap-1 rounded-md bg-card px-2.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted/80",
+        "inline-flex h-7 shrink-0 items-center gap-1 rounded-md bg-transparent px-2.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted/80",
         className
       )}
       {...props}
