@@ -1,0 +1,66 @@
+import SwiftUI
+
+struct SearchScopesExample: View {
+    struct Message: Identifiable {
+        let id: String
+        let sender: String
+        let time: String
+        var isUnread = false
+    }
+
+    private let messages = [
+        Message(id: "The launch checklist is ready for review.", sender: "Ana Souza", time: "9:41", isUnread: true),
+        Message(id: "Build 42 is on TestFlight with the fixes.", sender: "Bruno Lima", time: "8:15", isUnread: true),
+        Message(id: "Here is the draft roadmap for next quarter.", sender: "Carla Dias", time: "Yesterday"),
+        Message(id: "Staging keys were rotated, nothing to change.", sender: "Diego Alves", time: "Monday")
+    ]
+
+    enum Scope: Hashable {
+        case all
+        case unread
+    }
+
+    @State private var query = ""
+    @State private var scope = Scope.all
+
+    private var results: [Message] {
+        let scoped = messages.filter { message in
+            scope == .all || message.isUnread
+        }
+        guard !query.isEmpty else { return scoped }
+        return scoped.filter { message in
+            message.sender.localizedStandardContains(query) || message.id.localizedStandardContains(query)
+        }
+    }
+
+    var body: some View {
+        NavigationStack {
+            List(results) { message in
+                row(for: message)
+            }
+            .listStyle(.plain)
+            .navigationTitle("Inbox")
+            .searchable(text: $query, prompt: "Search messages")
+            .searchScopes($scope, activation: .onSearchPresentation) {
+                Text("All").tag(Scope.all)
+                Text("Unread").tag(Scope.unread)
+            }
+        }
+    }
+
+    private func row(for message: Message) -> some View {
+        VStack(alignment: .leading, spacing: FLXSpacing.xs) {
+            HStack {
+                Text(message.sender)
+                    .flxFont(.headline)
+                Spacer()
+                Text(message.time)
+                    .flxFont(.subheadline)
+                    .foregroundStyle(.secondary)
+            }
+            Text(message.id)
+                .flxFont(.subheadline)
+                .foregroundStyle(.secondary)
+        }
+    }
+}

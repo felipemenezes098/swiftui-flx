@@ -241,6 +241,18 @@ const componentCatalog: ComponentCatalogEntry[] = [
     },
   },
   {
+    slug: "search",
+    name: "Search",
+    seoNames: {
+      ios: "Search (searchable)",
+      mac: "Search (searchable)",
+    },
+    descriptions: {
+      ios: "Searches the content of a screen with SwiftUI's native search field.",
+      mac: "Searches the content of a window with SwiftUI's native search field.",
+    },
+  },
+  {
     slug: "secure-field",
     name: "Secure Field",
     seoNames: {

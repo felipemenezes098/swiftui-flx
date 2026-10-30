@@ -1,0 +1,99 @@
+<DocsHeader>
+
+# Search
+
+<DocsPageActions />
+
+</DocsHeader>
+
+<DocsAvailability />
+
+Searches the content of a screen with SwiftUI's native search field.
+
+<ComponentPreviewCode
+  alt="Inbox with a native search field"
+  image={{ light: "/images/components/ios/search/search-usage.webp", dark: "/images/components/ios/search/search-usage-dark.webp" }}
+  filePath="registry/components/search/search-usage-example.swift"
+  collapsible
+/>
+
+## Usage
+
+`.searchable(text:prompt:)` adds the system search field, with its placement, Liquid Glass, keyboard, and clear button, so use it directly and filter your content with the text:
+
+```swift
+@State private var query = ""
+
+NavigationStack {
+    List(results) { message in
+        MessageRow(message)
+    }
+    .navigationTitle("Inbox")
+    .searchable(text: $query, prompt: "Search messages")
+}
+```
+
+On iPhone, the field sits in the bottom toolbar, within easy reach. On iPad, it sits at the trailing end of the top toolbar. Filter the results as people type, and use the prompt to say what they can search for.
+
+## Examples
+
+### Suggestions
+
+`.searchSuggestions` shows suggestions, such as recent searches, while the field is active. `.searchCompletion(_:)` fills the field when people pick one.
+
+<ComponentPreviewCode
+  alt="Search field with recent searches"
+  image={{ light: "/images/components/ios/search/search-suggestions.webp", dark: "/images/components/ios/search/search-suggestions-dark.webp" }}
+  filePath="registry/components/search/search-suggestions-example.swift"
+  collapsible
+/>
+
+### Scopes
+
+`.searchScopes` adds a scope bar to filter among clear categories. Start with the broadest scope, like All. By default, iOS shows scopes once people start typing. `activation: .onSearchPresentation` shows them as soon as search opens, as in the example.
+
+<ComponentPreviewCode
+  alt="Search with All and Unread scopes"
+  image={{ light: "/images/components/ios/search/search-scopes.webp", dark: "/images/components/ios/search/search-scopes-dark.webp" }}
+  filePath="registry/components/search/search-scopes-example.swift"
+  collapsible
+/>
+
+### No results
+
+When nothing matches, show an [Empty](/docs/components/ios/empty) state over the list that says so and suggests what to try.
+
+<ComponentPreviewCode
+  alt="Search with no results and an empty state"
+  image={{ light: "/images/components/ios/search/search-empty.webp", dark: "/images/components/ios/search/search-empty-dark.webp" }}
+  filePath="registry/components/search/search-empty-example.swift"
+  collapsible
+/>
+
+### Search tab
+
+In an app with a tab bar, a search tab keeps search one tap away. See [Tab View](/docs/components/ios/tab-view#search).
+
+<ComponentPreviewCode
+  alt="Search tab with recent searches and a search field"
+  image={{ light: "/images/components/ios/tab-view/tab-view-search.webp", dark: "/images/components/ios/tab-view/tab-view-search-dark.webp" }}
+  filePath="registry/components/tab-view/tab-view-search-example.swift"
+  collapsible
+/>
+
+### Search inside content
+
+To filter a card or a single section of a screen, rather than the whole screen, put a [Text Field Group](/docs/components/ios/text-field-group) with a search icon next to that content.
+
+<ComponentPreviewCode
+  alt="Text field group with a search icon"
+  image={{ light: "/images/components/ios/text-field-group/text-field-group-usage.webp", dark: "/images/components/ios/text-field-group/text-field-group-usage-dark.webp" }}
+  filePath="registry/components/text-field-group/text-field-group-usage-example.swift"
+  collapsible
+/>
+
+## Color
+
+The text cursor and the suggestion icons follow the theme's `tint`, which `.flxTheme(_:)` applies at the root of your app. The scope bar stays neutral, like a [Segmented Control](/docs/components/ios/segmented-control).
+
+For more information, see the Human Interface Guidelines for [search fields](https://developer.apple.com/design/human-interface-guidelines/search-fields) and the [Apple documentation](https://developer.apple.com/documentation/swiftui/adding-a-search-interface-to-your-app).

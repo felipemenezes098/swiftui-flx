@@ -1,0 +1,86 @@
+<DocsHeader>
+
+# Search
+
+<DocsPageActions />
+
+</DocsHeader>
+
+<DocsAvailability />
+
+Searches the content of a window with SwiftUI's native search field.
+
+<ComponentPreviewCode
+  alt="Inbox window with a search field in the toolbar"
+  image={{ light: "/images/components/mac/search/search-usage.webp", dark: "/images/components/mac/search/search-usage-dark.webp" }}
+  filePath="registry/components/search/search-usage-example+macOS.swift"
+  collapsible
+/>
+
+## Usage
+
+`.searchable(text:prompt:)` adds the system search field, with its placement, keyboard handling, and clear button, so use it directly and filter your content with the text:
+
+```swift
+@State private var query = ""
+
+NavigationStack {
+    List(results) { message in
+        MessageRow(message)
+    }
+    .navigationTitle("Inbox")
+    .searchable(text: $query, prompt: "Search messages")
+}
+```
+
+On macOS, the field sits at the trailing end of the window's toolbar. Filter the results as people type, and use the prompt to say what they can search for.
+
+## Examples
+
+### Suggestions
+
+`.searchSuggestions` shows suggestions, such as recent searches, while the field is active. `.searchCompletion(_:)` fills the field when people pick one. On macOS they open in a menu below the field.
+
+<ComponentPreviewCode
+  alt="Search field with recent searches"
+    filePath="registry/components/search/search-suggestions-example+macOS.swift"
+  collapsible
+/>
+
+### Scopes
+
+`.searchScopes` adds a scope bar to filter among clear categories. Start with the broadest scope, like All. macOS shows the scope bar below the toolbar while people search.
+
+<ComponentPreviewCode
+  alt="Search with All and Unread scopes"
+    filePath="registry/components/search/search-scopes-example+macOS.swift"
+  collapsible
+/>
+
+### No results
+
+When nothing matches, show an [Empty](/docs/components/mac/empty) state over the list that says so.
+
+<ComponentPreviewCode
+  alt="Search with no results and an empty state"
+  image={{ light: "/images/components/mac/search/search-empty.webp", dark: "/images/components/mac/search/search-empty-dark.webp" }}
+  filePath="registry/components/search/search-empty-example+macOS.swift"
+  collapsible
+/>
+
+### Search inside content
+
+To filter one pane of a window, rather than the whole window, put a [Text Field Group](/docs/components/mac/text-field-group) with a search icon next to that content.
+
+<ComponentPreviewCode
+  alt="Text field group with a search icon"
+  image={{ light: "/images/components/mac/text-field-group/text-field-group-usage.webp", dark: "/images/components/mac/text-field-group/text-field-group-usage-dark.webp" }}
+  filePath="registry/components/text-field-group/text-field-group-usage-example.swift"
+  collapsible
+/>
+
+## Color
+
+The field's focus ring and the selected scope follow the theme's `tint`, which `.flxTheme(_:)` applies at the root of your app.
+
+For more information, see the Human Interface Guidelines for [search fields](https://developer.apple.com/design/human-interface-guidelines/search-fields) and the [Apple documentation](https://developer.apple.com/documentation/swiftui/adding-a-search-interface-to-your-app).
