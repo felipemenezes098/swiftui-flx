@@ -7,7 +7,9 @@ import sharp from "sharp"
 const root = join(import.meta.dirname, "..")
 const publicDir = join(root, "public")
 const imagesDir = join(publicDir, "images")
-const componentsDir = join(imagesDir, "components")
+const captureDirs = ["components", "blocks"].map((kind) =>
+  join(imagesDir, kind)
+)
 const manifestPath = join(root, "lib", "image-manifest.json")
 
 const maxWidths = { ios: 672, mac: 960 }
@@ -22,13 +24,16 @@ async function listFiles(dir) {
 }
 
 function platformOf(file) {
-  return relative(componentsDir, file).split(sep)[0]
+  return relative(imagesDir, file).split(sep)[1]
+}
+
+async function listCaptures(dir) {
+  return listFiles(dir).catch(() => [])
 }
 
 async function convertPngs() {
-  const pngs = (await listFiles(componentsDir)).filter((file) =>
-    file.endsWith(".png")
-  )
+  const files = (await Promise.all(captureDirs.map(listCaptures))).flat()
+  const pngs = files.filter((file) => file.endsWith(".png"))
 
   for (const png of pngs) {
     const webp = png.replace(/\.png$/, ".webp")
