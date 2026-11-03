@@ -1,0 +1,162 @@
+<DocsHeader>
+
+# Skeleton
+
+<DocsPageActions />
+
+</DocsHeader>
+
+<DocsAvailability />
+
+Shows a placeholder while content is loading.
+
+<ComponentPreviewCode
+  alt="FLXSkeleton avatar and two text lines"
+  image={{ light: "/images/components/ios/skeleton/skeleton-usage.webp", dark: "/images/components/ios/skeleton/skeleton-usage-dark.webp" }}
+  filePath="registry/components/skeleton/skeleton-usage-example.swift"
+  collapsible
+/>
+
+## Installation
+
+Requires the [design system foundation](/docs/installation#add-the-foundation) (tokens and theme).
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<CodeBlockCommand
+  command="shadcn@latest add @swiftui-flx/ios-skeleton"
+/>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy the style</Step>
+
+<CodeBlockFromFile
+  filePath="registry/components/skeleton/FLXSkeletonStyle.swift"
+  title="FLXSkeletonStyle.swift"
+/>
+
+<Step>Copy the component</Step>
+
+<CodeBlockFromFile
+  filePath="registry/components/skeleton/FLXSkeleton.swift"
+  title="FLXSkeleton.swift"
+/>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+`FLXSkeleton` fills the space it's given, so set its size with `.frame` and its shape with `.clipShape`.
+
+```swift
+FLXSkeleton()
+    .frame(width: 220, height: 16)
+```
+
+## Card
+
+Compose skeletons in the same layout as the content they stand in for, so nothing moves when it loads.
+
+<ComponentPreviewCode
+  alt="FLXCard with skeleton placeholders"
+  image={{ light: "/images/components/ios/skeleton/skeleton-card.webp", dark: "/images/components/ios/skeleton/skeleton-card-dark.webp" }}
+  code={`FLXCard {
+    FLXCardHeader {
+        FLXSkeleton()
+            .frame(width: 180, height: 16)
+        FLXSkeleton()
+            .frame(width: 120, height: 12)
+    }
+    FLXCardContent {
+        FLXSkeleton()
+            .frame(height: 120)
+    }
+}
+`}
+  collapsible
+/>
+
+## Redacted
+
+To turn a view you already have into a placeholder, use SwiftUI's `.redacted(reason: .placeholder)`. It replaces text and images with blocks of the same size, so you don't build a second layout. Use `.unredacted()` on a part that should stay visible.
+
+<ComponentPreviewCode
+  alt="A profile row redacted as a placeholder"
+  image={{ light: "/images/components/ios/skeleton/skeleton-redacted.webp", dark: "/images/components/ios/skeleton/skeleton-redacted-dark.webp" }}
+  code={`HStack(spacing: FLXSpacing.md) {
+    Image(systemName: "person.crop.circle.fill")
+        .flxFont(.largeTitle)
+    VStack(alignment: .leading) {
+        Text("Olivia Martin")
+            .flxFont(.headline)
+        Text("olivia@example.com")
+            .flxFont(.subheadline)
+    }
+}
+.redacted(reason: .placeholder)
+`}
+/>
+
+## Accessibility
+
+`FLXSkeleton` is hidden from VoiceOver, and its pulse stops when Reduce Motion is on. Tell VoiceOver that the area is loading on the container:
+
+```swift
+VStack {
+    FLXSkeleton()
+        .frame(height: 120)
+}
+.accessibilityElement()
+.accessibilityLabel("Loading")
+```
+
+## Custom styling
+
+`FLXSkeletonStyle` is an FLX protocol. Override it for a subtree via `.flxSkeletonStyle(_:)`:
+
+<ComponentPreviewCode
+  alt="FLXSkeleton custom styling"
+  image={{ light: "/images/components/ios/skeleton/skeleton-custom.webp", dark: "/images/components/ios/skeleton/skeleton-custom-dark.webp" }}
+  code={`struct FLXStaticSkeletonStyle: FLXSkeletonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        Capsule()
+            .fill(.quaternary)
+    }
+}
+
+VStack(alignment: .leading, spacing: FLXSpacing.sm) {
+    FLXSkeleton()
+        .frame(width: 220, height: 16)
+    FLXSkeleton()
+        .frame(width: 160, height: 16)
+}
+.flxSkeletonStyle(FLXStaticSkeletonStyle())
+`}
+  collapsible
+/>
+
+## API Reference
+
+### FLXSkeleton
+
+```swift
+init()
+```
+
+Filled with `theme.colors.accent` and `theme.radius.md`, pulsing between full and half opacity.

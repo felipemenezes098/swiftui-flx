@@ -86,6 +86,7 @@ struct SettingsView: View {
 | [Picker](https://swiftui.flexnative.com/docs/components/ios/picker) | ✓ | — | Dropdown to pick one value |
 | [Progress View](https://swiftui.flexnative.com/docs/components/ios/progress-view) | ✓ | ✓ | Progress bar or spinner |
 | [Secure Field](https://swiftui.flexnative.com/docs/components/ios/secure-field) | ✓ | ✓ | Password input |
+| [Skeleton](https://swiftui.flexnative.com/docs/components/ios/skeleton) | ✓ | ✓ | Placeholder while content loads |
 | [Slider](https://swiftui.flexnative.com/docs/components/ios/slider) | ✓ | ✓ | Pick a value from a range |
 | [Text Editor](https://swiftui.flexnative.com/docs/components/ios/text-editor) | ✓ | ✓ | Multi-line text input |
 | [Text Field](https://swiftui.flexnative.com/docs/components/ios/text-field) | ✓ | ✓ | Single-line text input |

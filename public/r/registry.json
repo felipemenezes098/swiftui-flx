@@ -314,6 +314,61 @@
       "type": "registry:file"
     },
     {
+      "name": "ios-skeleton",
+      "title": "Skeleton",
+      "description": "Shows a placeholder while content is loading.",
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
+      "files": [
+        {
+          "path": "registry/components/skeleton/FLXSkeletonStyle.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXSkeleton/FLXSkeletonStyle.swift"
+        },
+        {
+          "path": "registry/components/skeleton/FLXSkeleton.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXSkeleton/FLXSkeleton.swift"
+        }
+      ],
+      "meta": {
+        "platforms": {
+          "iOS": "16.4",
+          "iPadOS": "16.4"
+        },
+        "license": "MIT"
+      },
+      "type": "registry:file"
+    },
+    {
+      "name": "mac-skeleton",
+      "title": "Skeleton",
+      "description": "Shows a placeholder while content is loading.",
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
+      "files": [
+        {
+          "path": "registry/components/skeleton/FLXSkeletonStyle.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXSkeleton/FLXSkeletonStyle.swift"
+        },
+        {
+          "path": "registry/components/skeleton/FLXSkeleton.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXSkeleton/FLXSkeleton.swift"
+        }
+      ],
+      "meta": {
+        "platforms": {
+          "macOS": "13.3"
+        },
+        "license": "MIT"
+      },
+      "type": "registry:file"
+    },
+    {
       "name": "ios-item",
       "title": "Item",
       "description": "Displays a row of content, such as a list entry, notification, or settings row.",

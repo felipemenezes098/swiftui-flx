@@ -289,6 +289,18 @@ const componentCatalog: ComponentCatalogEntry[] = [
     },
   },
   {
+    slug: "skeleton",
+    name: "Skeleton",
+    seoNames: {
+      ios: "Skeleton",
+      mac: "Skeleton",
+    },
+    descriptions: {
+      ios: "Shows a placeholder while content is loading.",
+      mac: "Shows a placeholder while content is loading.",
+    },
+  },
+  {
     slug: "slider",
     name: "Slider",
     seoNames: {

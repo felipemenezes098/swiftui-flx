@@ -18,6 +18,14 @@ export const changelogFeaturedCount = 3
 
 const changelog: ChangelogEntry[] = [
   {
+    slug: "2026-11-skeleton",
+    title: "Skeleton",
+    date: "2026-11-03",
+    description:
+      "New Skeleton component: a placeholder that pulses while content loads, plus a guide to SwiftUI's redacted placeholders.",
+    actions: [],
+  },
+  {
     slug: "2026-10-date-picker-and-navigation",
     title: "Date Picker and Navigation",
     date: "2026-10-25",

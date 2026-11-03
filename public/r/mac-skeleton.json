@@ -1,0 +1,30 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "mac-skeleton",
+  "title": "Skeleton",
+  "description": "Shows a placeholder while content is loading.",
+  "registryDependencies": [
+    "@swiftui-flx/foundation"
+  ],
+  "files": [
+    {
+      "path": "registry/components/skeleton/FLXSkeletonStyle.swift",
+      "content": "import SwiftUI\n\n@MainActor\npublic protocol FLXSkeletonStyle {\n    associatedtype Body: View\n    typealias Configuration = FLXSkeletonStyleConfiguration\n\n    @ViewBuilder func makeBody(configuration: Configuration) -> Body\n}\n\npublic struct FLXSkeletonStyleConfiguration {}\n\npublic struct FLXDefaultSkeletonStyle: FLXSkeletonStyle {\n    public init() {}\n\n    public func makeBody(configuration: Configuration) -> some View {\n        FLXDefaultSkeletonStyleBody()\n    }\n}\n\nprivate enum FLXSkeletonMetrics {\n    static let pulseOpacity: Double = 0.5\n    static let pulseDuration: Double = 1\n}\n\nprivate struct FLXDefaultSkeletonStyleBody: View {\n    @Environment(\\.flxTheme) private var theme\n    @Environment(\\.accessibilityReduceMotion) private var reduceMotion\n    @State private var isPulsing = false\n\n    var body: some View {\n        RoundedRectangle(cornerRadius: theme.radius.md)\n            .fill(theme.colors.accent)\n            .opacity(opacity)\n            .animation(.easeInOut(duration: FLXSkeletonMetrics.pulseDuration).repeatForever(autoreverses: true), value: isPulsing)\n            .onAppear { isPulsing = true }\n    }\n\n    private var opacity: Double {\n        if isPulsing && !reduceMotion {\n            return FLXSkeletonMetrics.pulseOpacity\n        }\n        return 1\n    }\n}\n\nstruct AnyFLXSkeletonStyle: FLXSkeletonStyle {\n    private let _makeBody: (Configuration) -> AnyView\n\n    init<S: FLXSkeletonStyle>(_ style: S) {\n        _makeBody = { AnyView(style.makeBody(configuration: $0)) }\n    }\n\n    func makeBody(configuration: Configuration) -> AnyView {\n        _makeBody(configuration)\n    }\n}\n\nprivate struct FLXSkeletonStyleKey: EnvironmentKey {\n    static let defaultValue: AnyFLXSkeletonStyle? = nil\n}\n\nextension EnvironmentValues {\n    var flxSkeletonStyle: AnyFLXSkeletonStyle? {\n        get { self[FLXSkeletonStyleKey.self] }\n        set { self[FLXSkeletonStyleKey.self] = newValue }\n    }\n}\n\nextension View {\n    public func flxSkeletonStyle<S: FLXSkeletonStyle>(_ style: S) -> some View {\n        environment(\\.flxSkeletonStyle, AnyFLXSkeletonStyle(style))\n    }\n}\n",
+      "type": "registry:file",
+      "target": "~/DesignSystem/Components/FLXSkeleton/FLXSkeletonStyle.swift"
+    },
+    {
+      "path": "registry/components/skeleton/FLXSkeleton.swift",
+      "content": "import SwiftUI\n\n/// A placeholder block shown while content loads. It fills the size it's\n/// offered, so the caller sets its shape with `.frame` (and `.clipShape` for\n/// a circle), like shadcn/ui's `className`. To turn an existing view into a\n/// placeholder instead, use SwiftUI's `.redacted(reason: .placeholder)`.\npublic struct FLXSkeleton: View {\n    @Environment(\\.flxSkeletonStyle) private var style\n\n    public init() {}\n\n    public var body: some View {\n        (style ?? AnyFLXSkeletonStyle(FLXDefaultSkeletonStyle())).makeBody(configuration: .init())\n            .accessibilityHidden(true)\n    }\n}\n",
+      "type": "registry:file",
+      "target": "~/DesignSystem/Components/FLXSkeleton/FLXSkeleton.swift"
+    }
+  ],
+  "meta": {
+    "platforms": {
+      "macOS": "13.3"
+    },
+    "license": "MIT"
+  },
+  "type": "registry:file"
+}
