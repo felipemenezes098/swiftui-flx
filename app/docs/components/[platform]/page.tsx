@@ -3,6 +3,7 @@ import { notFound } from "next/navigation"
 
 import { HoverPrefetchLink } from "@/components/core/hover-prefetch-link"
 import { DocsPageActions } from "@/components/core/docs/docs-page-actions"
+import { NewLabel } from "@/components/core/docs/new-label"
 import {
   componentHref,
   componentsHref,
@@ -75,8 +76,9 @@ export default async function ComponentsIndexPage({ params }: Readonly<Props>) {
             key={doc.slug}
             href={componentHref(platform, doc.slug)}
           >
-            <span className="block rounded-lg border px-4 py-3 text-sm transition-colors hover:bg-muted/50">
+            <span className="flex items-center gap-2 rounded-lg border px-4 py-3 text-sm transition-colors hover:bg-muted/50">
               {doc.name}
+              {doc.isNew && <NewLabel />}
             </span>
           </HoverPrefetchLink>
         ))}

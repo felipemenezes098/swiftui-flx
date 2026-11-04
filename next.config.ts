@@ -3,6 +3,7 @@ import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
+  env: { NEXT_PUBLIC_BUILD_TIME: new Date().toISOString() },
   async rewrites() {
     return [{ source: "/docs/:path*.md", destination: "/md/:path*" }]
   },

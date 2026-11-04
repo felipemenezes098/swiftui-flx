@@ -32,11 +32,13 @@ export interface ComponentDoc {
   name: string
   seoName: string
   description: string
+  isNew: boolean
 }
 
 interface ComponentCatalogEntry {
   slug: string
   name: string
+  addedAt?: string
   seoNames: Partial<Record<Platform, string>>
   descriptions: Partial<Record<Platform, string>>
 }
@@ -291,6 +293,7 @@ const componentCatalog: ComponentCatalogEntry[] = [
   {
     slug: "skeleton",
     name: "Skeleton",
+    addedAt: "2026-11-03",
     seoNames: {
       ios: "Skeleton",
       mac: "Skeleton",
@@ -374,12 +377,29 @@ const componentCatalog: ComponentCatalogEntry[] = [
   },
 ]
 
+const NEW_COMPONENT_DAYS = 30
+
+function isNewComponent(addedAt?: string) {
+  if (!addedAt) return false
+  const buildTime = Date.parse(process.env.NEXT_PUBLIC_BUILD_TIME ?? "")
+  const age = buildTime - Date.parse(addedAt)
+  return age < NEW_COMPONENT_DAYS * 24 * 60 * 60 * 1000
+}
+
 export function getComponentDocs(platform: Platform): ComponentDoc[] {
   return componentCatalog.flatMap((entry) => {
     const description = entry.descriptions[platform]
     const seoName = entry.seoNames[platform]
     if (!description || !seoName) return []
-    return [{ slug: entry.slug, name: entry.name, seoName, description }]
+    return [
+      {
+        slug: entry.slug,
+        name: entry.name,
+        seoName,
+        description,
+        isNew: isNewComponent(entry.addedAt),
+      },
+    ]
   })
 }
 
@@ -463,6 +483,7 @@ export interface DocsNavItem {
   href: string
   disabled?: boolean
   external?: boolean
+  isNew?: boolean
 }
 
 export interface DocsNavGroup {
@@ -492,6 +513,7 @@ export function getDocsNav(platform: Platform): DocsNavGroup[] {
       items: getComponentDocs(platform).map((doc) => ({
         title: doc.name,
         href: componentHref(platform, doc.slug),
+        isNew: doc.isNew,
       })),
     },
   ]

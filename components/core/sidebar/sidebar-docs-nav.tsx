@@ -3,6 +3,7 @@
 import { ArrowUpRight } from "lucide-react"
 import { usePathname } from "next/navigation"
 
+import { NewLabel } from "@/components/core/docs/new-label"
 import { usePlatform } from "@/hooks/use-platform"
 import { getDocsNav } from "@/lib/docs"
 
@@ -36,7 +37,10 @@ export function SidebarDocsNav() {
               )}
               {!item.external && (
                 <SidebarLink href={item.href} active={pathname === item.href}>
-                  {item.title}
+                  <span className="flex items-center gap-2">
+                    {item.title}
+                    {item.isNew && <NewLabel />}
+                  </span>
                 </SidebarLink>
               )}
             </div>
