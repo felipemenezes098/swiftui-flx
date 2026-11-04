@@ -279,6 +279,39 @@
       ]
     },
     {
+      "name": "ios-toast",
+      "type": "registry:file",
+      "title": "Toast",
+      "description": "Shows brief feedback about an action, with an optional undo.",
+      "meta": {
+        "platforms": {
+          "iOS": "16.4",
+          "iPadOS": "16.4"
+        },
+        "license": "MIT"
+      },
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
+      "files": [
+        {
+          "path": "toast/FLXToastStyle.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXToast/FLXToastStyle.swift"
+        },
+        {
+          "path": "toast/FLXToastStyle+iOS.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXToast/FLXToastStyle+iOS.swift"
+        },
+        {
+          "path": "toast/FLXToast.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXToast/FLXToast.swift"
+        }
+      ]
+    },
+    {
       "name": "ios-item",
       "type": "registry:file",
       "title": "Item",

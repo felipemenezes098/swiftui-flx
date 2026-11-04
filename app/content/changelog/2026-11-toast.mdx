@@ -1,0 +1,13 @@
+**New [Toast](/docs/components/ios/toast) component for iOS.**
+
+Brief feedback about an action the person just took, shaped like `.alert`: `.flxToast("Changes saved", isPresented: $isSaved)`. It uses Liquid Glass on iOS 26 and later, shows one toast at a time, and stays on screen while VoiceOver is on.
+
+<ComponentPreview
+  platform="ios"
+  alt="FLXToast with a checkmark and the title Changes saved"
+  image={{ light: "/images/components/ios/toast/toast-usage.webp", dark: "/images/components/ios/toast/toast-usage-dark.webp" }}
+/>
+
+Add actions such as Undo with a trailing closure, or present toasts from an `Identifiable` value with `item:`.
+
+No existing component changed.

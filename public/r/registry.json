@@ -369,6 +369,39 @@
       "type": "registry:file"
     },
     {
+      "name": "ios-toast",
+      "title": "Toast",
+      "description": "Shows brief feedback about an action, with an optional undo.",
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
+      "files": [
+        {
+          "path": "registry/components/toast/FLXToastStyle.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXToast/FLXToastStyle.swift"
+        },
+        {
+          "path": "registry/components/toast/FLXToastStyle+iOS.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXToast/FLXToastStyle+iOS.swift"
+        },
+        {
+          "path": "registry/components/toast/FLXToast.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXToast/FLXToast.swift"
+        }
+      ],
+      "meta": {
+        "platforms": {
+          "iOS": "16.4",
+          "iPadOS": "16.4"
+        },
+        "license": "MIT"
+      },
+      "type": "registry:file"
+    },
+    {
       "name": "ios-item",
       "title": "Item",
       "description": "Displays a row of content, such as a list entry, notification, or settings row.",

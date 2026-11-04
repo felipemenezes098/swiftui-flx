@@ -364,6 +364,17 @@ const componentCatalog: ComponentCatalogEntry[] = [
     },
   },
   {
+    slug: "toast",
+    name: "Toast",
+    addedAt: "2026-11-04",
+    seoNames: {
+      ios: "Toast",
+    },
+    descriptions: {
+      ios: "Shows a brief message about an action the person just took.",
+    },
+  },
+  {
     slug: "toggle",
     name: "Toggle",
     seoNames: {
@@ -421,7 +432,7 @@ export function getComponentAvailabilityText(platform: Platform, slug: string) {
 }
 
 const componentsNotes: Partial<Record<Platform, string>> = {
-  mac: "Menu and Picker are iOS only. On macOS, use SwiftUI's Menu and Picker: the Mac always draws them natively.",
+  mac: "Menu and Picker are iOS only. On macOS, use SwiftUI's Menu and Picker: the Mac always draws them natively. Toast is iOS only for now.",
 }
 
 export function getComponentsDescription(platform: Platform) {

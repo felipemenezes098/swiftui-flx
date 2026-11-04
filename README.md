@@ -91,9 +91,10 @@ struct SettingsView: View {
 | [Text Editor](https://swiftui.flexnative.com/docs/components/ios/text-editor) | ✓ | ✓ | Multi-line text input |
 | [Text Field](https://swiftui.flexnative.com/docs/components/ios/text-field) | ✓ | ✓ | Single-line text input |
 | [Text Field Group](https://swiftui.flexnative.com/docs/components/ios/text-field-group) | ✓ | ✓ | Text field with leading and trailing addons |
+| [Toast](https://swiftui.flexnative.com/docs/components/ios/toast) | ✓ | — | Brief feedback about an action |
 | [Toggle](https://swiftui.flexnative.com/docs/components/ios/toggle) | ✓ | ✓ | Switch on iOS, checkbox on macOS |
 
-On macOS, Menu and Picker use SwiftUI's native versions, which the Mac always draws itself.
+On macOS, Menu and Picker use SwiftUI's native versions, which the Mac always draws itself. Toast is iOS only for now.
 
 ### Native guides
 

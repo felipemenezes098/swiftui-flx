@@ -18,6 +18,14 @@ export const changelogFeaturedCount = 3
 
 const changelog: ChangelogEntry[] = [
   {
+    slug: "2026-11-toast",
+    title: "Toast",
+    date: "2026-11-04",
+    description:
+      "New Toast component for iOS: brief feedback about an action, with optional actions such as Undo.",
+    actions: [],
+  },
+  {
     slug: "2026-11-skeleton",
     title: "Skeleton",
     date: "2026-11-03",
