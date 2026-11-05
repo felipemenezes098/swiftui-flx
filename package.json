@@ -4,9 +4,10 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "node scripts/code.mjs && next dev",
     "images": "node scripts/images.mjs",
-    "build": "node scripts/images.mjs && next build",
+    "code": "node scripts/code.mjs",
+    "build": "node scripts/images.mjs && node scripts/code.mjs && next build",
     "start": "next start",
     "lint": "eslint",
     "format": "prettier --write \"**/*.{ts,tsx}\"",

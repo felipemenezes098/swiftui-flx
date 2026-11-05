@@ -16,7 +16,6 @@ import {
   isPlatform,
   platforms,
 } from "@/lib/docs"
-import { getComponentsIndexMarkdown } from "@/lib/markdown"
 import { createDocTitle, createPageMetadata } from "@/lib/metadata"
 
 type Props = {
@@ -53,7 +52,6 @@ export default async function ComponentsIndexPage({ params }: Readonly<Props>) {
   const description = getComponentsDescription(platform)
   const note = getComponentsNote(platform)
   const { previous, next } = getDocsPager(componentsHref(platform), platform)
-  const markdown = getComponentsIndexMarkdown(platform)
 
   return (
     <div className="mx-auto flex w-full max-w-[50rem] flex-col gap-8">
@@ -61,7 +59,7 @@ export default async function ComponentsIndexPage({ params }: Readonly<Props>) {
         <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-3">
           <h1 className="text-base font-medium">{name} Components</h1>
           <DocsPageActions
-            markdown={markdown}
+            markdownPath={`components/${platform}`}
             previous={previous}
             next={next}
           />

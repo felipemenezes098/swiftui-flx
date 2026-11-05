@@ -10,8 +10,11 @@ import { cn } from "@/lib/utils"
 
 import { copyToClipboard } from "@/lib/copy"
 
-type CopyButtonProps = React.ComponentProps<typeof Button> & {
-  content: string
+type CopyContent =
+  string | ((button: HTMLButtonElement) => string | Promise<string>)
+
+type CopyButtonProps = Omit<React.ComponentProps<typeof Button>, "content"> & {
+  content: CopyContent
   label?: string
   icon?: React.ReactNode
   iconClassName?: string
@@ -45,7 +48,7 @@ function CopyButton({
   }, [])
 
   const copy = React.useCallback(
-    (value: string) => {
+    (value: string | Promise<string>) => {
       copyToClipboard(value)
       setCopied(true)
       if (timeoutRef.current) clearTimeout(timeoutRef.current)
@@ -63,7 +66,11 @@ function CopyButton({
       {...props}
       onClick={(event) => {
         onClick?.(event)
-        copy(content)
+        if (typeof content === "string") {
+          copy(content)
+        } else {
+          copy(content(event.currentTarget))
+        }
       }}
     >
       <span

@@ -2,7 +2,6 @@ import type { Metadata } from "next"
 
 import { DocsPageActions } from "@/components/core/docs/docs-page-actions"
 import { DocsToc } from "@/components/core/docs/docs-toc"
-import { getDocMarkdown } from "@/lib/markdown"
 import { getDocsPager } from "@/lib/docs"
 import { createDocTitle, createPageMetadata } from "@/lib/metadata"
 import { getDocToc } from "@/lib/toc"
@@ -16,17 +15,20 @@ export const metadata: Metadata = createPageMetadata({
 })
 
 export default async function InstallationPage() {
-  const [mod, toc, markdown] = await Promise.all([
+  const [mod, toc] = await Promise.all([
     import("@/app/content/installation.mdx"),
     getDocToc("installation"),
-    getDocMarkdown("installation"),
   ])
   const Content = mod.default
   const { previous, next } = getDocsPager("/docs/installation")
   const components = {
     ...getMDXComponents({}),
     DocsPageActions: () => (
-      <DocsPageActions markdown={markdown} previous={previous} next={next} />
+      <DocsPageActions
+        markdownPath="installation"
+        previous={previous}
+        next={next}
+      />
     ),
   }
 

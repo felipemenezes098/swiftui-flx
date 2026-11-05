@@ -1,4 +1,3 @@
-import { CopyButton } from "@/components/core/copy-button"
 import { extractCodeFromFilePath } from "@/lib/code"
 import { cn } from "@/lib/utils"
 
@@ -11,7 +10,8 @@ import {
   CodeBlockGroup,
   CodeBlockHeader,
 } from "./code-block"
-import { CodeBlockShiki } from "./code-block-shiki"
+import { CodeBlockCopyButton } from "./code-block-copy-button"
+import { CodeBlockFromFileBody } from "./code-block-from-file-body"
 import type { Languages } from "./shiki-highlighter"
 
 interface CodeBlockFromFileProps {
@@ -20,6 +20,7 @@ interface CodeBlockFromFileProps {
   language?: Languages
   title?: string
   collapsible?: boolean
+  lazy?: boolean
   className?: string
 }
 
@@ -29,6 +30,7 @@ async function CodeBlockFromFile({
   language = "swift",
   title,
   collapsible = false,
+  lazy = false,
   className,
 }: Readonly<CodeBlockFromFileProps>) {
   const resolvedCode = filePath ? extractCodeFromFilePath(filePath) : code
@@ -37,7 +39,12 @@ async function CodeBlockFromFile({
 
   const content = (
     <CodeBlockContent className="max-h-[480px]">
-      <CodeBlockShiki code={resolvedCode} language={language} />
+      <CodeBlockFromFileBody
+        filePath={filePath}
+        code={resolvedCode}
+        language={language}
+        lazy={lazy}
+      />
     </CodeBlockContent>
   )
 
@@ -48,8 +55,7 @@ async function CodeBlockFromFile({
       </CodeBlockGroup>
       <div className="flex shrink-0 items-center gap-1">
         {collapsible ? <CodeBlockCollapsibleTrigger /> : null}
-        <CopyButton
-          content={resolvedCode}
+        <CodeBlockCopyButton
           variant="ghost"
           size="sm"
           className="h-7 shrink-0 bg-transparent px-2 text-muted-foreground shadow-none hover:bg-muted"
@@ -57,8 +63,7 @@ async function CodeBlockFromFile({
       </div>
     </CodeBlockHeader>
   ) : (
-    <CopyButton
-      content={resolvedCode}
+    <CodeBlockCopyButton
       variant="ghost"
       size="sm"
       className="absolute top-2 right-2 z-10 h-7 bg-transparent px-2 text-muted-foreground shadow-none hover:bg-muted"

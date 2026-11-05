@@ -17,6 +17,10 @@ const nextConfig: NextConfig = {
         headers: [{ key: "Cache-Control", value: immutable }],
       },
       {
+        source: "/code/:path*",
+        headers: [{ key: "Cache-Control", value: immutable }],
+      },
+      {
         source: "/r/:path*",
         headers: [{ key: "Cache-Control", value: hourly }],
       },

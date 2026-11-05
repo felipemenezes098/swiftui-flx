@@ -19,7 +19,6 @@ import {
   platforms,
 } from "@/lib/docs"
 import { getComponentChangelog } from "@/lib/changelog"
-import { getDocMarkdown } from "@/lib/markdown"
 import { createDocTitle, createPageMetadata } from "@/lib/metadata"
 import { getComponentStructuredData } from "@/lib/structured-data"
 import { getDocToc } from "@/lib/toc"
@@ -64,10 +63,9 @@ export default async function ComponentDocPage({ params }: Readonly<Props>) {
   if (!doc) notFound()
 
   const contentPath = `components/${platform}/${slug}`
-  const [mod, toc, markdown] = await Promise.all([
+  const [mod, toc] = await Promise.all([
     import(`@/app/content/components/${platform}/${slug}.mdx`),
     getDocToc(contentPath),
-    getDocMarkdown(contentPath),
   ])
   const Content = mod.default
   const { previous, next } = getDocsPager(
@@ -102,7 +100,11 @@ export default async function ComponentDocPage({ params }: Readonly<Props>) {
       <DocsAvailability platform={platform} slug={slug} />
     ),
     DocsPageActions: () => (
-      <DocsPageActions markdown={markdown} previous={previous} next={next} />
+      <DocsPageActions
+        markdownPath={contentPath}
+        previous={previous}
+        next={next}
+      />
     ),
   }
 

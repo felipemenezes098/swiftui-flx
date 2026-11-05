@@ -17,7 +17,6 @@ import {
   getChangelogEntries,
 } from "@/lib/changelog"
 import { getDocsPager } from "@/lib/docs"
-import { getChangelogIndexMarkdown } from "@/lib/markdown"
 import { createDocTitle, createPageMetadata } from "@/lib/metadata"
 import { useMDXComponents as getMDXComponents } from "@/mdx-components"
 
@@ -53,7 +52,7 @@ export default async function ChangelogPage() {
         <div className="mt-2 flex flex-wrap items-center justify-between gap-x-4 gap-y-3">
           <h1 className="scroll-m-20 text-base font-medium">Changelog</h1>
           <DocsPageActions
-            markdown={getChangelogIndexMarkdown()}
+            markdownPath="changelog"
             previous={previous}
             next={next}
           />

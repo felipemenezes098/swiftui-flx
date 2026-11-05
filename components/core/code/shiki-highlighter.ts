@@ -39,6 +39,66 @@ const Themes = {
 type Languages =
   "bash" | "css" | "html" | "js" | "json" | "markdown" | "swift" | "ts" | "tsx"
 
+type TokenTheme = { variable: string; prefix: string; colors: string[] }
+
+function themeColors(theme: object): string[] {
+  const colors = new Set<string>()
+  JSON.stringify(theme, (_key, value: unknown) => {
+    if (typeof value === "string" && /^#[0-9a-f]{3,8}$/i.test(value)) {
+      colors.add(value.toLowerCase())
+    }
+    return value
+  })
+  return [...colors].sort()
+}
+
+const tokenThemes: TokenTheme[] = [
+  { variable: "--shiki-light", prefix: "l", colors: themeColors(lightTheme) },
+  { variable: "--shiki-dark", prefix: "d", colors: themeColors(darkTheme) },
+]
+
+function tokenClassName(declaration: string): string | undefined {
+  const [variable, value] = declaration.split(":").map((part) => part.trim())
+  const theme = tokenThemes.find((item) => item.variable === variable)
+  if (!theme || !value) return undefined
+  const index = theme.colors.indexOf(value.toLowerCase())
+  if (index === -1) return undefined
+  return `${theme.prefix}${index}`
+}
+
+const tokenClassesTransformer: ShikiTransformer = {
+  name: "TokenClasses",
+  span(node) {
+    const style = node.properties.style
+    if (typeof style !== "string") return
+    const kept: string[] = []
+    for (const declaration of style.split(";").filter(Boolean)) {
+      const className = tokenClassName(declaration)
+      if (className) {
+        this.addClassToHast(node, className)
+      } else {
+        kept.push(declaration)
+      }
+    }
+    if (kept.length > 0) {
+      node.properties.style = kept.join(";")
+    } else {
+      delete node.properties.style
+    }
+  },
+}
+
+export function tokenClassesCss(): string {
+  return tokenThemes
+    .flatMap((theme) =>
+      theme.colors.map(
+        (color, index) =>
+          `.shiki .${theme.prefix}${index} { ${theme.variable}: ${color}; }`
+      )
+    )
+    .join("\n")
+}
+
 const getJsEngine = (): RegexEngine => {
   jsEngine ??= createJavaScriptRegexEngine()
   return jsEngine
@@ -98,6 +158,7 @@ export async function highlightCode(
     transformerNotationHighlight(),
     transformerRemoveLineBreak(),
     lineNumbersTransformer,
+    tokenClassesTransformer,
     ...(highlightLines ? [transformerMetaHighlight()] : []),
     ...(highlightWords ? [transformerMetaWordHighlight()] : []),
   ]

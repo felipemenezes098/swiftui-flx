@@ -10,7 +10,6 @@ import {
   getChangelogEntries,
   getChangelogEntry,
 } from "@/lib/changelog"
-import { getChangelogMarkdown } from "@/lib/markdown"
 import { createDocTitle, createPageMetadata } from "@/lib/metadata"
 import { getDocToc } from "@/lib/toc"
 import { useMDXComponents as getMDXComponents } from "@/mdx-components"
@@ -45,10 +44,9 @@ export default async function ChangelogEntryPage({ params }: Readonly<Props>) {
   const entry = getChangelogEntry(slug)
   if (!entry) notFound()
 
-  const [mod, toc, markdown] = await Promise.all([
+  const [mod, toc] = await Promise.all([
     import(`@/app/content/changelog/${slug}.mdx`),
     getDocToc(`changelog/${slug}`),
-    getChangelogMarkdown(slug),
   ])
   const Content = mod.default
   const components = getMDXComponents({})
@@ -61,7 +59,7 @@ export default async function ChangelogEntryPage({ params }: Readonly<Props>) {
       <article className="mx-auto max-w-[50rem] min-w-0 flex-1">
         <DocsHeader>
           <Title>{changelogEntryTitle(entry)}</Title>
-          <DocsPageActions markdown={markdown ?? ""} />
+          <DocsPageActions markdownPath={`changelog/${slug}`} />
         </DocsHeader>
         <div className="mt-6">
           <Content components={components} />
