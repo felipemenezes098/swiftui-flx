@@ -65,14 +65,14 @@ struct SettingsView: View {
     private var profile: some View {
         HStack(spacing: FLXSpacing.md) {
             FLXAvatar(size: .large) {
-                FLXAvatarFallback("SD")
+                FLXAvatarFallback("CN")
                 FLXAvatarImage(url: URL(string: "https://github.com/shadcn.png"))
             }
             VStack(alignment: .leading, spacing: FLXSpacing.xs) {
-                Text("Sofia Davis")
+                Text("shadcn")
                     .flxFont(.headline)
                     .foregroundStyle(theme.colors.foreground)
-                Text("sofia@example.com")
+                Text("Pro plan")
                     .flxFont(.subheadline)
                     .foregroundStyle(theme.colors.mutedForeground)
             }
