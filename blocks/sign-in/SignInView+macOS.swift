@@ -36,9 +36,9 @@ struct SignInView: View {
         VStack(spacing: FLXSpacing.md) {
             Image(systemName: "sparkle")
                 .font(.title3)
-                .foregroundStyle(theme.colors.primaryForeground)
+                .foregroundStyle(logoForeground)
                 .frame(width: 40, height: 40)
-                .background(theme.colors.primary, in: RoundedRectangle(cornerRadius: theme.radius.lg))
+                .background(logoBackground, in: RoundedRectangle(cornerRadius: theme.radius.lg))
             VStack(spacing: FLXSpacing.xs) {
                 Text("Welcome back")
                     .flxFont(.title)
@@ -60,6 +60,16 @@ struct SignInView: View {
         .signInWithAppleButtonStyle(appleButtonStyle)
         .frame(height: 28)
         .clipShape(RoundedRectangle(cornerRadius: theme.radius.md))
+    }
+
+    private var logoBackground: Color {
+        if colorScheme == .dark { return .white }
+        return .black
+    }
+
+    private var logoForeground: Color {
+        if colorScheme == .dark { return .black }
+        return .white
     }
 
     private var appleButtonStyle: SignInWithAppleButton.Style {
