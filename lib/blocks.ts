@@ -23,6 +23,14 @@ export const blocks: Block[] = [
       mac: "blocks/sign-up/SignUpView+macOS.swift",
     },
   },
+  {
+    slug: "settings",
+    name: "Settings",
+    files: {
+      ios: "blocks/settings/SettingsView.swift",
+      mac: "blocks/settings/SettingsView+macOS.swift",
+    },
+  },
 ]
 
 export function blockImage(platform: Platform, slug: string) {

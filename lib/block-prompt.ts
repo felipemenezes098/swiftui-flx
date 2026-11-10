@@ -9,7 +9,7 @@ export function blockPrompt(block: Block, platform: Platform) {
 
   return [
     `Add this ${block.name} screen to my SwiftUI ${name} app as ${blockFileName(block, platform)}.`,
-    `It uses swiftui-flx components. Add any that are missing by following ${siteConfig.url}/llms.txt, then connect the closures to my auth.`,
+    `It uses swiftui-flx components. Add any that are missing by following ${siteConfig.url}/llms.txt, then connect the closures to my app.`,
     "",
     "```swift",
     code,
