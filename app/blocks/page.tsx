@@ -1,12 +1,13 @@
 import type { Metadata } from "next"
 
 import { BlockCard } from "@/components/core/blocks/block-card"
+import { BlockCategorySection } from "@/components/core/blocks/block-category-section"
 import { BlockMedia } from "@/components/core/blocks/block-media"
 import { BlocksPlatformFilter } from "@/components/core/blocks/blocks-platform-filter"
 import { BlocksPlatformGrid } from "@/components/core/blocks/blocks-platform-grid"
 import { CodeBlockFromFile } from "@/components/core/code/code-block-from-file"
 import { blockPrompt } from "@/lib/block-prompt"
-import { blockFileName, blocks } from "@/lib/blocks"
+import { blockCategories, blockFileName, blocksInCategory } from "@/lib/blocks"
 import { platforms } from "@/lib/docs"
 import { createPageMetadata } from "@/lib/metadata"
 
@@ -36,26 +37,34 @@ export default function BlocksPage() {
           </div>
           {platforms.map((platform) => (
             <BlocksPlatformGrid key={platform.id} platform={platform.id}>
-              {blocks.map((block) => (
-                <BlockCard
-                  key={block.slug}
-                  name={block.name}
-                  prompt={blockPrompt(block, platform.id)}
-                  media={
-                    <BlockMedia
-                      platform={platform.id}
-                      slug={block.slug}
+              {blockCategories.map((category) => (
+                <BlockCategorySection
+                  key={category.id}
+                  id={category.id}
+                  name={category.name}
+                >
+                  {blocksInCategory(category.id).map((block) => (
+                    <BlockCard
+                      key={block.slug}
                       name={block.name}
+                      prompt={blockPrompt(block, platform.id)}
+                      media={
+                        <BlockMedia
+                          platform={platform.id}
+                          slug={block.slug}
+                          name={block.name}
+                        />
+                      }
+                      code={
+                        <CodeBlockFromFile
+                          filePath={block.files[platform.id]}
+                          title={blockFileName(block, platform.id)}
+                          className="my-0"
+                        />
+                      }
                     />
-                  }
-                  code={
-                    <CodeBlockFromFile
-                      filePath={block.files[platform.id]}
-                      title={blockFileName(block, platform.id)}
-                      className="my-0"
-                    />
-                  }
-                />
+                  ))}
+                </BlockCategorySection>
               ))}
             </BlocksPlatformGrid>
           ))}

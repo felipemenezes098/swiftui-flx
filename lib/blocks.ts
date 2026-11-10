@@ -1,14 +1,23 @@
 import type { Platform } from "@/lib/docs"
 
+export const blockCategories = [
+  { id: "authentication", name: "Authentication" },
+  { id: "settings", name: "Settings" },
+] as const
+
+export type BlockCategory = (typeof blockCategories)[number]["id"]
+
 export interface Block {
   slug: string
   name: string
+  category: BlockCategory
   files: Record<Platform, string>
 }
 
 export const blocks: Block[] = [
   {
     slug: "sign-in",
+    category: "authentication",
     name: "Sign In",
     files: {
       ios: "blocks/sign-in/SignInView.swift",
@@ -17,6 +26,7 @@ export const blocks: Block[] = [
   },
   {
     slug: "sign-up",
+    category: "authentication",
     name: "Sign Up",
     files: {
       ios: "blocks/sign-up/SignUpView.swift",
@@ -25,6 +35,7 @@ export const blocks: Block[] = [
   },
   {
     slug: "settings",
+    category: "settings",
     name: "Settings",
     files: {
       ios: "blocks/settings/SettingsView.swift",
@@ -40,4 +51,8 @@ export function blockImage(platform: Platform, slug: string) {
 
 export function blockFileName(block: Block, platform: Platform) {
   return block.files[platform].split("/").pop()?.replace("+macOS", "") ?? ""
+}
+
+export function blocksInCategory(category: BlockCategory) {
+  return blocks.filter((block) => block.category === category)
 }

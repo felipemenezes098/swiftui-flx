@@ -15,5 +15,5 @@ export function BlocksPlatformGrid({
   const [config] = useConfig()
   if (config.platform !== platform) return null
 
-  return <div className="grid gap-6 md:grid-cols-2">{children}</div>
+  return <div className="flex flex-col gap-10 md:gap-12">{children}</div>
 }
