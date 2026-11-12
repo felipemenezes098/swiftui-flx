@@ -279,6 +279,39 @@
       ]
     },
     {
+      "name": "ios-one-time-code-field",
+      "type": "registry:file",
+      "title": "One-Time Code Field",
+      "description": "Enters a verification code digit by digit, with AutoFill from Messages, Mail and password apps.",
+      "meta": {
+        "platforms": {
+          "iOS": "16.4",
+          "iPadOS": "16.4"
+        },
+        "license": "MIT"
+      },
+      "registryDependencies": [
+        "@swiftui-flx/foundation"
+      ],
+      "files": [
+        {
+          "path": "one-time-code-field/FLXOneTimeCodeFieldStyle.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXOneTimeCodeField/FLXOneTimeCodeFieldStyle.swift"
+        },
+        {
+          "path": "one-time-code-field/FLXOneTimeCodeField+iOS.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXOneTimeCodeField/FLXOneTimeCodeField+iOS.swift"
+        },
+        {
+          "path": "one-time-code-field/FLXOneTimeCodeField.swift",
+          "type": "registry:file",
+          "target": "~/DesignSystem/Components/FLXOneTimeCodeField/FLXOneTimeCodeField.swift"
+        }
+      ]
+    },
+    {
       "name": "ios-toast",
       "type": "registry:file",
       "title": "Toast",

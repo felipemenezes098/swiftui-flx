@@ -1,0 +1,13 @@
+**New [One-Time Code Field](/docs/components/ios/one-time-code-field) component for iOS.**
+
+A verification code input drawn as boxes over one hidden system text field: `FLXOneTimeCodeField("Verification code", text: $code)`. Because the text field is real, codes from Messages, Mail, and password apps show up above the keyboard, and paste works as expected.
+
+<ComponentPreview
+  platform="ios"
+  alt="FLXOneTimeCodeField with six boxes and the digits 4829 entered"
+  image={{ light: "/images/components/ios/one-time-code-field/one-time-code-field-usage.webp", dark: "/images/components/ios/one-time-code-field/one-time-code-field-usage-dark.webp" }}
+/>
+
+Split the boxes into groups with `FLXDefaultOneTimeCodeFieldStyle(groupSize: 3)`, or draw your own with `.flxOneTimeCodeFieldStyle(_:)`.
+
+No existing component changed.

@@ -221,6 +221,17 @@ const componentCatalog: ComponentCatalogEntry[] = [
     },
   },
   {
+    slug: "one-time-code-field",
+    name: "One-Time Code Field",
+    addedAt: "2026-11-11",
+    seoNames: {
+      ios: "One-Time Code (OTP) Field",
+    },
+    descriptions: {
+      ios: "Enters a verification code digit by digit, with AutoFill.",
+    },
+  },
+  {
     slug: "picker",
     name: "Picker",
     seoNames: {
@@ -432,7 +443,7 @@ export function getComponentAvailabilityText(platform: Platform, slug: string) {
 }
 
 const componentsNotes: Partial<Record<Platform, string>> = {
-  mac: "Menu and Picker are iOS only. On macOS, use SwiftUI's Menu and Picker: the Mac always draws them natively. Toast is iOS only for now.",
+  mac: "Menu and Picker are iOS only. On macOS, use SwiftUI's Menu and Picker: the Mac always draws them natively. One-Time Code Field and Toast are iOS only for now.",
 }
 
 export function getComponentsDescription(platform: Platform) {

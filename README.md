@@ -83,6 +83,7 @@ struct SettingsView: View {
 | [Form Field](https://swiftui.flexnative.com/docs/components/ios/form-field) | ✓ | ✓ | Label, control, description and error together |
 | [Item](https://swiftui.flexnative.com/docs/components/ios/item) | ✓ | ✓ | List, notification and settings rows |
 | [Menu](https://swiftui.flexnative.com/docs/components/ios/menu) | ✓ | — | Actions revealed from a button |
+| [One-Time Code Field](https://swiftui.flexnative.com/docs/components/ios/one-time-code-field) | ✓ | — | Verification code input with AutoFill |
 | [Picker](https://swiftui.flexnative.com/docs/components/ios/picker) | ✓ | — | Dropdown to pick one value |
 | [Progress View](https://swiftui.flexnative.com/docs/components/ios/progress-view) | ✓ | ✓ | Progress bar or spinner |
 | [Secure Field](https://swiftui.flexnative.com/docs/components/ios/secure-field) | ✓ | ✓ | Password input |
@@ -94,7 +95,7 @@ struct SettingsView: View {
 | [Toast](https://swiftui.flexnative.com/docs/components/ios/toast) | ✓ | — | Brief feedback about an action |
 | [Toggle](https://swiftui.flexnative.com/docs/components/ios/toggle) | ✓ | ✓ | Switch on iOS, checkbox on macOS |
 
-On macOS, Menu and Picker use SwiftUI's native versions, which the Mac always draws itself. Toast is iOS only for now.
+On macOS, Menu and Picker use SwiftUI's native versions, which the Mac always draws itself. One-Time Code Field and Toast are iOS only for now.
 
 ### Native guides
 

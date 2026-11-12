@@ -1,0 +1,264 @@
+<DocsHeader>
+
+# One-Time Code Field
+
+<DocsPageActions />
+
+</DocsHeader>
+
+<DocsAvailability />
+
+Enters a verification code digit by digit, with AutoFill.
+
+<ComponentPreviewCode
+  alt="FLXOneTimeCodeField with six boxes and the digits 4829 entered"
+  image={{ light: "/images/components/ios/one-time-code-field/one-time-code-field-usage.webp", dark: "/images/components/ios/one-time-code-field/one-time-code-field-usage-dark.webp" }}
+  filePath="registry/components/one-time-code-field/one-time-code-field-usage-example.swift"
+/>
+
+## Installation
+
+Requires the [design system foundation](/docs/installation#add-the-foundation) (tokens and theme).
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<CodeBlockCommand
+  command="shadcn@latest add @swiftui-flx/ios-one-time-code-field"
+/>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy the style</Step>
+
+<CodeBlockFromFile
+  lazy
+  filePath="registry/components/one-time-code-field/FLXOneTimeCodeFieldStyle.swift"
+  title="FLXOneTimeCodeFieldStyle.swift"
+/>
+
+<Step>Copy the iOS text field</Step>
+
+<CodeBlockFromFile
+  lazy
+  filePath="registry/components/one-time-code-field/FLXOneTimeCodeField+iOS.swift"
+  title="FLXOneTimeCodeField+iOS.swift"
+/>
+
+<Step>Copy the component</Step>
+
+<CodeBlockFromFile
+  lazy
+  filePath="registry/components/one-time-code-field/FLXOneTimeCodeField.swift"
+  title="FLXOneTimeCodeField.swift"
+/>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+Apple has no one-time code control, so `FLXOneTimeCodeField` draws the boxes over a single hidden text field. The keyboard, paste, and AutoFill all come from that system text field.
+
+```swift
+@State private var code = ""
+
+FLXOneTimeCodeField("Verification code", text: $code)
+```
+
+The field accepts digits only. Spaces and dashes in a pasted code are dropped, so `482 913` becomes `482913`. Tapping a filled box selects that digit, and the next one you type replaces it. Deleting a digit moves the ones after it back one box.
+
+## AutoFill
+
+The field sets `.oneTimeCode` as its content type, so iOS offers a code above the keyboard as it arrives in Messages, in Mail (iOS 17 and later), or from a password app (iOS 18 and later). No setup is needed.
+
+To restrict a text message code to your website, end the message with a line naming the domain. iOS then offers the code only on that domain or in an app associated with it:
+
+```text
+Your Example code is 482913.
+
+@example.com #482913
+```
+
+## Length
+
+Codes have 6 digits by default. Set `length:` for other sizes. The field never holds more digits than that.
+
+<ComponentPreviewCode
+  alt="FLXOneTimeCodeField with four boxes and the digits 73 entered"
+  image={{ light: "/images/components/ios/one-time-code-field/one-time-code-field-length.webp", dark: "/images/components/ios/one-time-code-field/one-time-code-field-length-dark.webp" }}
+  code={`FLXOneTimeCodeField("PIN", text: $pin, length: 4)
+`}
+/>
+
+## Groups
+
+`groupSize` splits the boxes into groups with a dash between them, which makes a long code easier to read and compare.
+
+<ComponentPreviewCode
+  alt="FLXOneTimeCodeField with two groups of three boxes separated by a dash"
+  image={{ light: "/images/components/ios/one-time-code-field/one-time-code-field-groups.webp", dark: "/images/components/ios/one-time-code-field/one-time-code-field-groups-dark.webp" }}
+  code={`FLXOneTimeCodeField("Verification code", text: $code)
+    .flxOneTimeCodeFieldStyle(FLXDefaultOneTimeCodeFieldStyle(groupSize: 3))
+`}
+/>
+
+## Submitting the code
+
+The number pad has no Return key, so there is no `.onSubmit`. React to a complete code with `.onChange(of:)`, and keep a button for people who'd rather confirm:
+
+<ComponentPreviewCode
+  alt="Card titled Verify your email with a full code and a Verify button"
+  image={{ light: "/images/components/ios/one-time-code-field/one-time-code-field-submit.webp", dark: "/images/components/ios/one-time-code-field/one-time-code-field-submit-dark.webp" }}
+  code={`FLXCard {
+    FLXCardHeader {
+        FLXCardTitle("Verify your email")
+        FLXCardDescription("Enter the code we sent to your email.")
+    }
+    FLXCardContent {
+        FLXOneTimeCodeField("Verification code", text: $code)
+            .onChange(of: code) { newCode in
+                if newCode.count == 6 {
+                    verify(newCode)
+                }
+            }
+    }
+    FLXCardFooter {
+        FLXButton(variant: .primary) {
+            verify(code)
+        } label: {
+            Text("Verify").frame(maxWidth: .infinity)
+        }
+        .controlSize(.large)
+        .disabled(code.count < 6)
+    }
+}
+`}
+  collapsible
+/>
+
+Clear `code` after a wrong code, so the next attempt starts from the first box.
+
+## Disabled
+
+<ComponentPreviewCode
+  alt="Disabled FLXOneTimeCodeField at half opacity"
+  image={{ light: "/images/components/ios/one-time-code-field/one-time-code-field-disabled.webp", dark: "/images/components/ios/one-time-code-field/one-time-code-field-disabled-dark.webp" }}
+  code={`FLXOneTimeCodeField("Verification code", text: $code)
+    .disabled(isVerifying)
+`}
+/>
+
+## Accessibility
+
+- VoiceOver reads the field as a single element with the title as its label, spells the code one digit at a time, and says how many digits are entered, such as "4 of 6 digits entered."
+- The title isn't shown on screen. Put a visible label or description next to the field, such as "Enter the code we sent to your email."
+- The boxes grow with Dynamic Type until the row fills the available width, then stop.
+- With Reduce Motion on, the cursor in the empty box stays still instead of blinking.
+
+The title is a `LocalizedStringResource`, so a literal is translated and extracted to your String Catalog. The hint is translated when your String Catalog has the `%lld of %lld digits entered.` key:
+
+```json
+"%lld of %lld digits entered." : {
+  "localizations" : {
+    "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "%1$lld de %2$lld dígitos digitados." } }
+  }
+}
+```
+
+## Custom styling
+
+`FLXOneTimeCodeFieldStyle` is an FLX protocol. Override it for a subtree via `.flxOneTimeCodeFieldStyle(_:)`. A tap picks a box by its share of the field's width, so lay the boxes out evenly across the field.
+
+<ComponentPreviewCode
+  alt="FLXOneTimeCodeField drawn as digits over underlines"
+  image={{ light: "/images/components/ios/one-time-code-field/one-time-code-field-custom.webp", dark: "/images/components/ios/one-time-code-field/one-time-code-field-custom-dark.webp" }}
+  code={`struct FLXUnderlineOneTimeCodeFieldStyle: FLXOneTimeCodeFieldStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        FLXUnderlineOneTimeCodeFieldStyleBody(configuration: configuration)
+    }
+}
+
+struct FLXUnderlineOneTimeCodeFieldStyleBody: View {
+    @Environment(\\.flxTheme) private var theme
+
+    let configuration: FLXOneTimeCodeFieldStyleConfiguration
+
+    var body: some View {
+        HStack(spacing: FLXSpacing.md) {
+            ForEach(configuration.slots) { slot in
+                VStack(spacing: FLXSpacing.sm) {
+                    (slot.character ?? Text(verbatim: " "))
+                        .flxFont(.title2)
+                        .monospacedDigit()
+                        .foregroundStyle(theme.colors.foreground)
+                    Rectangle()
+                        .fill(lineColor(slot))
+                        .frame(height: FLXBorderWidth.thick)
+                }
+                .frame(maxWidth: .infinity)
+            }
+        }
+    }
+
+    private func lineColor(_ slot: FLXOneTimeCodeFieldStyleConfiguration.Slot) -> Color {
+        if slot.isActive || slot.character != nil { return theme.colors.foreground }
+        return theme.colors.border
+    }
+}
+
+FLXOneTimeCodeField("Verification code", text: $code)
+    .flxOneTimeCodeFieldStyle(FLXUnderlineOneTimeCodeFieldStyle())
+`}
+  collapsible
+/>
+
+The style only draws. Typing, paste, AutoFill, and VoiceOver stay with the hidden text field, which the component places over whatever the style returns.
+
+## API Reference
+
+### FLXOneTimeCodeField
+
+```swift
+init(
+    _ titleResource: LocalizedStringResource,
+    text: Binding<String>,
+    length: Int = 6
+)
+```
+
+Also takes a `StringProtocol` title, used as is.
+
+### FLXDefaultOneTimeCodeFieldStyle
+
+```swift
+init(groupSize: Int? = nil)
+```
+
+### FLXOneTimeCodeFieldStyleConfiguration
+
+| Property | Type | Description |
+| --- | --- | --- |
+| `slots` | `[Slot]` | One per digit of `length`, in order. |
+| `isFocused` | `Bool` | Whether the field is being edited. |
+
+### FLXOneTimeCodeFieldStyleConfiguration.Slot
+
+| Property | Type | Description |
+| --- | --- | --- |
+| `id` | `Int` | The slot's position, from 0. |
+| `character` | `Text?` | The digit in the slot, or `nil` when it's empty. |
+| `isActive` | `Bool` | Whether the next digit goes into this slot or replaces it. |

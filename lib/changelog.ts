@@ -18,6 +18,14 @@ export const changelogFeaturedCount = 3
 
 const changelog: ChangelogEntry[] = [
   {
+    slug: "2026-11-one-time-code-field",
+    title: "One-Time Code Field",
+    date: "2026-11-11",
+    description:
+      "New One-Time Code Field component for iOS: a verification code input with AutoFill from Messages, Mail, and password apps.",
+    actions: [],
+  },
+  {
     slug: "2026-11-toast",
     title: "Toast",
     date: "2026-11-04",
